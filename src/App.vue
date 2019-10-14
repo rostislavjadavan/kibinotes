@@ -1,5 +1,5 @@
 <template>
-    <div id="app">        
+    <div id="app">
         <router-view />
     </div>
 </template>
@@ -8,3 +8,7 @@
 import "typeface-source-sans-pro";
 export default {};
 </script>
+
+<style>
+@import "assets/github-markdown.css";
+</style>
