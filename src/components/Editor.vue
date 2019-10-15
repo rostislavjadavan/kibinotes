@@ -15,7 +15,7 @@ export default {
         content: String
     },
     data() {
-        return {        
+        return {
             instance: null,
             options: {
                 value: "",
@@ -33,9 +33,11 @@ export default {
                 this.options
             );
             this.instance.setValue(this.options.value || this.content);
-            this.instance.on("change", cm => {                
+            this.instance.on("change", cm => {
                 this.$emit("change", cm.getValue());
             });
+            this.instance.focus();
+            this.instance.setCursor(this.instance.lineCount(), 0);
         }
     }
 };
