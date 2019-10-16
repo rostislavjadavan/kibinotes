@@ -15,6 +15,7 @@
 <script>
 import Markdown from "@/components/Markdown";
 import Editor from "@/components/Editor";
+import Storage from "@/libs/storage"
 
 export default {
     components: {
@@ -23,9 +24,10 @@ export default {
     },
     data() {
         return {        
-            content: "# Content \n Test content",
+            content: "",
             edit: false,
-            editButtonCaption: "Edit"
+            editButtonCaption: "Edit",
+            storage: new Storage
         };
     },
     methods: {
@@ -35,10 +37,14 @@ export default {
         switchmode() {
             this.edit = !this.edit;
             this.editButtonCaption = this.edit ? "Save" : "Edit";
+            
+            if (!this.edit) {
+                this.storage.save(this.content);
+            }
         }
     },
-    mounted() {
-        
+    mounted() {        
+        this.content = this.storage.load();
     }
 };
 </script>
