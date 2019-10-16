@@ -1,5 +1,11 @@
 {
   "name": "code-notes",
+  "description": "Notes application for developers",
+  "author": {
+    "name": "Rostislav Jadavan",
+    "email": "rostislav@jadavan.com",
+    "url": "https://rostislavjadavan.com"
+  },
   "version": "0.1.0",
   "private": true,
   "scripts": {
