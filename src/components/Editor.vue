@@ -32,12 +32,20 @@ export default {
                 this.$refs.editor,
                 this.options
             );
+            
             this.instance.setValue(this.options.value || this.content);
             this.instance.on("change", cm => {
                 this.$emit("change", cm.getValue());
             });
+
             this.instance.focus();
             this.instance.setCursor(this.instance.lineCount(), 0);
+
+            this.instance.setOption("extraKeys", {
+                "Cmd-S": (instance) => {
+                    this.$emit("save", instance.getValue());                
+                }
+            });
         }
     }
 };
