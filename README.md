@@ -1,3 +1,5 @@
+![](logo/logo_small.png)
+
 # Code Notes
 
 > Swiss knife for developers

@@ -1,0 +1,11 @@
+.container {
+    display: flex;
+}
+
+.panel-250 {    
+    flex-basis: 250px;
+}
+
+.panel-fixed {
+    position: fixed;
+}

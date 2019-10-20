@@ -1,13 +1,28 @@
 <template>
-    <div class="main">   
-        <div class="nav">
-            <button v-on:click="switchmode">{{editButtonCaption}}</button>
-        </div>     
-        <div v-if="edit">
-            <editor v-bind:content="content" v-on:change="editorContentChange" v-on:save="editorSave" />
+    <div class="container">
+        <div class="panel-250">
+            <div class="panel-fixed">
+                <ul>
+                    <li>Note1</li>
+                    <li>Note2</li>
+                </ul>
+            </div>
         </div>
-        <div v-if="!edit">
-            <markdown v-bind:content="content" />
+        <div class="panel">            
+            <div class="nav">
+                <button v-on:click="switchmode">{{editButtonCaption}}</button>
+            </div>
+            
+            <div v-if="edit">
+                <editor
+                    v-bind:content="content"
+                    v-on:change="editorContentChange"
+                    v-on:save="editorSave"
+                />
+            </div>
+            <div v-if="!edit">
+                <markdown v-bind:content="content" />
+            </div>            
         </div>
     </div>
 </template>
@@ -16,7 +31,7 @@
 import Markdown from "@/components/Markdown";
 import Editor from "@/components/Editor";
 import Storage from "@/libs/storage";
-import Mousetrap from 'mousetrap';
+import Mousetrap from "mousetrap";
 
 export default {
     components: {
@@ -24,11 +39,11 @@ export default {
         Editor
     },
     data() {
-        return {        
+        return {
             content: "",
             edit: false,
             editButtonCaption: "Edit",
-            storage: new Storage
+            storage: new Storage()
         };
     },
     methods: {
@@ -48,7 +63,7 @@ export default {
             }
         }
     },
-    mounted() {        
+    mounted() {
         this.content = this.storage.load();
 
         Mousetrap.bind("command+s", () => this.switchmode());

@@ -10,5 +10,6 @@ export default {};
 </script>
 
 <style>
+@import "assets/layout.css";
 @import "assets/github-markdown.css";
 </style>
