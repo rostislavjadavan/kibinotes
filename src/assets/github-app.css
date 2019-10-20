@@ -1,5 +1,10 @@
 .container {
     display: flex;
+    align-items: stretch;
+}
+
+.panel {
+    flex-grow: 1;
 }
 
 .panel-250 {    
@@ -8,4 +13,22 @@
 
 .panel-fixed {
     position: fixed;
+}
+
+.notes-list {    
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}
+
+.notes-list a {
+    background-color: #fafbfc;
+    padding: 10px 12px;
+    margin-bottom: 10px;
+}
+
+.notes-list a:hover {
+    cursor: pointer;
+    font-weight: 700;
 }

@@ -1,10 +1,8 @@
 <template>
     <div>
-        <ul>
-            <li v-for="note in this.$store.state.noteList" v-bind:key="note.id">
-                <a v-on:click="onSelectNote(note)">{{note.title}}</a>
-            </li>
-        </ul>
+        <div class="notes-list" v-for="note in this.$store.state.noteList" v-bind:key="note.id">
+            <a v-on:click="onSelectNote(note)">{{note.title}}</a>
+        </div>
     </div>
 </template>
 
