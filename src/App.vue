@@ -1,7 +1,5 @@
 <template>
-    <div id="app">
-        <router-view />
-    </div>
+    <router-view />
 </template>
 
 <script>
@@ -10,6 +8,6 @@ export default {};
 </script>
 
 <style>
-@import "assets/layout.css";
+@import "assets/github-app.css";
 @import "assets/github-markdown.css";
 </style>
