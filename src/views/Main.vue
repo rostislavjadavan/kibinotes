@@ -1,6 +1,6 @@
 <template>
-    <div class="columns is-mobile is-fullheight">
-        <div class="column is-2 has-background-white-ter hero is-fullheight">
+    <div class="columns is-mobile">
+        <div class="is-main-panel has-background-warning hero is-fullheight">
             <div class="main-panel">
                 <div class="app-logo" />
                 <div class="compose has-text-centered">
@@ -11,7 +11,7 @@
                 <NotesListPanel />
             </div>
         </div>
-        <div class="column is-10 main-content hero is-fullheight">
+        <div class="column is-rest main-content hero is-fullheight">
             <EditorPanel />
         </div>
     </div>
