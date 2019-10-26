@@ -1,8 +1,17 @@
 <template>
-    <div>
-        <div class="notes-list" v-for="note in this.$store.state.noteList" v-bind:key="note.id">
-            <a v-on:click="onSelectNote(note)">{{note.title}}</a>
-        </div>
+    <div class="notes-list">
+        <a
+            href="#"
+            v-on:click="onSelectNote(note)"
+            class="item"
+            v-for="note in this.$store.state.noteList"
+            v-bind:key="note.id"
+        >
+            <span class="name">
+                <i class="far fa-file"></i>
+                {{note.title}}
+            </span>
+        </a>
     </div>
 </template>
 
