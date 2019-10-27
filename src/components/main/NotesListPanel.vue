@@ -7,10 +7,10 @@
             v-for="note in this.$store.state.noteList"
             v-bind:key="note.id"
         >
-            <span class="name">
+            <span class="icon">
                 <i class="far fa-file"></i>
-                {{note.title}}
             </span>
+            <span class="name">{{note.title}}</span>
         </a>
     </div>
 </template>
@@ -21,7 +21,7 @@ export default {
     data() {
         return {
             active: null
-        }
+        };
     },
     methods: {
         onSelectNote(note) {
@@ -29,7 +29,7 @@ export default {
             this.active = note.id;
         },
         itemClass(note) {
-            return this.active == note.id ? 'item item-active' : 'item'
+            return this.active == note.id ? "item item-active" : "item";
         }
     }
 };
