@@ -28,9 +28,7 @@ export default {
         EditorPanel
     },
     mounted() {
-        this.$store.state.storage.list((err, rows) => {
-            this.$store.commit(SET_NOTE_LIST, rows);
-        });        
+        this.$store.dispatch("reloadNotesList");
     }
 };
 </script>

@@ -26,6 +26,10 @@ export default new Vuex.Store({
         }
     },
     actions: {
-
+        reloadNotesList(context) {
+            context.state.storage.list((err, rows) => {
+                context.commit(SET_NOTE_LIST, rows);
+            });
+        }
     }
 })
