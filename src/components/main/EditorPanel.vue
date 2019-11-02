@@ -23,7 +23,7 @@
 import Markdown from "@/components/Markdown";
 import Editor from "@/components/Editor";
 import Mousetrap from 'mousetrap';
-import { SET_EDIT_MODE } from "@/mutations_names"
+import { SET_EDIT_MODE, SET_ACTIVE_NOTE } from "@/mutations_names"
 
 export default {    
     components: {
@@ -37,14 +37,21 @@ export default {
     },
     methods: {
         editorContentChange(content) {
-            //this.content = content;
+            this.saveNoteContent(content);
         },
         editorSave(content) {
-            //this.content = content;
+            this.saveNoteContent(content);
             this.switchmode();
         },
         switchmode() {
             this.$store.commit(SET_EDIT_MODE, !this.$store.state.editMode);            
+        },
+        saveNoteContent(content) {
+            let note = JSON.parse(JSON.stringify(this.$store.state.activeNote));
+            note.content = content;
+
+            this.$store.state.storage.save(note);
+            this.$store.commit(SET_ACTIVE_NOTE, note);
         }
     },
     mounted() {

@@ -28,8 +28,9 @@ export default {
         EditorPanel
     },
     mounted() {
-        const storage = this.$store.state.storage;
-        this.$store.commit(SET_NOTE_LIST, storage.list());
+        this.$store.state.storage.list((err, rows) => {
+            this.$store.commit(SET_NOTE_LIST, rows);
+        });        
     }
 };
 </script>

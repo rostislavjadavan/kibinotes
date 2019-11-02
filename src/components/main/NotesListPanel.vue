@@ -25,8 +25,10 @@ export default {
     },
     methods: {
         onSelectNote(note) {
-            this.$store.commit(SET_ACTIVE_NOTE, note);
-            this.active = note.id;
+            this.$store.state.storage.get(note.id, (err, row) => {
+                this.$store.commit(SET_ACTIVE_NOTE, row);
+                this.active = row.id;
+            })
         },
         itemClass(note) {
             return this.active == note.id ? "item item-active" : "item";
