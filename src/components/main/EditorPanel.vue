@@ -5,7 +5,7 @@
         </div>
 
         <div v-if="this.$store.state.editMode">
-            <div class="has-background-warning note-title">
+            <div class="note-title">
                 <b-field label="Title">
                     <b-input 
                     size="is-medium" 
@@ -19,7 +19,7 @@
             />
         </div>
         <div v-if="!this.$store.state.editMode">
-            <div class="has-background-warning note-title">
+            <div class="note-title">
                 <h1>{{this.$store.state.activeNote.title}}</h1>
             </div>
             <markdown v-bind:content="this.$store.state.activeNote.content" />
