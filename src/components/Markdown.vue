@@ -20,9 +20,12 @@ export default {
         };
     },
     computed: {
-        markdownOutput: function() {            
-            return this.md.render(this.content);
+        markdownOutput: function() {
+            if (this.content != null) {
+                return this.md.render(this.content);
+            }
+            return "";
         }
-    }    
+    }
 };
 </script>

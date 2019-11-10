@@ -26,4 +26,20 @@ export default class Storage {
         let sql = "UPDATE notes SET title = $title, content = $content WHERE id = $id";
         this.db.run(sql, noteData, callback);
     }
+
+    create(callback) {
+        let noteData = {
+            $title: "New note"
+        }
+        let sql = "INSERT INTO notes(title) VALUES ($title)";
+        this.db.run(sql, noteData, callback);
+    }
+
+    remove(note, callback) {
+        let noteData = {
+            $id: note.id
+        }
+        let sql = "DELETE FROM notes WHERE id = $id";
+        this.db.run(sql, noteData, callback);
+    }
 }
