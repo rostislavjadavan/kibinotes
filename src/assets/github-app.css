@@ -7,4 +7,15 @@
     height: 30px;
     margin: 25px 0;
     background-image: url("logo.png");
+    background-size: 180px 30px;
+}
+
+.note-editor-nav {
+    position: fixed;
+    right: 10px;
+    z-index: 100;
+}
+
+.ml1 {
+    margin-left: 15px;
 }
