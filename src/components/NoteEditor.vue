@@ -30,6 +30,7 @@ import Markdown from "@/components/Markdown";
 import Editor from "@/components/Editor";
 import Mousetrap from "mousetrap";
 import { SET_EDIT_MODE, SET_ACTIVE_NOTE } from "@/mutations_names";
+import debounce from "@/libs/debounce";
 
 export default {
     components: {
@@ -37,39 +38,34 @@ export default {
         Markdown,
         Editor
     },
-    data() {
-        return {
-            editButtonCaption: "Edit"            
-        };
-    },
     methods: {
         titleContentChange(title) {
-            this.saveNote({title: title})
+            this.saveNote({ title: title });
         },
         editorContentChange(content) {
-            this.saveNote({content: content})            
+            this.saveNote({ content: content });
         },
         editorSave(content) {
-            this.saveNote({content: content})
+            this.saveNote({ content: content });
             this.switchmode();
         },
-        switchmode() {            
+        switchmode() {
             this.$store.commit(SET_EDIT_MODE, !this.$store.state.editMode);
         },
         saveNote(newNote) {
-            let note = JSON.parse(JSON.stringify(this.$store.state.activeNote));            
-            if (newNote.hasOwnProperty('title')) {
+            let note = JSON.parse(JSON.stringify(this.$store.state.activeNote));
+            if (newNote.hasOwnProperty("title")) {
                 note.title = newNote.title;
             }
-            if (newNote.hasOwnProperty('content')) {
+            if (newNote.hasOwnProperty("content")) {
                 note.content = newNote.content;
             }
 
-            this.$store.state.storage.save(note);
+            debounce(() => this.$store.state.storage.save(note), 250)();
+
             this.$store.commit(SET_ACTIVE_NOTE, note);
-            this.$store.dispatch("reloadNotesList");
         },
-        dashboard() {            
+        dashboard() {
             this.$store.commit(SET_EDIT_MODE, false);
             this.$router.push({ name: "dashboard" });
         }
