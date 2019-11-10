@@ -94,7 +94,6 @@ export default {
                             vueThis.$store.commit(SET_ACTIVE_NOTE, row);
                             vueThis.active = row.id;
                             vueThis.$router.push({ name: "note" });
-                            vueThis.$buefy.toast.open("New note created!");
                         }
                     );
                 }
