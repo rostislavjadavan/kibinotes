@@ -1,4 +1,4 @@
-![](logo/logo_small.png)
+![](src/assets/logo.svg)
 
 # Code Notes
 
