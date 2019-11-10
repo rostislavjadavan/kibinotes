@@ -1,12 +1,28 @@
 <template>
     <div v-if="this.$store.state.activeNote != null">
         <div class="note-editor-nav">
-            <button
-                class="button"
-                v-on:click="switchmode"
-                v-html="this.$store.state.editMode ? 'Save' : 'Edit'"
-            ></button>
-            <button class="button" v-on:click="dashboard">Go to Dashboard</button>
+            <div class="buttons">
+                <button class="button" v-on:click="switchmode" v-if="this.$store.state.editMode">
+                    <span class="icon is-small">
+                        <i class="fas fa-paragraph"></i>
+                    </span>
+                    <span>View</span>
+                </button>
+
+                <button class="button" v-on:click="switchmode" v-if="!this.$store.state.editMode">
+                    <span class="icon is-small">
+                        <i class="fas fa-pen"></i>
+                    </span>
+                    <span>Edit</span>
+                </button>
+
+                <button class="button" v-on:click="dashboard">
+                    <span class="icon is-small">
+                        <i class="fas fa-align-justify"></i>
+                    </span>
+                    <span>Go to Dashboard</span>
+                </button>
+            </div>
         </div>
 
         <div v-if="this.$store.state.editMode">
