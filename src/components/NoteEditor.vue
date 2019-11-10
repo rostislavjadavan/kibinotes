@@ -2,14 +2,13 @@
     <div v-if="this.$store.state.activeNote != null">
         <div class="nav">
             <button v-on:click="switchmode" v-html="this.$store.state.editMode ? 'Save' : 'Edit'"></button>
+            <button v-on:click="dashboard">Go to Dashboard</button>
         </div>
 
         <div v-if="this.$store.state.editMode">
             <div class="note-title">
                 <b-field label="Title">
-                    <b-input 
-                    size="is-medium" 
-                    v-model="title"></b-input>
+                    <b-input size="is-medium" v-model="title"></b-input>
                 </b-field>
             </div>
             <editor
@@ -51,7 +50,7 @@ export default {
             this.saveNoteContent(content);
         },
         editorSave(content) {
-            this.content = content;            
+            this.content = content;
             this.switchmode();
         },
         switchmode() {
@@ -68,10 +67,18 @@ export default {
             this.$store.state.storage.save(note);
             this.$store.commit(SET_ACTIVE_NOTE, note);
             this.$store.dispatch("reloadNotesList");
+        },
+        dashboard() {
+            this.title = this.$store.state.activeNote.title;
+            this.content = this.$store.state.activeNote.content;
+            this.saveNoteContent(this.content);
+            this.$store.commit(SET_EDIT_MODE, false);
+            this.$router.push({ name: "dashboard" });
         }
     },
     mounted() {
         Mousetrap.bind("command+s", () => this.switchmode());
+        Mousetrap.bind("command+d", () => this.dashboard());
     }
 };
 </script>

@@ -20,7 +20,7 @@ function createWindow() {
         width: 800, height: 600, webPreferences: {
             nodeIntegration: true
         },
-        minWidth: 700,
+        minWidth: 780,
         minHeight: 500        
     })
 

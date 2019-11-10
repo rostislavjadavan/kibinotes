@@ -1,79 +1,10 @@
-.app {
-    display: flex;
+.view {
+    padding: 25px 15px;
 }
 
-.is-main-panel {
-    flex-grow: 0;
-    flex-shrink: 0;
-    flex-basis: 250px; 
-    padding-left: 10px;
-    background-color: #1f232a;
-}
-
-.is-rest {
-    flex-grow: 1;
-    padding-left: 15px;
-    background: #ffffff;
-}
-
-.main-panel {
-    position: sticky;
-    top: 0px;
-    padding: 20px 0;
-}
-
-.main-panel .app-logo {
+.app-logo {
     width: 180px;
     height: 30px;
+    margin: 25px 0;
     background-image: url("logo.png");
-}
-
-.main-panel .compose {
-    padding: 40px 20px;
-}
-
-.main-panel .compose .button {
-    color: #F6F7F7;
-    font-size: 13px;
-    font-weight: 700;
-}
-
-.main-panel .notes-list {
-    color: #6F7B7E;
-}
-
-.main-panel .notes-list .item {
-    display: flex;
-    padding: 10px 0;
-    color: #d1d1d1;
-    border-top-left-radius: 4px;
-    border-bottom-left-radius: 4px;
-}
-
-.main-panel .notes-list .item:hover {
-    background-color: #2a3039;
-    border-bottom-left-radius: 4px;
-}
-
-.main-panel .notes-list .item-active,
-.main-panel .notes-list .item-active:hover {
-    background-color: #135987;
-}
-
-.main-panel .notes-list .name {
-    font-size: 15px;
-    padding: 0 10px;
-    color: #d1d1d1;
-    font-weight: 500;
-}
-
-
-.main-panel .notes-list .icon {
-    font-size: 19px;
-    padding-left: 5px;
-}
-
-.main-content .note-title {
-    padding: 5px 10px;
-    margin-left: -12px;
 }
