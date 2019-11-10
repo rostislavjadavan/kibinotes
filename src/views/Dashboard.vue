@@ -10,16 +10,27 @@
                 </b-field>
             </div>
         </div>
+        <div class="columns is-centered">
+            <button class="button is-large">
+                <span class="icon is-small">
+                    <i class="fas fa-plus"></i>
+                </span>
+                <span>New note</span>
+            </button>
+        </div>
         <div class="columns">
             <div class="column is-10 is-offset-1">
-                <table class="table is-fullwidth is-hoverable">
+                <table class="table is-fullwidth">
                     <tbody>
-                        <tr
-                            v-on:click="onSelectNote(note)"
-                            v-for="note in this.$store.state.noteList"
-                            v-bind:key="note.id"
-                        >
-                            <td>{{note.title}}</td>
+                        <tr v-for="note in this.$store.state.noteList" v-bind:key="note.id">
+                            <td class="note-title-cell" v-on:click="onSelectNote(note)">{{note.title}}</td>
+                            <td class="note-actions-cell" align="right">
+                                <a href="#">
+                                    <span class="icon">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </span>
+                                </a>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
