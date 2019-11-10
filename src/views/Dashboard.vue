@@ -48,9 +48,16 @@ export default {
     methods: {
         onSelectNote(note) {
             this.$store.state.storage.get(note.id, (err, row) => {
-                this.$store.commit(SET_ACTIVE_NOTE, row);
-                this.active = row.id;
-                this.$router.push({ name: "note" });
+                if (err) {
+                    vueThis.$buefy.toast.open({
+                        message: "Error :( " + err,
+                        type: "is-danger"
+                    });
+                } else {
+                    this.$store.commit(SET_ACTIVE_NOTE, row);
+                    this.active = row.id;
+                    this.$router.push({ name: "note" });
+                }
             });
         },
         onDeleteNote(note) {
@@ -65,7 +72,9 @@ export default {
                 onConfirm: () => {
                     this.$store.state.storage.remove(note);
                     this.$store.dispatch("reloadNotesList");
-                    this.$buefy.toast.open("Note <b>" + note.title +"</b> deleted!");
+                    this.$buefy.toast.open(
+                        "Note <b>" + note.title + "</b> deleted!"
+                    );
                 }
             });
         },
@@ -73,7 +82,10 @@ export default {
             var vueThis = this;
             this.$store.state.storage.create(function(err) {
                 if (err) {
-                    console.log(err);
+                    vueThis.$buefy.toast.open({
+                        message: "Error :( " + err,
+                        type: "is-danger"
+                    });
                 } else {
                     vueThis.$store.state.storage.get(
                         this.lastID,
