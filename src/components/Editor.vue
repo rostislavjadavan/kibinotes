@@ -33,7 +33,7 @@ export default {
                 this.options
             );
             
-            this.instance.setValue(this.options.value || this.content);
+            this.instance.setValue(this.options.value || this.content || "");
             this.instance.on("change", cm => {
                 this.$emit("change", cm.getValue());
             });

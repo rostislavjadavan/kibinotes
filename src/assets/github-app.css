@@ -1,0 +1,25 @@
+.view {
+    padding: 25px 15px;
+}
+
+.app-logo {
+    width: 180px;
+    height: 30px;
+    margin: 25px 0;
+    background-image: url("logo.svg");
+    background-size: 180px 30px;
+}
+
+.note-title-cell:hover {
+    cursor: pointer;
+}
+
+.note-editor-nav {
+    position: fixed;
+    right: 10px;
+    z-index: 100;
+}
+
+.ml1 {
+    margin-left: 15px;
+}

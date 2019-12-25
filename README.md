@@ -1,3 +1,5 @@
+![](src/assets/logo.svg)
+
 # Code Notes
 
 > Swiss knife for developers

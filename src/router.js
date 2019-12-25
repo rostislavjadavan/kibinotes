@@ -9,8 +9,13 @@ export default new Router({
     routes: [
         {
             path: '/',
-            name: 'main',
-            component: () => import('./views/Main.vue')
+            name: 'dashboard',
+            component: () => import('./views/Dashboard.vue')
+        },
+        {
+            path: '/note',
+            name: 'note',
+            component: () => import('./views/Note.vue')
         }
     ]
 })
