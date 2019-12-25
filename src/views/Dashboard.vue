@@ -3,6 +3,7 @@
         <div class="columns is-centered">
             <div class="app-logo" />
         </div>
+        <!--
         <div class="columns is-centered">
             <div class="column is-half">
                 <b-field>
@@ -10,6 +11,7 @@
                 </b-field>
             </div>
         </div>
+        -->
         <div class="columns is-centered">
             <button class="button is-large" v-on:click="onCreateNote()">
                 <span class="icon is-small">
