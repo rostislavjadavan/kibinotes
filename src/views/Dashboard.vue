@@ -46,10 +46,11 @@
 
 <script>
 import { SET_ACTIVE_NOTE, SET_EDIT_MODE } from "@/mutations_names";
+import NoteService from '@/libs/NoteService'
 export default {
     methods: {
         onSelectNote(note) {
-            this.$store.state.storage.get(note.id, (err, row) => {
+            NoteService.get(note.id, (err, row) => {
                 if (err) {
                     vueThis.$buefy.toast.open({
                         message: "Error :( " + err,
@@ -72,7 +73,7 @@ export default {
                 type: "is-danger",
                 scroll: "keep",
                 onConfirm: () => {
-                    this.$store.state.storage.remove(note);
+                    NoteService.remove(note);
                     this.$store.dispatch("reloadNotesList");
                     this.$buefy.toast.open(
                         "Note <b>" + note.title + "</b> deleted!"
@@ -82,14 +83,14 @@ export default {
         },
         onCreateNote() {
             var vueThis = this;
-            this.$store.state.storage.create(function(err) {
+            NoteService.create(function(err) {
                 if (err) {
                     vueThis.$buefy.toast.open({
                         message: "Error :( " + err,
                         type: "is-danger"
                     });
                 } else {
-                    vueThis.$store.state.storage.get(
+                    NoteService.get(
                         this.lastID,
                         (err, row) => {
                             vueThis.$store.commit(SET_EDIT_MODE, true);

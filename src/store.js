@@ -1,17 +1,17 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import Storage from "@/libs/storage";
+import NoteService from "@/libs/NoteService";
 import { SET_NOTE_LIST, SET_ACTIVE_NOTE, SET_EDIT_MODE } from "@/mutations_names";
 
 Vue.use(Vuex)
+
 
 export default new Vuex.Store({
     state: {
         activeNote: null,
         editMode: false,
         noteList: [],        
-        storage: new Storage()
     },
     mutations: {
         [SET_NOTE_LIST](state, noteList) {
@@ -27,7 +27,7 @@ export default new Vuex.Store({
     },
     actions: {
         reloadNotesList(context) {
-            context.state.storage.list((err, rows) => {
+            NoteService.list((err, rows) => {
                 context.commit(SET_NOTE_LIST, rows);
             });
         }

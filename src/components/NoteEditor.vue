@@ -44,6 +44,7 @@
 import NoteEditorTitle from "@/components/NoteEditorTitle";
 import Markdown from "@/components/Markdown";
 import Editor from "@/components/Editor";
+import NoteService from '@/libs/NoteService'
 import Mousetrap from "mousetrap";
 import { SET_EDIT_MODE, SET_ACTIVE_NOTE } from "@/mutations_names";
 import debounce from "@/libs/debounce";
@@ -77,7 +78,7 @@ export default {
                 note.content = newNote.content;
             }
 
-            debounce(() => this.$store.state.storage.save(note), 250)();
+            debounce(() => NoteService.save(note), 250)();
 
             this.$store.commit(SET_ACTIVE_NOTE, note);
         },
