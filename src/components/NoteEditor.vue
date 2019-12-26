@@ -45,7 +45,7 @@ import NoteEditorTitle from "@/components/NoteEditorTitle";
 import Markdown from "@/components/Markdown";
 import Editor from "@/components/Editor";
 import NoteService from '@/libs/NoteService'
-import Mousetrap from "mousetrap";
+import KeyboardShortcutsService from "@/libs/KeyboardShortcutsService";
 import { SET_EDIT_MODE, SET_ACTIVE_NOTE } from "@/mutations_names";
 import debounce from "@/libs/debounce";
 
@@ -88,8 +88,8 @@ export default {
         }
     },
     mounted() {
-        Mousetrap.bind("command+s", () => this.switchmode());
-        Mousetrap.bind("command+d", () => this.dashboard());
+        KeyboardShortcutsService.bindSwitchEditAndViewMode(() => this.switchmode());
+        KeyboardShortcutsService.bindGoToDashboard(() => this.dashboard());
     }
 };
 </script>

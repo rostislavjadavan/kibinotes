@@ -25,7 +25,7 @@ export default {
         onDelete(note) {
             this.$emit("delete", note);
         },
-        onSelect(note) {
+        onSelect(note) {            
             this.$emit("select", note.id);
         }
     }

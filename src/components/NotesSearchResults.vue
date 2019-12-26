@@ -18,18 +18,40 @@
                         </div>
                     </div>
                 </div>
-                <p class="is-size-6 has-text-centered">{{this.$store.state.searchResultList.length}} results found</p>
+                <p
+                    class="is-size-6 has-text-centered"
+                >{{this.$store.state.searchResultList.length}} results found</p>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import { SET_SEARCH_RESULT } from "@/mutations_names";
+import KeyboardShortcutsService from "@/libs/KeyboardShortcutsService";
 export default {
     methods: {
         onSelect(note) {
             this.$emit("select", note.note_id);
         }
+    },
+    created() {
+        this.$store.subscribe((mutation, state) => {
+            if (mutation.type === SET_SEARCH_RESULT) {
+                let index = 1;
+                do {
+                    console.log("command+" + index);
+                    KeyboardShortcutsService.bindSearchResult(
+                        index,
+                        () => this.$emit(
+                            "select",
+                            state.searchResultList[index - 1].note_id
+                        )
+                    );
+                    index++;
+                } while (index <= state.searchResultList.length && index < 10);
+            }
+        });
     }
 };
 </script>

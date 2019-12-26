@@ -52,7 +52,7 @@ export default {
     },
     methods: {
         onSelectNoteById(noteId) {
-            NoteService.get(noteId, (err, row) => {
+            NoteService.get(noteId, (err, row) => {                
                 if (err) {
                     vueThis.$buefy.toast.open({
                         message: "Error :( " + err,
