@@ -14,6 +14,15 @@
     cursor: pointer;
 }
 
+.note-content-preview-cell {
+    font-size: 1.0rem;
+    background-color: #f6f8fa;
+}
+
+.note-content-preview-cell b {
+    background-color: khaki;
+}
+
 .note-editor-nav {
     position: fixed;
     right: 10px;

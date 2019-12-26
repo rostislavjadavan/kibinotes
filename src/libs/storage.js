@@ -18,11 +18,13 @@ export const connection = new sqlite3.Database(
 
 [
     `CREATE TABLE IF NOT EXISTS "notes" (
-            "id"	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+            "id"	TEXT NOT NULL PRIMARY KEY,
             "title"	TEXT,
             "content"	TEXT,
             "last_update_ts"	INTEGER
-        )`
+        )`,
+    `CREATE VIRTUAL TABLE IF NOT EXISTS notes_index 
+            USING fts5(note_id UNINDEXED, title, content);`
 ].forEach(sql => {
     connection.run(sql);
 })
