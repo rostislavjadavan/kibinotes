@@ -17,18 +17,20 @@ class NoteService {
         let noteData = {
             $id: note.id,
             $content: note.content,
-            $title: note.title
+            $title: note.title,
+            $last_update_ts: Date.now()
         }
-        let sql = "UPDATE notes SET title = $title, content = $content WHERE id = $id";
+        let sql = "UPDATE notes SET title = $title, content = $content, last_update_ts = $last_update_ts  WHERE id = $id";
         this.connection.run(sql, noteData, callback);
     }
 
     create(callback) {
         let noteData = {
-            $title: "New note"
-        }
-        let sql = "INSERT INTO notes(title) VALUES ($title)";
-        this.cconnectionon.run(sql, noteData, callback);
+            $title: "New note",
+            $last_update_ts: Date.now()
+        }        
+        let sql = "INSERT INTO notes(title, last_update_ts) VALUES ($title, $last_update_ts)";
+        this.connection.run(sql, noteData, callback);
     }
 
     remove(note, callback) {
