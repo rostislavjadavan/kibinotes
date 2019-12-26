@@ -5,8 +5,17 @@
         </div>
         <div class="columns is-centered">
             <div class="column is-half">
-                <b-field>
-                    <b-input v-model="searchQuery" placeholder="Search..." size="is-medium"></b-input>
+                <b-field>                    
+                    <div class="control is-medium is-clearfix">
+                        <input
+                            ref="search"
+                            v-model="searchQuery"                            
+                            type="text"
+                            autocomplete="on"
+                            placeholder="Search..."
+                            class="input is-medium"
+                        />                        
+                    </div>                                    
                 </b-field>
             </div>
         </div>
@@ -23,16 +32,16 @@
             v-on:delete="onDeleteNote"
             v-on:select="onSelectNoteById"
         />
-        <notes-search-results 
-            :query.sync="searchQuery"
-            v-if="searchQuery.length > 0" 
-            v-on:select="onSelectNoteById" 
-            />
+        <notes-search-results v-if="searchQuery.length > 0" v-on:select="onSelectNoteById" />
     </div>
 </template>
 
 <script>
-import { SET_ACTIVE_NOTE, SET_EDIT_MODE } from "@/mutations_names";
+import {
+    SET_ACTIVE_NOTE,
+    SET_EDIT_MODE,
+    SET_SEARCH_QUERY
+} from "@/mutations_names";
 import NoteService from "@/libs/NoteService";
 import NotesList from "@/components/NotesList";
 import NotesSearchResults from "@/components/NotesSearchResults";
@@ -42,7 +51,7 @@ export default {
         NotesSearchResults
     },
     methods: {
-        onSelectNoteById(noteId) {            
+        onSelectNoteById(noteId) {
             NoteService.get(noteId, (err, row) => {
                 if (err) {
                     vueThis.$buefy.toast.open({
@@ -100,6 +109,14 @@ export default {
     },
     mounted() {
         this.$store.dispatch("reloadNotesList");
+        this.$refs.search.focus();
+        this.searchQuery = this.$store.state.searchQuery;
+    },
+    watch: {
+        searchQuery: function(val) {
+            this.$store.commit(SET_SEARCH_QUERY, this.searchQuery);
+            this.$store.dispatch("updateSearchResult");
+        }
     }
 };
 </script>

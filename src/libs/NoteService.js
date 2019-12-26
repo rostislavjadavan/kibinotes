@@ -87,7 +87,7 @@ class NoteService {
         let sql = `SELECT 
             note_id,
             highlight(notes_index, 1, '<b>', '</b>') title,
-            snippet(notes_index, 2, '<b>', '</b>', '...', 10) content
+            snippet(notes_index, 2, '<b>', '</b>', '...', 30) content
             FROM notes_index 
             WHERE notes_index MATCH '${query}*'
             ORDER BY rank;`;
