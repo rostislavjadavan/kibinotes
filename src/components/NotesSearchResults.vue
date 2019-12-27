@@ -34,24 +34,6 @@ export default {
         onSelect(note) {
             this.$emit("select", note.note_id);
         }
-    },
-    created() {
-        this.$store.subscribe((mutation, state) => {
-            if (mutation.type === SET_SEARCH_RESULT) {
-                let index = 1;
-                do {
-                    console.log("command+" + index);
-                    KeyboardShortcutsService.bindSearchResult(
-                        index,
-                        () => this.$emit(
-                            "select",
-                            state.searchResultList[index - 1].note_id
-                        )
-                    );
-                    index++;
-                } while (index <= state.searchResultList.length && index < 10);
-            }
-        });
-    }
+    }    
 };
 </script>

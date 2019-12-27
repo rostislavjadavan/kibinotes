@@ -5,17 +5,17 @@
         </div>
         <div class="columns is-centered">
             <div class="column is-half">
-                <b-field>                    
+                <b-field>
                     <div class="control is-medium is-clearfix">
                         <input
                             ref="search"
-                            v-model="searchQuery"                            
+                            v-model="searchQuery"
                             type="text"
                             autocomplete="on"
                             placeholder="Search..."
                             class="input is-medium"
-                        />                        
-                    </div>                                    
+                        />
+                    </div>
                 </b-field>
             </div>
         </div>
@@ -40,11 +40,13 @@
 import {
     SET_ACTIVE_NOTE,
     SET_EDIT_MODE,
-    SET_SEARCH_QUERY
+    SET_SEARCH_QUERY,
+    SET_SEARCH_RESULT
 } from "@/mutations_names";
 import NoteService from "@/libs/NoteService";
 import NotesList from "@/components/NotesList";
 import NotesSearchResults from "@/components/NotesSearchResults";
+import KeyboardShortcutsService from "@/libs/KeyboardShortcutsService";
 export default {
     components: {
         NotesList,
@@ -52,7 +54,7 @@ export default {
     },
     methods: {
         onSelectNoteById(noteId) {
-            NoteService.get(noteId, (err, row) => {                
+            NoteService.get(noteId, (err, row) => {
                 if (err) {
                     vueThis.$buefy.toast.open({
                         message: "Error :( " + err,
@@ -111,6 +113,19 @@ export default {
         this.$store.dispatch("reloadNotesList");
         this.$refs.search.focus();
         this.searchQuery = this.$store.state.searchQuery;
+
+        this.$store.subscribe((mutation, state) => {
+            if (mutation.type === SET_SEARCH_RESULT) {
+                let index = 1;
+                do {
+                    KeyboardShortcutsService.bindSearchResult(this.$refs.search, index, (index) => {                                                
+                        const noteId = state.searchResultList[index - 1].note_id;
+                        this.onSelectNoteById(noteId);
+                    });
+                    index++;
+                } while (index <= state.searchResultList.length && index < 10);
+            }
+        });
     },
     watch: {
         searchQuery: function(val) {
@@ -120,4 +135,3 @@ export default {
     }
 };
 </script>
-

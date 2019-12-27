@@ -20,8 +20,8 @@ class KeyboardShortcutsService {
         Mousetrap.bind(this.bindings.goToDashboard, func);
     }
 
-    bindSearchResult(index, func) {
-        Mousetrap.bind(this.bindings.searchResult + "+" + index, func);
+    bindSearchResult(el, index, func) {        
+        Mousetrap(el).bind(this.bindings.searchResult + "+" + index, () => func(index));
     }
 }
 
