@@ -6,7 +6,7 @@
         <div class="columns is-centered">
             <div class="column is-half">
                 <b-field>
-                    <div class="control is-medium is-clearfix">
+                    <div class="control is-medium is-clearfix is-expanded">
                         <input
                             ref="search"
                             v-model="searchQuery"
@@ -16,6 +16,13 @@
                             class="input is-medium"
                         />
                     </div>
+                    <p class="control" v-if="isSearch">
+                        <button class="button is-medium" v-on:click="onClearSearchQuery()">
+                            <span class="icon is-small">
+                                <i class="fas fa-times"></i>
+                            </span>
+                        </button>
+                    </p>
                 </b-field>
             </div>
         </div>
@@ -28,11 +35,11 @@
             </button>
         </div>
         <notes-list
-            v-if="searchQuery.length == 0"
+            v-if="!isSearch"
             v-on:delete="onDeleteNote"
             v-on:select="onSelectNoteById"
         />
-        <notes-search-results v-if="searchQuery.length > 0" v-on:select="onSelectNoteById" />
+        <notes-search-results v-if="isSearch" v-on:select="onSelectNoteById" />
     </div>
 </template>
 
@@ -102,6 +109,10 @@ export default {
                     });
                 }
             });
+        },
+        onClearSearchQuery() {
+            this.searchQuery = "";
+            this.$refs.search.focus();
         }
     },
     data() {
@@ -118,10 +129,15 @@ export default {
             if (mutation.type === SET_SEARCH_RESULT) {
                 let index = 1;
                 do {
-                    KeyboardShortcutsService.bindSearchResult(this.$refs.search, index, (index) => {                                                
-                        const noteId = state.searchResultList[index - 1].note_id;
-                        this.onSelectNoteById(noteId);
-                    });
+                    KeyboardShortcutsService.bindSearchResult(
+                        this.$refs.search,
+                        index,
+                        index => {
+                            const noteId =
+                                state.searchResultList[index - 1].note_id;
+                            this.onSelectNoteById(noteId);
+                        }
+                    );
                     index++;
                 } while (index <= state.searchResultList.length && index < 10);
             }
@@ -131,6 +147,11 @@ export default {
         searchQuery: function(val) {
             this.$store.commit(SET_SEARCH_QUERY, this.searchQuery);
             this.$store.dispatch("updateSearchResult");
+        }
+    },
+    computed: {
+        isSearch: function() {
+            return this.searchQuery.length > 0;
         }
     }
 };
