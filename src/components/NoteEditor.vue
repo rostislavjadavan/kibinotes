@@ -2,21 +2,28 @@
     <div v-if="this.$store.state.activeNote != null">
         <div class="note-editor-nav">
             <div class="buttons">
-                <button class="button" v-on:click="switchmode" v-if="this.$store.state.editMode">
+                <button class="button" v-on:click="onSwitchMode" v-if="this.$store.state.editMode">
                     <span class="icon is-small">
                         <i class="fas fa-paragraph"></i>
                     </span>
                     <span>View</span>
                 </button>
 
-                <button class="button" v-on:click="switchmode" v-if="!this.$store.state.editMode">
+                <button class="button" v-on:click="onSwitchMode" v-if="!this.$store.state.editMode">
                     <span class="icon is-small">
                         <i class="fas fa-pen"></i>
                     </span>
                     <span>Edit</span>
                 </button>
 
-                <button class="button" v-on:click="dashboard">
+                <button class="button" v-on:click="onDelete">
+                    <span class="icon is-small">
+                        <i class="fas fa-trash-alt"></i>
+                    </span>
+                    <span>Delete</span>
+                </button>
+
+                <button class="button" v-on:click="onDashboard">
                     <span class="icon is-small">
                         <i class="fas fa-align-justify"></i>
                     </span>
@@ -26,11 +33,11 @@
         </div>
 
         <div v-if="this.$store.state.editMode">
-            <note-editor-title v-on:change="titleContentChange" />
+            <note-editor-title v-on:change="onTitleContentChange" />
             <editor
                 v-bind:content="this.$store.state.activeNote.content"
-                v-on:change="editorContentChange"
-                v-on:save="editorSave"
+                v-on:change="onEditorContentChange"
+                v-on:save="onEditorSave"
             />
         </div>
         <div v-if="!this.$store.state.editMode">
@@ -56,17 +63,17 @@ export default {
         Editor
     },
     methods: {
-        titleContentChange(title) {
+        onTitleContentChange(title) {
             this.saveNote({ title: title });
         },
-        editorContentChange(content) {
+        onEditorContentChange(content) {
             this.saveNote({ content: content });
         },
-        editorSave(content) {
+        onEditorSave(content) {
             this.saveNote({ content: content });
-            this.switchmode();
+            this.onSwitchMode();
         },
-        switchmode() {
+        onSwitchMode() {
             this.$store.commit(SET_EDIT_MODE, !this.$store.state.editMode);
         },
         saveNote(newNote) {
@@ -82,14 +89,34 @@ export default {
 
             this.$store.commit(SET_ACTIVE_NOTE, note);
         },
-        dashboard() {
+        onDashboard() {
             this.$store.commit(SET_EDIT_MODE, false);
             this.$router.push({ name: "dashboard" });
+        },
+        onDelete() {
+            const note = this.$store.state.activeNote;
+            this.$buefy.dialog.confirm({
+                message:
+                    "Are you sure you want to delete note <b>" +
+                    note.title +
+                    "</b>",
+                confirmText: "Yes, delete",
+                type: "is-danger",
+                scroll: "keep",
+                onConfirm: () => {
+                    NoteService.remove(note);
+                    this.$router.push({ name: "dashboard" });
+                    this.$store.dispatch("reloadNotesList");
+                    this.$buefy.toast.open(
+                        "Note <b>" + note.title + "</b> deleted!"
+                    );
+                }
+            });
         }
     },
     mounted() {
-        KeyboardShortcutsService.bindSwitchEditAndViewMode(() => this.switchmode());
-        KeyboardShortcutsService.bindGoToDashboard(() => this.dashboard());
+        KeyboardShortcutsService.bindSwitchEditAndViewMode(() => this.onSwitchMode());
+        KeyboardShortcutsService.bindGoToDashboard(() => this.onDashboard());
     }
 };
 </script>
