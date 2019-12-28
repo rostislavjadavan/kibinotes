@@ -19,7 +19,8 @@ export default {
             instance: null,
             options: {
                 value: "",
-                theme: "github-light"
+                theme: "github-light",
+                lineNumbers: true
             }
         };
     },
@@ -32,7 +33,7 @@ export default {
                 this.$refs.editor,
                 this.options
             );
-            
+
             this.instance.setValue(this.options.value || this.content || "");
             this.instance.on("change", cm => {
                 this.$emit("change", cm.getValue());
@@ -42,8 +43,11 @@ export default {
             this.instance.setCursor(this.instance.lineCount(), 0);
 
             this.instance.setOption("extraKeys", {
-                "Cmd-S": (instance) => {
-                    this.$emit("save", instance.getValue());                
+                "Cmd-S": instance => {
+                    this.$emit("save", instance.getValue());
+                },
+                "Cmd-D": instance => {
+                    this.$emit("dashboard");
                 }
             });
         }

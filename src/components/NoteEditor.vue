@@ -38,6 +38,7 @@
                 v-bind:content="this.$store.state.activeNote.content"
                 v-on:change="onEditorContentChange"
                 v-on:save="onEditorSave"
+                v-on:dashboard="onDashboard"
             />
         </div>
         <div v-if="!this.$store.state.editMode">
