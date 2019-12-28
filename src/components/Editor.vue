@@ -8,6 +8,7 @@
 
 <script>
 import CodeMirror from "codemirror/lib/codemirror.js";
+import CodeMirrorSearch from "codemirror/addon/search/searchcursor.js";
 import "codemirror/lib/codemirror.css";
 
 export default {
@@ -40,7 +41,7 @@ export default {
             });
 
             this.instance.focus();
-            this.instance.setCursor(this.instance.lineCount(), 0);
+            //this.instance.setCursor(this.instance.lineCount(), 0);
 
             this.instance.setOption("extraKeys", {
                 "Cmd-S": instance => {
@@ -50,6 +51,15 @@ export default {
                     this.$emit("dashboard");
                 }
             });
+
+            if (this.$store.state.searchQuery) {                
+                let cursor = this.instance.getSearchCursor(this.$store.state.searchQuery);
+                while (cursor.findNext()) {
+                    this.instance.markText(cursor.from(), cursor.to(), {
+                        className: "highlight"
+                    });
+                }
+            }
         }
     }
 };
