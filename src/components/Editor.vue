@@ -1,6 +1,6 @@
 <template>
     <section>
-        <div class="editor">
+        <div class="editor" ref="wrapper">
             <textarea ref="editor" value></textarea>
         </div>
     </section>
@@ -52,8 +52,10 @@ export default {
                 }
             });
 
-            if (this.$store.state.searchQuery) {                
-                let cursor = this.instance.getSearchCursor(this.$store.state.searchQuery);
+            if (this.$store.state.searchQuery) {
+                let cursor = this.instance.getSearchCursor(
+                    this.$store.state.searchQuery
+                );
                 while (cursor.findNext()) {
                     this.instance.markText(cursor.from(), cursor.to(), {
                         className: "highlight"

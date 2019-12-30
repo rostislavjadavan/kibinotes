@@ -15,7 +15,7 @@
 }
 
 
-.note-seach-result-box b, span .highlight {
+.note-seach-result-box b, span .highlight, mark {
     background-color: khaki;
 }
 

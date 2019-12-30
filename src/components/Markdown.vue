@@ -1,9 +1,10 @@
 <template>
-    <div class="markdown-body" v-html="markdownOutput" />
+    <div ref="markdown" class="markdown-body" v-html="markdownOutput" />
 </template>
 
 <script>
 import Markdown from "markdown-it";
+import Mark from "@/libs/mark";
 
 export default {
     props: {
@@ -25,6 +26,17 @@ export default {
                 return this.md.render(this.content);
             }
             return "";
+        }
+    },
+    mounted() {
+        if (this.$store.state.searchQuery) {
+            var markInstance = new Mark(this.$refs.markdown);
+            var options = {
+                acrossElements: true,
+                separateWordSearch: true,
+                diacritics: true
+            };
+            markInstance.mark(this.$store.state.searchQuery, options);
         }
     }
 };
