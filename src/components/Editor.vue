@@ -1,6 +1,6 @@
 <template>
     <section>
-        <div class="editor">
+        <div class="editor" ref="wrapper">
             <textarea ref="editor" value></textarea>
         </div>
     </section>
@@ -8,6 +8,7 @@
 
 <script>
 import CodeMirror from "codemirror/lib/codemirror.js";
+import CodeMirrorSearch from "codemirror/addon/search/searchcursor.js";
 import "codemirror/lib/codemirror.css";
 
 export default {
@@ -19,7 +20,8 @@ export default {
             instance: null,
             options: {
                 value: "",
-                theme: "github-light"
+                theme: "github-light",
+                lineNumbers: true
             }
         };
     },
@@ -32,20 +34,34 @@ export default {
                 this.$refs.editor,
                 this.options
             );
-            
+
             this.instance.setValue(this.options.value || this.content || "");
             this.instance.on("change", cm => {
                 this.$emit("change", cm.getValue());
             });
 
             this.instance.focus();
-            this.instance.setCursor(this.instance.lineCount(), 0);
+            //this.instance.setCursor(this.instance.lineCount(), 0);
 
             this.instance.setOption("extraKeys", {
-                "Cmd-S": (instance) => {
-                    this.$emit("save", instance.getValue());                
+                "Cmd-S": instance => {
+                    this.$emit("save", instance.getValue());
+                },
+                "Cmd-D": instance => {
+                    this.$emit("dashboard");
                 }
             });
+
+            if (this.$store.state.searchQuery) {
+                let cursor = this.instance.getSearchCursor(
+                    this.$store.state.searchQuery
+                );
+                while (cursor.findNext()) {
+                    this.instance.markText(cursor.from(), cursor.to(), {
+                        className: "highlight"
+                    });
+                }
+            }
         }
     }
 };

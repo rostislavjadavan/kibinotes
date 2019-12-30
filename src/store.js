@@ -1,17 +1,26 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import Storage from "@/libs/storage";
-import { SET_NOTE_LIST, SET_ACTIVE_NOTE, SET_EDIT_MODE } from "@/mutations_names";
+import debounce from "@/libs/debounce";
+import NoteService from "@/libs/NoteService";
+import {
+    SET_NOTE_LIST,
+    SET_ACTIVE_NOTE,
+    SET_EDIT_MODE,
+    SET_SEARCH_QUERY,
+    SET_SEARCH_RESULT
+} from "@/mutations_names";
 
 Vue.use(Vuex)
+
 
 export default new Vuex.Store({
     state: {
         activeNote: null,
         editMode: false,
-        noteList: [],        
-        storage: new Storage()
+        noteList: [],
+        searchQuery: "",
+        searchResultList: []
     },
     mutations: {
         [SET_NOTE_LIST](state, noteList) {
@@ -23,13 +32,30 @@ export default new Vuex.Store({
         },
         [SET_EDIT_MODE](state, editMode) {
             state.editMode = editMode;
+        },
+        [SET_SEARCH_QUERY](state, searchQuery) {
+            state.searchQuery = searchQuery;
+        },
+        [SET_SEARCH_RESULT](state, searchResultList) {
+            state.searchResultList = searchResultList;
         }
     },
     actions: {
         reloadNotesList(context) {
-            context.state.storage.list((err, rows) => {
+            NoteService.list((err, rows) => {
                 context.commit(SET_NOTE_LIST, rows);
             });
+        },
+        updateSearchResult(context) {
+            debounce(
+                () =>
+                    NoteService.search(context.state.searchQuery, function (err, rows) {
+                        if (typeof rows !== 'undefined') {
+                            context.commit(SET_SEARCH_RESULT, rows);
+                        }
+                    }),
+                150
+            )();
         }
     }
 })

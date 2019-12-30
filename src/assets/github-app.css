@@ -10,8 +10,13 @@
     background-size: 180px 30px;
 }
 
-.note-title-cell:hover {
+.note-title-cell:hover, .note-seach-result-box:hover {
     cursor: pointer;
+}
+
+
+.note-seach-result-box b, span .highlight, mark {
+    background-color: khaki;
 }
 
 .note-editor-nav {
