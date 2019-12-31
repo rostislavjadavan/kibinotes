@@ -2,6 +2,7 @@
 import Mousetrap from "mousetrap";
 
 const bindings = {
+    createNewNote: "command+n",
     switchEditAndViewMode: "command+s",
     goToDashboard: "command+d",
     searchResult: "command"
@@ -10,6 +11,13 @@ const bindings = {
 class KeyboardShortcutsService {
     constructor(bindings) {
         this.bindings = bindings;        
+    }
+
+    bindCreateNewNote(el, func) {
+        if (el) {
+            Mousetrap(el).bind(this.bindings.createNewNote, func);
+        }
+        Mousetrap.bind(this.bindings.createNewNote, func);        
     }
 
     bindSwitchEditAndViewMode(func) {

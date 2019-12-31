@@ -142,6 +142,8 @@ export default {
                 } while (index <= state.searchResultList.length && index < 10);
             }
         });
+
+        KeyboardShortcutsService.bindCreateNewNote(this.$refs.search, this.onCreateNote);
     },
     watch: {
         searchQuery: function(val) {
