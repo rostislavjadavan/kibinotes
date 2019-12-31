@@ -16,6 +16,11 @@ export default new Router({
             path: '/note',
             name: 'note',
             component: () => import('./views/Note.vue')
+        },
+        {
+            path: '/system',
+            name: 'system',
+            component: () => import('./views/System.vue')
         }
     ]
 })

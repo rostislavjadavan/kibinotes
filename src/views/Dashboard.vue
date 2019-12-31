@@ -34,12 +34,9 @@
                 <span>New note</span>
             </button>
         </div>
-        <notes-list
-            v-if="!isSearch"
-            v-on:delete="onDeleteNote"
-            v-on:select="onSelectNoteById"
-        />
+        <notes-list v-if="!isSearch" v-on:delete="onDeleteNote" v-on:select="onSelectNoteById" />
         <notes-search-results v-if="isSearch" v-on:select="onSelectNoteById" />
+        <app-footer />
     </div>
 </template>
 
@@ -50,17 +47,20 @@ import {
     SET_SEARCH_QUERY,
     SET_SEARCH_RESULT
 } from "@/mutations_names";
-import NoteService from "@/libs/NoteService";
 import NotesList from "@/components/NotesList";
 import NotesSearchResults from "@/components/NotesSearchResults";
+import AppFooter from '@/components/AppFooter'
 import KeyboardShortcutsService from "@/libs/KeyboardShortcutsService";
+import NoteService from "@/libs/NoteService";
 export default {
     components: {
         NotesList,
-        NotesSearchResults
+        NotesSearchResults,
+        AppFooter
     },
     methods: {
         onSelectNoteById(noteId) {
+            var vueThis = this;
             NoteService.get(noteId, (err, row) => {
                 if (err) {
                     vueThis.$buefy.toast.open({
@@ -142,6 +142,14 @@ export default {
                 } while (index <= state.searchResultList.length && index < 10);
             }
         });
+
+        KeyboardShortcutsService.bindCreateNewNote(
+            this.$refs.search,
+            this.onCreateNote
+        );
+        KeyboardShortcutsService.bindSystemPage(() =>
+            this.$router.push({ name: "system" })
+        );
     },
     watch: {
         searchQuery: function(val) {

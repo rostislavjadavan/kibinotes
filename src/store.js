@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 
 import debounce from "@/libs/debounce";
 import NoteService from "@/libs/NoteService";
+import NoteIndexService from '@/libs/NoteIndexService';
 import {
     SET_NOTE_LIST,
     SET_ACTIVE_NOTE,
@@ -49,7 +50,7 @@ export default new Vuex.Store({
         updateSearchResult(context) {
             debounce(
                 () =>
-                    NoteService.search(context.state.searchQuery, function (err, rows) {
+                    NoteIndexService.search(context.state.searchQuery, function (err, rows) {
                         if (typeof rows !== 'undefined') {
                             context.commit(SET_SEARCH_RESULT, rows);
                         }
