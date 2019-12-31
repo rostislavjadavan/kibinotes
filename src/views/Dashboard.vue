@@ -34,11 +34,7 @@
                 <span>New note</span>
             </button>
         </div>
-        <notes-list
-            v-if="!isSearch"
-            v-on:delete="onDeleteNote"
-            v-on:select="onSelectNoteById"
-        />
+        <notes-list v-if="!isSearch" v-on:delete="onDeleteNote" v-on:select="onSelectNoteById" />
         <notes-search-results v-if="isSearch" v-on:select="onSelectNoteById" />
     </div>
 </template>
@@ -61,6 +57,7 @@ export default {
     },
     methods: {
         onSelectNoteById(noteId) {
+            var vueThis = this;
             NoteService.get(noteId, (err, row) => {
                 if (err) {
                     vueThis.$buefy.toast.open({
@@ -143,7 +140,13 @@ export default {
             }
         });
 
-        KeyboardShortcutsService.bindCreateNewNote(this.$refs.search, this.onCreateNote);
+        KeyboardShortcutsService.bindCreateNewNote(
+            this.$refs.search,
+            this.onCreateNote
+        );
+        KeyboardShortcutsService.bindSystemPage(() =>
+            this.$router.push({ name: "system" })
+        );
     },
     watch: {
         searchQuery: function(val) {

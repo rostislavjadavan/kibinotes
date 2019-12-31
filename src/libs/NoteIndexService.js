@@ -7,21 +7,23 @@ class NoteIndexService {
         this.connection = connection;
     }
 
-    update(note) {
+    update(note, callback) {
         let noteIndexData = {
             $note_id: note.id,
-            $content: removeMarkdown(note.content).replace(/[^\w\s]/gi, ''),
+            $content: removeMarkdown(note.content),
             $title: note.title
         }
         let sqlIndex = "UPDATE notes_index SET title = $title, content = $content WHERE note_id = $note_id";
         this.connection.run(sqlIndex, noteIndexData, function (err) {
             if (err) {
                 console.error(err);
+            } else {
+                if (callback) callback();
             }
         });
     }
 
-    create(noteId, noteTitle) {
+    create(noteId, noteTitle, callback) {
         let noteIndexData = {
             $note_id: noteId,
             $title: noteTitle
@@ -30,11 +32,13 @@ class NoteIndexService {
         this.connection.run(sqlIndex, noteIndexData, function (err) {
             if (err) {
                 console.error(err);
+            } else {
+                if (callback) callback();
             }
         });
     }
 
-    remove(note) {
+    remove(note, callback) {
         let noteData = {
             $id: note.id
         }        
@@ -43,6 +47,8 @@ class NoteIndexService {
         this.connection.run(sqlIndex, noteData, function (err) {
             if (err) {
                 console.error(err);
+            } else {
+                if (callback) callback();
             }
         });
     }
