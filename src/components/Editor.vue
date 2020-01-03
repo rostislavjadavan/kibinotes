@@ -10,6 +10,7 @@
 import CodeMirror from "codemirror/lib/codemirror.js";
 import CodeMirrorSearch from "codemirror/addon/search/searchcursor.js";
 import "codemirror/lib/codemirror.css";
+import "codemirror/mode/markdown/markdown.js";
 
 export default {
     props: {
@@ -20,7 +21,8 @@ export default {
             instance: null,
             options: {
                 value: "",
-                theme: "github-light",
+                mode: "markdown",
+                theme: "app",
                 lineNumbers: true
             }
         };
@@ -69,7 +71,7 @@ export default {
 
 
 <style>
-@import "../assets/github-codemirror-theme.css";
+@import "../assets/codemirror.css";
 
 .CodeMirror {
     height: auto;

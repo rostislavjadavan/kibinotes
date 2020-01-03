@@ -1,5 +1,7 @@
 <template>
-    <div ref="markdown" class="markdown-body" v-html="markdownOutput" />
+    <div class="content">
+        <div ref="markdown" class="markdown-body" v-html="markdownOutput" />
+    </div>
 </template>
 
 <script>

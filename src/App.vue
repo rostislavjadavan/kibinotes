@@ -9,6 +9,5 @@ export default {};
 </script>
 
 <style>
-@import "assets/github-app.css";
-@import "assets/github-markdown.css";
+@import "assets/app.css";
 </style>
