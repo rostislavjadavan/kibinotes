@@ -6,6 +6,7 @@
 
 <script>
 import Markdown from "markdown-it";
+import MarkdownEmoji from "markdown-it-emoji";
 import Mark from "@/libs/mark";
 
 export default {
@@ -31,6 +32,8 @@ export default {
         }
     },
     mounted() {
+        this.md.use(MarkdownEmoji);
+        
         if (this.$store.state.searchQuery) {
             var markInstance = new Mark(this.$refs.markdown);
             var options = {
