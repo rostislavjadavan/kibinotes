@@ -7,6 +7,7 @@
 <script>
 import Markdown from "markdown-it";
 import MarkdownEmoji from "markdown-it-emoji";
+import MarkdownTaskList from "markdown-it-task-lists";
 import Mark from "@/libs/mark";
 
 export default {
@@ -33,7 +34,8 @@ export default {
     },
     mounted() {
         this.md.use(MarkdownEmoji);
-        
+        this.md.use(MarkdownTaskList);
+
         if (this.$store.state.searchQuery) {
             var markInstance = new Mark(this.$refs.markdown);
             var options = {
@@ -46,3 +48,9 @@ export default {
     }
 };
 </script>
+
+<style>
+.task-list-item-checkbox {
+    font-size: 3rem;    
+}
+</style>
