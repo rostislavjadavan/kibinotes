@@ -43,7 +43,29 @@ export default {
             });
 
             this.instance.focus();
-            //this.instance.setCursor(this.instance.lineCount(), 0);
+
+            let scroll = this.$store.state.noteScroll;            
+            if (scroll.positionStart != null && scroll.positionEnd != null) {
+                let avg = (scroll.positionStart + scroll.positionEnd) / 2;
+                let startLine = Math.round(
+                    (this.instance.lineCount() * scroll.positionStart) / 100
+                );
+                let line = Math.round((this.instance.lineCount() * avg) / 100);
+
+                if (startLine < 10) {
+                    this.instance.setCursor(startLine, 0);
+                    this.instance.scrollIntoView(
+                        { line: startLine, char: 0 },
+                        window.innerHeight / 2
+                    );
+                } else {
+                    this.instance.setCursor(line, 0);
+                    this.instance.scrollIntoView(
+                        { line: line, char: 0 },
+                        window.innerHeight / 2
+                    );
+                }
+            }
 
             this.instance.setOption("extraKeys", {
                 "Cmd-S": instance => {

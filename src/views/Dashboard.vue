@@ -121,6 +121,8 @@ export default {
         };
     },
     mounted() {
+        this.$store.commit(SET_EDIT_MODE, false);
+        
         this.$store.dispatch("reloadNotesList");
         this.$refs.search.focus();
         this.searchQuery = this.$store.state.searchQuery;

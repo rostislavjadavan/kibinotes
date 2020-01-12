@@ -9,6 +9,7 @@ import Markdown from "markdown-it";
 import MarkdownEmoji from "markdown-it-emoji";
 import MarkdownTaskList from "markdown-it-task-lists";
 import Mark from "@/libs/mark";
+import { SET_NOTE_SCROLL } from "@/mutations_names";
 
 export default {
     props: {
@@ -23,6 +24,16 @@ export default {
                 typographer: true
             })
         };
+    },
+    methods: {
+        handleScroll() {            
+            let rect = document.querySelector("body").getBoundingClientRect();
+            this.$store.commit(SET_NOTE_SCROLL, {
+                scrollY: window.scrollY,
+                positionStart: (Math.abs(rect.top) / rect.height) * 100,
+                positionEnd: ((Math.abs(rect.top) + window.innerHeight) / rect.height) * 100
+            });
+        }
     },
     computed: {
         markdownOutput: function() {
@@ -45,12 +56,22 @@ export default {
             };
             markInstance.mark(this.$store.state.searchQuery, options);
         }
+
+        let scroll = this.$store.state.noteScroll;
+        if (scroll.scrollY != null) {
+            window.scrollTo(0, scroll.scrollY);
+        }
+
+        window.addEventListener("scroll", this.handleScroll);
+    },
+    destroyed() {
+        window.removeEventListener("scroll", this.handleScroll);
     }
 };
 </script>
 
 <style>
 .task-list-item-checkbox {
-    font-size: 3rem;    
+    font-size: 3rem;
 }
 </style>

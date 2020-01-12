@@ -9,7 +9,8 @@ import {
     SET_ACTIVE_NOTE,
     SET_EDIT_MODE,
     SET_SEARCH_QUERY,
-    SET_SEARCH_RESULT
+    SET_SEARCH_RESULT,
+    SET_NOTE_SCROLL
 } from "@/mutations_names";
 
 Vue.use(Vuex)
@@ -21,7 +22,12 @@ export default new Vuex.Store({
         editMode: false,
         noteList: [],
         searchQuery: "",
-        searchResultList: []
+        searchResultList: [],
+        noteScroll: {
+            scrollY: null,
+            positionStart: null,
+            positionEnd: null
+        }
     },
     mutations: {
         [SET_NOTE_LIST](state, noteList) {
@@ -39,6 +45,9 @@ export default new Vuex.Store({
         },
         [SET_SEARCH_RESULT](state, searchResultList) {
             state.searchResultList = searchResultList;
+        },
+        [SET_NOTE_SCROLL](state, position) {            
+            state.noteScroll = position;
         }
     },
     actions: {

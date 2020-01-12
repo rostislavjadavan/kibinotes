@@ -90,8 +90,7 @@ export default {
 
             this.$store.commit(SET_ACTIVE_NOTE, note);
         },
-        onDashboard() {
-            this.$store.commit(SET_EDIT_MODE, false);
+        onDashboard() {            
             this.$router.push({ name: "dashboard" });
         },
         onDelete() {
