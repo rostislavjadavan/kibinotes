@@ -55,6 +55,10 @@
     color: #eee;
 }
 
+#dark .button:hover {
+    border-color: #777;        
+}
+
 #dark .table td, 
 #dark .table th {
     border-bottom: 1px solid #555;
