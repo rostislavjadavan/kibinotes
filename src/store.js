@@ -10,7 +10,8 @@ import {
     SET_EDIT_MODE,
     SET_SEARCH_QUERY,
     SET_SEARCH_RESULT,
-    SET_NOTE_SCROLL
+    SET_NOTE_SCROLL,
+    SET_THEME
 } from "@/mutations_names";
 
 Vue.use(Vuex)
@@ -18,6 +19,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
+        theme: "dark",
         activeNote: null,
         editMode: false,
         noteList: [],
@@ -46,8 +48,11 @@ export default new Vuex.Store({
         [SET_SEARCH_RESULT](state, searchResultList) {
             state.searchResultList = searchResultList;
         },
-        [SET_NOTE_SCROLL](state, position) {            
+        [SET_NOTE_SCROLL](state, position) {
             state.noteScroll = position;
+        },
+        [SET_THEME](state, theme) {
+            state.theme = theme;            
         }
     },
     actions: {
