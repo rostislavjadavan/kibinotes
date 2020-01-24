@@ -1,6 +1,6 @@
 ![](src/assets/logo.svg)
 
-# Code Notes
+#  Kibinotes
 
 > Swiss knife for developers
 

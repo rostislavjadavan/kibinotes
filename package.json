@@ -1,12 +1,12 @@
 {
-  "name": "code-notes",
+  "name": "kibinotes",
   "description": "Notes application for developers",
   "author": {
     "name": "Rostislav Jadavan",
     "email": "rostislav@jadavan.com",
     "url": "https://rostislavjadavan.com"
   },
-  "version": "0.5.0",
+  "version": "0.5.1",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
