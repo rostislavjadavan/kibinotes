@@ -70,6 +70,12 @@
     background-color: #333;
     border: 1px solid #555;
 }
+#dark input::placeholder {
+    color: #555;
+}
+#dark label {
+    color: #ccc;
+}
 
 #dark .note-seach-result-box b, 
 #dark span .highlight, mark {

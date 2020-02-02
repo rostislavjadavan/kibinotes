@@ -11,6 +11,7 @@
                 </button>
             </div>
 
+            <h2>Search index</h2>            
             <div v-if="working">
                 <b-progress></b-progress>
             </div>
@@ -25,6 +26,12 @@
                 </div>
             </div>
             <pre v-html="log" v-if="log" />
+
+            <h2>Database</h2>
+
+            <b-field label="Sqlite3 file path">
+            <b-input v-model="dbpath" placeholder="Disabled" disabled></b-input>
+        </b-field>            
         </div>
     </div>
 </template>
@@ -32,12 +39,14 @@
 <script>
 import NoteService from "@/libs/NoteService";
 import NoteIndexService from "@/libs/NoteIndexService";
+import * as Storage from "@/libs/storage"
 
 export default {
     data() {
         return {
             working: false,
-            log: ""
+            log: "",
+            dbpath: Storage.path
         };
     },
     methods: {
