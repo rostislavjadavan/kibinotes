@@ -17,7 +17,7 @@ export default {
         darkMode: function(val) {                                
             let theme = val ? "dark" : "default";            
             document.body.id = theme;
-            this.$store.commit(SET_THEME, theme);
+            this.$store.dispatch("setTheme", theme);
         }
     },
     computed: {        

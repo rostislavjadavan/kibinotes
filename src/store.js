@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import debounce from "@/libs/debounce";
+import SettingsService from "@/libs/SettingsService"
 import NoteService from "@/libs/NoteService";
 import NoteIndexService from '@/libs/NoteIndexService';
 import {
@@ -19,7 +20,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        theme: "dark",
+        theme: SettingsService.getTheme(),
         activeNote: null,
         editMode: false,
         noteList: [],
@@ -71,6 +72,10 @@ export default new Vuex.Store({
                     }),
                 150
             )();
-        }
+        },
+        setTheme(context, theme) {
+            SettingsService.setTheme(theme);
+            context.commit(SET_THEME, theme);
+        }        
     }
 })

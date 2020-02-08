@@ -73,6 +73,10 @@
 #dark input::placeholder {
     color: #555;
 }
+#dark input:focus {    
+    box-shadow: none;
+}
+
 #dark label {
     color: #ccc;
 }
