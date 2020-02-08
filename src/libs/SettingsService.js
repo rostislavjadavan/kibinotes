@@ -8,7 +8,7 @@ export const path = require('path').join(electron.remote.app.getPath("userData")
 class SettingsService {
     constructor() {
         this.settings = {
-            theme: "dark"
+            theme: "default"
         };
 
         if (fs.existsSync(path)) {
