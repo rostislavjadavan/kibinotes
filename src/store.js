@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import debounce from "@/libs/debounce";
+import SettingsService from "@/libs/SettingsService"
 import NoteService from "@/libs/NoteService";
 import NoteIndexService from '@/libs/NoteIndexService';
 import {
@@ -10,7 +11,8 @@ import {
     SET_EDIT_MODE,
     SET_SEARCH_QUERY,
     SET_SEARCH_RESULT,
-    SET_NOTE_SCROLL
+    SET_NOTE_SCROLL,
+    SET_THEME
 } from "@/mutations_names";
 
 Vue.use(Vuex)
@@ -18,6 +20,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
+        theme: SettingsService.getTheme(),
         activeNote: null,
         editMode: false,
         noteList: [],
@@ -46,8 +49,11 @@ export default new Vuex.Store({
         [SET_SEARCH_RESULT](state, searchResultList) {
             state.searchResultList = searchResultList;
         },
-        [SET_NOTE_SCROLL](state, position) {            
+        [SET_NOTE_SCROLL](state, position) {
             state.noteScroll = position;
+        },
+        [SET_THEME](state, theme) {
+            state.theme = theme;            
         }
     },
     actions: {
@@ -66,6 +72,10 @@ export default new Vuex.Store({
                     }),
                 150
             )();
-        }
+        },
+        setTheme(context, theme) {
+            SettingsService.setTheme(theme);
+            context.commit(SET_THEME, theme);
+        }        
     }
 })

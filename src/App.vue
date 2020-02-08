@@ -4,10 +4,11 @@
 
 <script>
 import "typeface-source-sans-pro";
-import "@fortawesome/fontawesome-free/js/all.js"
+import "@fortawesome/fontawesome-free/js/all.js";
 export default {};
 </script>
 
 <style>
 @import "assets/app.css";
+@import "assets/dark.css";
 </style>

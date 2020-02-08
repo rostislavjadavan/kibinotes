@@ -1,0 +1,124 @@
+#dark, body#dark {    
+    color: #eee;
+    background-color: #333;
+}
+
+#dark .app-logo {
+    background-image: url("logo_dark.svg");
+}
+
+#dark .content h1,
+#dark .content h2,
+#dark .content h3, 
+#dark .content h4,
+#dark .content h5,
+#dark strong,
+#dark nav ul li.is-active,
+#dark .breadcrumb li.is-active a
+{
+    color: #eee;    
+}
+
+#dark a {
+    color: hsl(256, 96%, 74%);
+}
+#dark a:hover {
+    color: hsl(256, 96%, 84%);
+}
+
+#dark .table,
+#dark .modal-card-body
+{
+    color: #eee;
+    background-color: #333;
+}
+
+#dark .markdown-body pre, #dark .markdown-body pre code {
+    color: #eee;
+    background-color: #444;
+}
+
+#dark .markdown-body code { 
+    color: hsl(171, 100%, 41%);
+    background-color: #444;
+}
+
+#dark .modal-card-foot {
+    border-top: 1px solid #555;
+    color: #eee;
+    background-color: #444;
+}
+
+#dark .button {
+    background-color: #333;
+    border-color: #555;    
+    color: #eee;
+}
+
+#dark .button:hover {
+    border-color: #777;        
+}
+
+#dark .table td, 
+#dark .table th {
+    border-bottom: 1px solid #555;
+}
+
+#dark input,
+#dark .box {
+    color: #eee;
+    background-color: #333;
+    border: 1px solid #555;
+}
+#dark input::placeholder {
+    color: #555;
+}
+#dark input:focus {    
+    box-shadow: none;
+}
+
+#dark label {
+    color: #ccc;
+}
+
+#dark .note-seach-result-box b, 
+#dark span .highlight, mark {
+    color: #333;
+    background-color: khaki;
+}
+
+#dark .CodeMirror {
+    color: #eee;
+}
+
+#dark .CodeMirror-gutters {
+    color: #eee;
+    background-color: #444;
+    border-right: 1px solid #333;
+}
+
+#dark .CodeMirror-lines {
+    background-color: #444;
+}
+
+#dark pre.CodeMirror-lines {
+    background-color: transparent;
+}
+
+#dark .CodeMirror div.CodeMirror-cursor {
+    border-left: 2px solid white;
+}
+
+#dark .CodeMirror-selected {
+    background: hsl(256, 30%, 52%);;
+}
+
+#dark button.is-danger {
+    background-color: #b10a18;
+    border-color: transparent;
+    color: #fff;
+  }
+#dark .button.is-danger:focus:not(:active), 
+#dark .button.is-danger.is-focused:not(:active) {
+    box-shadow: none;
+}
