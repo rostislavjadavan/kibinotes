@@ -5,6 +5,9 @@ appId: "com.jadavan.kibinotes"
 mac:
   icon: "logo/build/icons/icon.icns"
 
+win:
+  icon: "logo/build/icons/icon.ico"
+
 # Config for OSX dmg
 dmg:
   contents:
