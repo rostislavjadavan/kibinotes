@@ -2,11 +2,11 @@
 import Mousetrap from "mousetrap";
 
 const bindings = {
-    createNewNote: "command+n",
-    switchEditAndViewMode: "command+s",
-    goToDashboard: "command+d",
-    searchResult: "command",
-    systemPage: "command+shift+s"
+    createNewNote: "mod+n",
+    switchEditAndViewMode: "mod+s",
+    goToDashboard: "mod+d",
+    searchResult: "mod",
+    systemPage: "mod+shift+s"
 };
 
 class KeyboardShortcutsService {
