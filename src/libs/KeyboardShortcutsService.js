@@ -12,6 +12,7 @@ const bindings = {
 class KeyboardShortcutsService {
     constructor(bindings) {
         this.modKey = os.platform() == 'darwin' ? 'command' : 'ctrl';
+        this.modKeyEditor = os.platform() == 'darwin' ? 'Cmd' : 'Ctrl';
         this.bindings = bindings;
     }
 
@@ -38,16 +39,12 @@ class KeyboardShortcutsService {
         Mousetrap.bind(this.modKey + "+" + this.bindings.systemPage, func);
     }
 
-    getCMModKey() {
-        return this.modKey == "command" ? "Cmd" : this.modKey;
-    }
-
     getCMSwitchEditAndViewMode() {
-        return this.getCMModKey() + "-" + this.bindings.switchEditAndViewMode.toUpperCase();
+        return this.modKeyEditor + "-" + this.bindings.switchEditAndViewMode.toUpperCase();
     }
 
     getCMGoToDashboard() {
-        return this.getCMModKey() + "-" + this.bindings.goToDashboard.toUpperCase();
+        return this.modKeyEditor + "-" + this.bindings.goToDashboard.toUpperCase();
     }
 }
 

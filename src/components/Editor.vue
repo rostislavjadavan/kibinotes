@@ -68,14 +68,11 @@ export default {
                 }
             }
 
-            const switchKey = KeyboardShortcutsService.getCMSwitchEditAndViewMode();
-            const dashboardKey = KeyboardShortcutsService.getCMGoToDashboard();
-
             this.instance.setOption("extraKeys", {
-                [switchKey]: instance => {
+                [KeyboardShortcutsService.getCMSwitchEditAndViewMode()]: instance => {
                     this.$emit("save", instance.getValue());
                 },
-                [dashboardKey]: instance => {
+                [KeyboardShortcutsService.getCMGoToDashboard()]: instance => {
                     this.$emit("dashboard");
                 }
             });
