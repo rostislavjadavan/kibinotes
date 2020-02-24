@@ -7,6 +7,7 @@
 </template>
 
 <script>
+import KeyboardShortcutsService from "@/libs/KeyboardShortcutsService";
 import CodeMirror from "codemirror/lib/codemirror.js";
 import CodeMirrorSearch from "codemirror/addon/search/searchcursor.js";
 import "codemirror/lib/codemirror.css";
@@ -44,7 +45,7 @@ export default {
 
             this.instance.focus();
 
-            let scroll = this.$store.state.noteScroll;            
+            let scroll = this.$store.state.noteScroll;
             if (scroll.positionStart != null && scroll.positionEnd != null) {
                 let avg = (scroll.positionStart + scroll.positionEnd) / 2;
                 let startLine = Math.round(
@@ -67,11 +68,14 @@ export default {
                 }
             }
 
+            const switchKey = KeyboardShortcutsService.getCMSwitchEditAndViewMode();
+            const dashboardKey = KeyboardShortcutsService.getCMGoToDashboard();
+
             this.instance.setOption("extraKeys", {
-                "Cmd-S": instance => {
+                [switchKey]: instance => {
                     this.$emit("save", instance.getValue());
                 },
-                "Cmd-D": instance => {
+                [dashboardKey]: instance => {
                     this.$emit("dashboard");
                 }
             });
