@@ -8,8 +8,9 @@ import "@fortawesome/fontawesome-free/js/all.js";
 import LoggingService from '@/libs/LoggingService'
 export default {
     mounted() {
-        var os = require('os');
-        LoggingService.info("application started " + os.type() + ", " + os.release() + ", " + os.platform());
+        const appVersion = require('electron').remote.app.getVersion();
+        const os = require('os');
+        LoggingService.info(`application started, version=${appVersion}, os=${os.type()}, ${os.release()}, ${os.platform()}`);
     },
     beforeDestroy() {
         LoggingService.info("application finished");

@@ -1,4 +1,5 @@
 import electron from 'electron';
+import LoggingService from '@/libs/LoggingService'
 
 const sqlite3 = require('sqlite3').verbose();
 
@@ -8,10 +9,13 @@ export const connection = new sqlite3.Database(
     path,
     sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE, function (err) {
         if (err) {
+            LoggingService.error(`Unable to connect to dabase ${path}: ${err.message}`);
             vueThis.$buefy.toast.open({
                 message: "Error :( " + err,
                 type: "is-danger"
             });
+        } else {
+            LoggingService.info(`Connected to ${path}`)
         }
     }
 );
