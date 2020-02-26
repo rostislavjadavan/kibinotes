@@ -74,6 +74,9 @@ export default {
                 },
                 [KeyboardShortcutsService.getCMGoToDashboard()]: instance => {
                     this.$emit("dashboard");
+                },
+                [KeyboardShortcutsService.getCMEditTitle()]: instance => {
+                    this.$store.state.editTitle.focus();
                 }
             });
 

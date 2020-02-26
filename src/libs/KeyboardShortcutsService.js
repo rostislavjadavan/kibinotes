@@ -4,7 +4,8 @@ import Mousetrap from "mousetrap";
 const os = require('os');
 const bindings = {
     createNewNote: "n",
-    switchEditAndViewMode: "s",
+    switchEditAndViewMode: "e",
+    editTitle: "t",
     goToDashboard: "d",
     systemPage: "shift+s"
 };
@@ -25,10 +26,14 @@ class KeyboardShortcutsService {
 
     bindSwitchEditAndViewMode(func) {
         Mousetrap.bind(this.modKey + "+" + this.bindings.switchEditAndViewMode, func);
-    }
+    }    
 
-    bindGoToDashboard(func) {
-        Mousetrap.bind(this.modKey + "+" + this.bindings.goToDashboard, func);
+    bindGoToDashboard(el, func) {
+        if (typeof el === "function") {
+            Mousetrap.bind(this.modKey + "+" + this.bindings.goToDashboard, func);
+        } else {
+            Mousetrap(el).bind(this.modKey + "+" + this.bindings.goToDashboard, func);        
+        }
     }
 
     bindSearchResult(el, index, func) {
@@ -41,6 +46,10 @@ class KeyboardShortcutsService {
 
     getCMSwitchEditAndViewMode() {
         return this.modKeyEditor + "-" + this.bindings.switchEditAndViewMode.toUpperCase();
+    }
+
+    getCMEditTitle() {
+        return this.modKeyEditor + "-" + this.bindings.editTitle.toUpperCase();
     }
 
     getCMGoToDashboard() {
