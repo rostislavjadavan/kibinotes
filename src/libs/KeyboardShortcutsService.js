@@ -30,7 +30,7 @@ class KeyboardShortcutsService {
 
     bindGoToDashboard(el, func) {
         if (typeof el === "function") {
-            Mousetrap.bind(this.modKey + "+" + this.bindings.goToDashboard, func);
+            Mousetrap.bind(this.modKey + "+" + this.bindings.goToDashboard, el);
         } else {
             Mousetrap(el).bind(this.modKey + "+" + this.bindings.goToDashboard, func);        
         }
