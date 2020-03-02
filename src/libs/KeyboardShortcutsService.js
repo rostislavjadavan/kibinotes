@@ -4,7 +4,8 @@ import Mousetrap from "mousetrap";
 const os = require('os');
 const bindings = {
     createNewNote: "n",
-    switchEditAndViewMode: "s",
+    switchEditAndViewMode: "e",
+    editTitle: "t",
     goToDashboard: "d",
     systemPage: "shift+s"
 };
@@ -12,6 +13,7 @@ const bindings = {
 class KeyboardShortcutsService {
     constructor(bindings) {
         this.modKey = os.platform() == 'darwin' ? 'command' : 'ctrl';
+        this.modKeyEditor = os.platform() == 'darwin' ? 'Cmd' : 'Ctrl';
         this.bindings = bindings;
     }
 
@@ -24,10 +26,14 @@ class KeyboardShortcutsService {
 
     bindSwitchEditAndViewMode(func) {
         Mousetrap.bind(this.modKey + "+" + this.bindings.switchEditAndViewMode, func);
-    }
+    }    
 
-    bindGoToDashboard(func) {
-        Mousetrap.bind(this.modKey + "+" + this.bindings.goToDashboard, func);
+    bindGoToDashboard(el, func) {
+        if (typeof el === "function") {
+            Mousetrap.bind(this.modKey + "+" + this.bindings.goToDashboard, el);
+        } else {
+            Mousetrap(el).bind(this.modKey + "+" + this.bindings.goToDashboard, func);        
+        }
     }
 
     bindSearchResult(el, index, func) {
@@ -38,16 +44,16 @@ class KeyboardShortcutsService {
         Mousetrap.bind(this.modKey + "+" + this.bindings.systemPage, func);
     }
 
-    getCMModKey() {
-        return this.modKey == "command" ? "Cmd" : this.modKey;
+    getCMSwitchEditAndViewMode() {
+        return this.modKeyEditor + "-" + this.bindings.switchEditAndViewMode.toUpperCase();
     }
 
-    getCMSwitchEditAndViewMode() {
-        return this.getCMModKey() + "-" + this.bindings.switchEditAndViewMode.toUpperCase();
+    getCMEditTitle() {
+        return this.modKeyEditor + "-" + this.bindings.editTitle.toUpperCase();
     }
 
     getCMGoToDashboard() {
-        return this.getCMModKey() + "-" + this.bindings.goToDashboard.toUpperCase();
+        return this.modKeyEditor + "-" + this.bindings.goToDashboard.toUpperCase();
     }
 }
 
