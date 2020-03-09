@@ -33,6 +33,11 @@ Current version is 0.6.0.
 - `Mod+E` - switch between edit and view mode
 - `Mod+T` - edit title (when editing note)
 
+### Mod Key
+
+- Mac OS: `Command`
+- Windows and Linux: `Ctrl`
+
 ## Notes Backup
 
 Currenly there is no built-in solution and it is user responsibility to backup data file. Notes are stored in `data.db` file in following location:
@@ -40,7 +45,6 @@ Currenly there is no built-in solution and it is user responsibility to backup d
 - Mac OS: `~/Library/Application Support/kibinotes/data.db`
 - Windows: `C:\Users\<you>\AppData\Local\kibinotes\data.db`
 - Linux: `~/.config/kibinotes/data.db`
-
 
 ## License
 
