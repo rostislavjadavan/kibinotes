@@ -10,7 +10,7 @@
 
 ### Mac
 
-- [Kibinotes-0.6.0.dmg](https://github.com/rostislavjadavan/kibinotes/releases/download/v0.6.0/Kibinotes-0.6.0.dmg)
+- [Kibinotes-0.6.1.dmg](https://github.com/rostislavjadavan/kibinotes/releases/download/v0.6.1/Kibinotes-0.6.1.dmg)
 
 ### Linux
 
