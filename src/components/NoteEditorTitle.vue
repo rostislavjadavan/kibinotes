@@ -16,7 +16,7 @@
 
 <script>
 import { SET_EDIT_TITLE } from "@/mutations_names";
-import KeyboardShortcutsService from '@/libs/KeyboardShortcutsService'
+import KeyboardShortcutsService from "@/libs/KeyboardShortcutsService";
 export default {
     data() {
         return {
@@ -34,17 +34,26 @@ export default {
         }
     },
     mounted() {
-        this.title = this.$store.state.activeNote.title;        
+        const focusTitleInput = () => {
+            this.$store.commit(SET_EDIT_TITLE, this.$refs.title);
+            if (this.$refs.title) {
+                KeyboardShortcutsService.bindGoToDashboard(
+                    this.$refs.title.$el,
+                    () => {
+                        this.$router.push({ name: "dashboard" });
+                    }
+                );
+            }
+        };
+
+        if (this.$store.state.editMode) {
+            focusTitleInput()
+        }
+
+        this.title = this.$store.state.activeNote.title;
         this.$store.watch(
             (state, getters) => state.editMode,
-            (newValue, oldValue) => {                
-                this.$store.commit(SET_EDIT_TITLE, this.$refs.title);
-                if (this.$refs.title) {
-                    KeyboardShortcutsService.bindGoToDashboard(this.$refs.title.$el, () => {
-                        this.$router.push({ name: "dashboard" });
-                    })
-                }
-            }
+            (newValue, oldValue) => focusTitleInput()
         );
     }
 };
