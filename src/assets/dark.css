@@ -33,7 +33,9 @@
     background-color: #333;
 }
 
-#dark .markdown-body pre, #dark .markdown-body pre code {
+#dark .markdown-body pre, 
+#dark .markdown-body pre code, 
+#dark blockquote {
     color: #eee;
     background-color: #444;
 }
@@ -41,6 +43,10 @@
 #dark .markdown-body code { 
     color: hsl(171, 100%, 41%);
     background-color: #444;
+}
+
+#dark blockquote {
+    border-left: 5px solid hsl(171, 100%, 41%);
 }
 
 #dark .modal-card-foot {
