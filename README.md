@@ -4,28 +4,28 @@
 
 > Minimalistic notes application with instant search
 
-## Download
+![](graphics/screenshots.jpg)
 
-Current version is 0.6.0.
+## Download
 
 ### Mac
 
-- https://github.com/rostislavjadavan/kibinotes/releases/download/v0.6.0/Kibinotes-0.6.0.dmg
+- [Kibinotes-0.6.0.dmg](https://github.com/rostislavjadavan/kibinotes/releases/download/v0.6.0/Kibinotes-0.6.0.dmg)
 
 ### Linux
 
-- https://github.com/rostislavjadavan/kibinotes/releases/download/v0.6.0/Kibinotes-0.6.0.AppImage
+- [Kibinotes-0.6.0.AppImage](https://github.com/rostislavjadavan/kibinotes/releases/download/v0.6.0/Kibinotes-0.6.0.AppImage)
 
 ### Windows
 
-- https://github.com/rostislavjadavan/kibinotes/releases/download/v0.6.0/Kibinotes.Setup.0.6.0.exe
+- [Kibinotes.Setup.0.6.0.exe](https://github.com/rostislavjadavan/kibinotes/releases/download/v0.6.0/Kibinotes.Setup.0.6.0.exe)
 
 ## Keyboard Shortcuts
 
 ### Dashboard
 
 - `Mod+N` - new note
-- `Mod+1..0` - go to particular note when searching
+- `Mod+1..0` - go to particular note from search results
 
 ### Note detail
 
