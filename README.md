@@ -14,7 +14,7 @@
 
 ### Linux
 
-- [Kibinotes-0.6.0.AppImage](https://github.com/rostislavjadavan/kibinotes/releases/download/v0.6.0/Kibinotes-0.6.0.AppImage)
+- [Kibinotes-0.6.1.AppImage](https://github.com/rostislavjadavan/kibinotes/releases/download/v0.6.1/Kibinotes-0.6.1.AppImage)
 
 ### Windows
 
