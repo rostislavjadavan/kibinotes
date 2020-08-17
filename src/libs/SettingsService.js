@@ -19,8 +19,7 @@ class SettingsService {
 
             if (this.settings.path == null || !fs.existsSync(this.settings.path)) {
                 this.settings.path = require('path').join(electron.remote.app.getPath("userData"), "data.db");
-            }
-            console.log(this.settings);
+            }            
         } else {
             fs.writeFileSync(path, JSON.stringify(this.settings));
             LoggingService.info(`Using default settings: ${JSON.stringify(this.settings)}`)

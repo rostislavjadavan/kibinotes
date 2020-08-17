@@ -8,6 +8,7 @@
 import Markdown from "markdown-it";
 import MarkdownEmoji from "markdown-it-emoji";
 import MarkdownTaskList from "markdown-it-task-lists";
+import MarkdownCopy from '@/libs/MarkdownCopy'
 import Mark from "@/libs/mark";
 import { SET_NOTE_SCROLL } from "@/mutations_names";
 
@@ -46,6 +47,7 @@ export default {
     mounted() {
         this.md.use(MarkdownEmoji);
         this.md.use(MarkdownTaskList);
+        this.md.use(MarkdownCopy, {});
 
         if (this.$store.state.searchQuery) {
             var markInstance = new Mark(this.$refs.markdown);

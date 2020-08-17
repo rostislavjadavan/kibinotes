@@ -19,7 +19,6 @@
   },
   "main": "background.js",
   "dependencies": {
-    "aws-sdk": "^2.725.0",
     "buefy": "^0.8.6",
     "codemirror": "^5.56.0",
     "core-js": "^2.6.5",

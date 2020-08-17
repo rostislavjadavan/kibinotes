@@ -1,5 +1,5 @@
 body {
-    min-height: 100vh;    
+    min-height: 100vh;
 }
 
 .view {
@@ -18,13 +18,14 @@ body {
     font-size: 1.2rem;
 }
 
-.note-title-cell:hover, .note-seach-result-box:hover {
-    
+.note-title-cell:hover,
+.note-seach-result-box:hover {
     cursor: pointer;
 }
 
-
-.note-seach-result-box b, span .highlight, mark {
+.note-seach-result-box b,
+span .highlight,
+mark {
     background-color: khaki;
 }
 
@@ -39,11 +40,11 @@ body {
 }
 
 .mt1 {
-    margin-top: 15px;   
+    margin-top: 15px;
 }
 
 .mb1 {
-    margin-bottom: 15px;   
+    margin-bottom: 15px;
 }
 
 input[type="checkbox"] {
@@ -51,16 +52,43 @@ input[type="checkbox"] {
     margin: 0 0.5rem;
 }
 
-.content {    
+.content {
     font-size: 1.1rem;
 }
 
 .content li p {
-   margin: 0 !important;
+    margin: 0 !important;
 }
 .content li {
     margin-bottom: 0.5rem;
 }
 .content li li {
     margin: 0;
+}
+
+pre {
+    position: relative;
+}
+
+.m-mdic-copy-wrapper {
+    position: absolute;
+    top: 0.3rem;
+    right: 0.5rem;
+}
+
+.m-mdic-copy-wrapper button {
+    font-weight: bold;
+    background: none !important;
+    border: none;
+    padding: 0 !important;    
+    color: #aaa;
+    cursor: pointer;
+}
+
+.m-mdic-copy-wrapper button:hover {
+    color: #ccc;
+}
+
+.u-mdic-copy-notify {
+    display: none;
 }
