@@ -1,5 +1,5 @@
 body {
-    min-height: 100vh;
+    min-height: 100vh;    
 }
 
 .view {
@@ -14,7 +14,12 @@ body {
     background-size: 180px 30px;
 }
 
+.note-title-cell {
+    font-size: 1.2rem;
+}
+
 .note-title-cell:hover, .note-seach-result-box:hover {
+    
     cursor: pointer;
 }
 
@@ -39,4 +44,23 @@ body {
 
 .mb1 {
     margin-bottom: 15px;   
+}
+
+input[type="checkbox"] {
+    transform: scale(1.5);
+    margin: 0 0.5rem;
+}
+
+.content {    
+    font-size: 1.1rem;
+}
+
+.content li p {
+   margin: 0 !important;
+}
+.content li {
+    margin-bottom: 0.5rem;
+}
+.content li li {
+    margin: 0;
 }

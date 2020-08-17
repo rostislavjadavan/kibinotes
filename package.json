@@ -6,7 +6,7 @@
     "email": "rostislav@jadavan.com",
     "url": "https://rostislavjadavan.com"
   },
-  "version": "0.6.1",
+  "version": "0.6.2",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -19,9 +19,9 @@
   },
   "main": "background.js",
   "dependencies": {
-    "aws-sdk": "^2.715.0",
+    "aws-sdk": "^2.725.0",
     "buefy": "^0.8.6",
-    "codemirror": "^5.49.0",
+    "codemirror": "^5.56.0",
     "core-js": "^2.6.5",
     "markdown-it": "^10.0.0",
     "markdown-it-emoji": "^1.4.0",

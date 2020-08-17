@@ -9,16 +9,22 @@ export const path = require('path').join(electron.remote.app.getPath("userData")
 class SettingsService {
     constructor() {
         this.settings = {
-            theme: "default"
+            theme: "default",
+            path: null
         };
 
         if (fs.existsSync(path)) {
-            this.settings = JSON.parse(fs.readFileSync(path));
+            this.settings = { ...this.settings, ...JSON.parse(fs.readFileSync(path)) };
             LoggingService.info(`Loaded settings from ${path}: ${JSON.stringify(this.settings)}`)
+
+            if (this.settings.path == null || !fs.existsSync(this.settings.path)) {
+                this.settings.path = require('path').join(electron.remote.app.getPath("userData"), "data.db");
+            }
+            console.log(this.settings);
         } else {
             fs.writeFileSync(path, JSON.stringify(this.settings));
             LoggingService.info(`Using default settings: ${JSON.stringify(this.settings)}`)
-        }        
+        }
     }
 
     writeUpdates() {
@@ -32,6 +38,10 @@ class SettingsService {
     setTheme(theme) {
         this.settings.theme = theme;
         this.writeUpdates();
+    }
+
+    getPath() {
+        return this.settings.path;
     }
 }
 
