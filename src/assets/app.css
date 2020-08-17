@@ -80,7 +80,7 @@ pre {
     font-weight: bold;
     background: none !important;
     border: none;
-    padding: 0 !important;    
+    padding: 0 !important;
     color: #aaa;
     cursor: pointer;
 }
@@ -91,4 +91,13 @@ pre {
 
 .u-mdic-copy-notify {
     display: none;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+    background-color: #fff;
+}
+
+::-webkit-scrollbar-thumb, ::-webkit-scrollbar-thumb:window-inactive {
+    background: #ccc;
 }

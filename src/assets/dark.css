@@ -128,3 +128,20 @@
 #dark .button.is-danger.is-focused:not(:active) {
     box-shadow: none;
 }
+
+.m-mdic-copy-wrapper button:hover {
+    color: #ccc;
+}
+
+.u-mdic-copy-notify {
+    display: none;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+    background-color: #333;
+}
+
+::-webkit-scrollbar-thumb, ::-webkit-scrollbar-thumb:window-inactive {
+    background: #666;
+}
