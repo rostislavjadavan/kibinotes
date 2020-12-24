@@ -1,10 +1,9 @@
 
 const fs = require('fs')
-
-import electron from 'electron';
+const { remote } = require('electron')
 
 export const file = "app-" + new Date().toISOString().slice(0, 10) + ".log"
-export const path = require('path').join(electron.remote.app.getPath("userData"), file);
+export const path = require('path').join(remote.app.getPath("userData"), file);
 
 class LoggingService {
 
