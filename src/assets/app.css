@@ -2,6 +2,10 @@ body {
     min-height: 100vh;
 }
 
+.app {
+    min-height: 100vh;    
+}
+
 .view {
     padding: 25px 15px;
 }
@@ -15,7 +19,7 @@ body {
 }
 
 .note-title-cell {
-    font-size: 1.2rem;
+    font-size: 1rem;
 }
 
 .note-title-cell:hover,
@@ -53,7 +57,7 @@ input[type="checkbox"] {
 }
 
 .content {
-    font-size: 1.1rem;
+    font-size: 1rem;
 }
 
 .content li p {

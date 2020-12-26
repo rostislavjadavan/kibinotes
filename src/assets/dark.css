@@ -1,4 +1,4 @@
-#dark, body#dark {    
+#dark .app {    
     color: #eee;
     background-color: #333;
 }
@@ -33,6 +33,10 @@
     background-color: #333;
 }
 
+#dark hr {
+    background: #666
+}
+
 #dark .markdown-body pre, 
 #dark .markdown-body pre code, 
 #dark blockquote {
@@ -40,7 +44,7 @@
     background-color: #444;
 }
 
-#dark .markdown-body code { 
+#dark .markdown-body code, #dark code { 
     color: hsl(171, 100%, 41%);
     background-color: #444;
 }

@@ -1,6 +1,7 @@
  .cm-s-app {
-     font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
-     font-size: 1.0rem;
+     font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;     
+     font-size: 0.9rem;
+     color: #4a4a4a;
  }
 
  .CodeMirror-hints.app {

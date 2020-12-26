@@ -7,7 +7,7 @@ const bindings = {
     switchEditAndViewMode: "e",
     editTitle: "t",
     goToDashboard: "d",
-    systemPage: "shift+s"
+    settingsPage: "s"
 };
 
 class KeyboardShortcutsService {
@@ -40,8 +40,8 @@ class KeyboardShortcutsService {
         Mousetrap(el).bind(this.modKey + "+" + index, () => func(index));
     }
 
-    bindSystemPage(func) {
-        Mousetrap.bind(this.modKey + "+" + this.bindings.systemPage, func);
+    bindSettingsPage(func) {
+        Mousetrap.bind(this.modKey + "+" + this.bindings.settingsPage, func);
     }
 
     getCMSwitchEditAndViewMode() {

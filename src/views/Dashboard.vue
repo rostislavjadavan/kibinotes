@@ -1,5 +1,18 @@
 <template>
     <div class="dashboard view">
+        <div class="note-editor-nav">
+                <div class="buttons">
+                    <button
+                        class="button is-small"
+                        v-on:click="$router.push({ name: 'settings' })"
+                    >
+                        <span class="icon is-small">
+                            <i class="fas fa-cog"></i>
+                        </span>
+                        <span>Settings</span>
+                    </button>
+                </div>
+            </div>
         <div class="columns is-centered">
             <div class="app-logo" />
         </div>
@@ -149,8 +162,8 @@ export default {
             this.$refs.search,
             this.onCreateNote
         );
-        KeyboardShortcutsService.bindSystemPage(() =>
-            this.$router.push({ name: "system" })
+        KeyboardShortcutsService.bindSettingsPage(() =>
+            this.$router.push({ name: "settings" })
         );
     },
     watch: {

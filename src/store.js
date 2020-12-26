@@ -79,6 +79,7 @@ export default new Vuex.Store({
         },
         setTheme(context, theme) {
             SettingsService.setTheme(theme);
+            document.body.id = theme;
             context.commit(SET_THEME, theme);
         }        
     }
