@@ -141,11 +141,11 @@
     display: none;
 }
 
-::-webkit-scrollbar {
+#dark ::-webkit-scrollbar {
     width: 12px;
     background-color: #333;
 }
 
-::-webkit-scrollbar-thumb, ::-webkit-scrollbar-thumb:window-inactive {
+#dark ::-webkit-scrollbar-thumb, ::-webkit-scrollbar-thumb:window-inactive {
     background: #666;
 }

@@ -150,11 +150,11 @@
     display: none;
 }
 
-::-webkit-scrollbar {
+#nord ::-webkit-scrollbar {
     width: 12px;
     background-color: #2E3440;
 }
 
-::-webkit-scrollbar-thumb, ::-webkit-scrollbar-thumb:window-inactive {
+#nord ::-webkit-scrollbar-thumb, ::-webkit-scrollbar-thumb:window-inactive {
     background: #4C566A;
 }
