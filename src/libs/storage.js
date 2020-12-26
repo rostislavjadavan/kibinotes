@@ -1,4 +1,3 @@
-import electron from 'electron';
 import SettingsService from '@/libs/SettingsService'
 import LoggingService from '@/libs/LoggingService'
 

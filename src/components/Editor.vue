@@ -75,8 +75,8 @@ export default {
                 [KeyboardShortcutsService.getCMGoToDashboard()]: instance => {
                     this.$emit("dashboard");
                 },
-                [KeyboardShortcutsService.getCMEditTitle()]: instance => {
-                    this.$store.state.editTitle.focus();
+                [KeyboardShortcutsService.getCMEditTitle()]: instance => {                    
+                    this.$root.$emit('focus_note_title');
                 }
             });
 

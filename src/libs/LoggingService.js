@@ -1,6 +1,6 @@
 
-const fs = require('fs')
-const { remote } = require('electron')
+import { remote } from '@/libs/electron.js';
+const fs = remote.require('fs')
 
 export const file = "app-" + new Date().toISOString().slice(0, 10) + ".log"
 export const path = require('path').join(remote.app.getPath("userData"), file);
@@ -8,7 +8,7 @@ export const path = require('path').join(remote.app.getPath("userData"), file);
 class LoggingService {
 
     constructor() {
-        this.development = true;        
+        this.development = true;
     }
 
     info(message) {

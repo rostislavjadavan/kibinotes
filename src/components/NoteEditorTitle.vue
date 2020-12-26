@@ -34,27 +34,10 @@ export default {
         }
     },
     mounted() {
-        const focusTitleInput = () => {
-            this.$store.commit(SET_EDIT_TITLE, this.$refs.title);
-            if (this.$refs.title) {
-                KeyboardShortcutsService.bindGoToDashboard(
-                    this.$refs.title.$el,
-                    () => {
-                        this.$router.push({ name: "dashboard" });
-                    }
-                );
-            }
-        };
-
-        if (this.$store.state.editMode) {
-            focusTitleInput()
-        }
-
         this.title = this.$store.state.activeNote.title;
-        this.$store.watch(
-            (state, getters) => state.editMode,
-            (newValue, oldValue) => focusTitleInput()
-        );
+        this.$root.$on('focus_note_title', () => {
+            this.$refs.title.focus();
+        });        
     }
 };
 </script>

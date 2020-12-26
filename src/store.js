@@ -8,8 +8,7 @@ import NoteIndexService from '@/libs/NoteIndexService';
 import {
     SET_NOTE_LIST,
     SET_ACTIVE_NOTE,
-    SET_EDIT_MODE,
-    SET_EDIT_TITLE,
+    SET_EDIT_MODE,    
     SET_SEARCH_QUERY,
     SET_SEARCH_RESULT,
     SET_NOTE_SCROLL,
@@ -44,10 +43,7 @@ export default new Vuex.Store({
         },
         [SET_EDIT_MODE](state, editMode) {
             state.editMode = editMode;
-        },
-        [SET_EDIT_TITLE](state, editTitle) {            
-            state.editTitle = editTitle;
-        },
+        },        
         [SET_SEARCH_QUERY](state, searchQuery) {
             state.searchQuery = searchQuery;
         },
@@ -64,6 +60,9 @@ export default new Vuex.Store({
     actions: {
         reloadNotesList(context) {
             NoteService.list((err, rows) => {
+                if (err) {
+                    console.error(err);
+                }
                 context.commit(SET_NOTE_LIST, rows);
             });
         },

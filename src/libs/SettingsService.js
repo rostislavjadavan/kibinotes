@@ -1,10 +1,10 @@
-import electron from 'electron';
 import LoggingService from '@/libs/LoggingService'
 
-const fs = require('electron').remote.require('fs');
+import { remote } from '@/libs/electron.js';
+const fs = remote.require('fs')
 
 export const file = "settings.json"
-export const path = require('path').join(electron.remote.app.getPath("userData"), file);
+export const path = require('path').join(remote.app.getPath("userData"), file);
 
 class SettingsService {
     constructor() {
@@ -12,7 +12,7 @@ class SettingsService {
             theme: "default",
             path: null
         };
-
+        
         if (fs.existsSync(path)) {
             this.settings = { ...this.settings, ...JSON.parse(fs.readFileSync(path)) };
             LoggingService.info(`Loaded settings from ${path}: ${JSON.stringify(this.settings)}`)
