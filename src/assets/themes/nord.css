@@ -4,7 +4,7 @@
 }
 
 #nord .app-logo {
-    background-image: url("logo_dark.svg");
+    background-image: url("logo_nord.svg");
 }
 
 #nord .content h1,
@@ -69,6 +69,7 @@
     border-color: #81A1C1;        
 }
 
+#nord .b-radio.radio input[type=radio]:checked + .check,
 #nord .b-radio.radio input[type=radio]:hover + .check {
     border-color: #88C0D0;
 }
