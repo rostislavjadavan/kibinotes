@@ -56,7 +56,7 @@
             </div>
 
             <hr />
-            <h2>System stuff</h2>
+            <h2>System</h2>
             <h4>Search index</h4>
             <p>
                 When search goes crazy you can fix it by rebuilding whole search
@@ -71,7 +71,7 @@
                         <span class="icon is-small">
                             <i class="fas fa-sync"></i>
                         </span>
-                        <span>Rebuild note search index</span>
+                        <span>Rebuild</span>
                     </button>
                 </div>
             </div>
