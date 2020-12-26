@@ -26,5 +26,6 @@ export default {
 
 <style>
 @import "assets/app.css";
-@import "assets/dark.css";
+@import "assets/themes/dark.css";
+@import "assets/themes/nord.css";
 </style>

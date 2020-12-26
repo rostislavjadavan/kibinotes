@@ -46,6 +46,14 @@
                     >Dark</b-radio
                 >
             </div>
+            <div class="field">
+                <b-radio
+                    v-on:input="onThemeChange"
+                    v-model="theme"
+                    native-value="nord"
+                    >Nord</b-radio
+                >
+            </div>
 
             <hr />
             <h2>System stuff</h2>
