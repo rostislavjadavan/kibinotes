@@ -18,7 +18,7 @@
         </div>
         <div class="columns is-centered">
             <div class="column is-half">
-                <b-field>
+                <b-field grouped>
                     <div class="control is-medium is-clearfix is-expanded">
                         <input
                             ref="search"
