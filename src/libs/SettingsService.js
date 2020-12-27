@@ -9,7 +9,7 @@ export const path = require('path').join(remote.app.getPath("userData"), file);
 class SettingsService {
     constructor() {
         this.settings = {
-            theme: "default",
+            theme: "light",
             path: null
         };
         

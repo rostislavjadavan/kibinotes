@@ -35,7 +35,7 @@
                     v-on:input="onThemeChange"
                     v-model="theme"
                     native-value="light"
-                    >Light (default)</b-radio
+                    >Light</b-radio
                 >
             </div>
             <div class="field">
