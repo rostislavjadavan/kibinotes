@@ -130,6 +130,6 @@
     background-color: #2E3440;
 }
 
-#nord ::-webkit-scrollbar-thumb, ::-webkit-scrollbar-thumb:window-inactive {
+#nord ::-webkit-scrollbar-thumb, #nord ::-webkit-scrollbar-thumb:window-inactive {
     background: #4C566A;
 }

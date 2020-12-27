@@ -121,6 +121,6 @@
     background-color: #333;
 }
 
-#dark ::-webkit-scrollbar-thumb, ::-webkit-scrollbar-thumb:window-inactive {
+#dark ::-webkit-scrollbar-thumb, #dark ::-webkit-scrollbar-thumb:window-inactive {
     background: #666;
 }
