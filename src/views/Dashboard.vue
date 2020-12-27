@@ -1,18 +1,18 @@
 <template>
     <div class="dashboard view">
         <div class="note-editor-nav">
-                <div class="buttons">
-                    <button
-                        class="button is-small"
-                        v-on:click="$router.push({ name: 'settings' })"
-                    >
-                        <span class="icon is-small">
-                            <i class="fas fa-cog"></i>
-                        </span>
-                        <span>Settings</span>
-                    </button>
-                </div>
+            <div class="buttons">
+                <button
+                    class="button is-small"
+                    v-on:click="$router.push({ name: 'settings' })"
+                >
+                    <span class="icon is-small">
+                        <i class="fas fa-cog"></i>
+                    </span>
+                    <span>Settings</span>
+                </button>
             </div>
+        </div>
         <div class="columns is-centered">
             <div class="app-logo" />
         </div>
@@ -30,7 +30,10 @@
                         />
                     </div>
                     <p class="control" v-if="isSearch">
-                        <button class="button is-medium" v-on:click="onClearSearchQuery()">
+                        <button
+                            class="button is-medium"
+                            v-on:click="onClearSearchQuery()"
+                        >
                             <span class="icon is-small">
                                 <i class="fas fa-times"></i>
                             </span>
@@ -40,14 +43,20 @@
             </div>
         </div>
         <div class="columns is-centered">
-            <button class="button is-large" v-on:click="onCreateNote()">
-                <span class="icon is-small">
-                    <i class="fas fa-plus"></i>
-                </span>
-                <span>New note</span>
-            </button>
+            <div class="column is-narrow">
+                <button class="button is-large" v-on:click="onCreateNote()">
+                    <span class="icon is-small">
+                        <i class="fas fa-plus"></i>
+                    </span>
+                    <span>New note</span>
+                </button>
+            </div>
         </div>
-        <notes-list v-if="!isSearch" v-on:delete="onDeleteNote" v-on:select="onSelectNoteById" />
+        <notes-list
+            v-if="!isSearch"
+            v-on:delete="onDeleteNote"
+            v-on:select="onSelectNoteById"
+        />
         <notes-search-results v-if="isSearch" v-on:select="onSelectNoteById" />
         <app-footer />
     </div>
@@ -58,18 +67,18 @@ import {
     SET_ACTIVE_NOTE,
     SET_EDIT_MODE,
     SET_SEARCH_QUERY,
-    SET_SEARCH_RESULT
+    SET_SEARCH_RESULT,
 } from "@/mutations_names";
 import NotesList from "@/components/NotesList";
 import NotesSearchResults from "@/components/NotesSearchResults";
-import AppFooter from '@/components/AppFooter'
+import AppFooter from "@/components/AppFooter";
 import KeyboardShortcutsService from "@/libs/KeyboardShortcutsService";
 import NoteService from "@/libs/NoteService";
 export default {
     components: {
         NotesList,
         NotesSearchResults,
-        AppFooter
+        AppFooter,
     },
     methods: {
         onSelectNoteById(noteId) {
@@ -78,7 +87,7 @@ export default {
                 if (err) {
                     vueThis.$buefy.toast.open({
                         message: "Error :( " + err,
-                        type: "is-danger"
+                        type: "is-danger",
                     });
                 } else {
                     this.$store.commit(SET_ACTIVE_NOTE, row);
@@ -102,16 +111,16 @@ export default {
                     this.$buefy.toast.open(
                         "Note <b>" + note.title + "</b> deleted!"
                     );
-                }
+                },
             });
         },
         onCreateNote() {
             var vueThis = this;
-            NoteService.create(function(err, noteId) {
+            NoteService.create(function (err, noteId) {
                 if (err) {
                     vueThis.$buefy.toast.open({
                         message: "Error :( " + err,
-                        type: "is-danger"
+                        type: "is-danger",
                     });
                 } else {
                     NoteService.get(noteId, (err, row) => {
@@ -126,16 +135,16 @@ export default {
         onClearSearchQuery() {
             this.searchQuery = "";
             this.$refs.search.focus();
-        }
+        },
     },
     data() {
         return {
-            searchQuery: ""
+            searchQuery: "",
         };
     },
     mounted() {
         this.$store.commit(SET_EDIT_MODE, false);
-        
+
         this.$store.dispatch("reloadNotesList");
         this.$refs.search.focus();
         this.searchQuery = this.$store.state.searchQuery;
@@ -147,7 +156,7 @@ export default {
                     KeyboardShortcutsService.bindSearchResult(
                         this.$refs.search,
                         index,
-                        index => {
+                        (index) => {
                             const noteId =
                                 state.searchResultList[index - 1].note_id;
                             this.onSelectNoteById(noteId);
@@ -167,15 +176,15 @@ export default {
         );
     },
     watch: {
-        searchQuery: function(val) {
+        searchQuery: function (val) {
             this.$store.commit(SET_SEARCH_QUERY, this.searchQuery);
             this.$store.dispatch("updateSearchResult");
-        }
+        },
     },
     computed: {
-        isSearch: function() {
+        isSearch: function () {
             return this.searchQuery.length > 0;
-        }
-    }
+        },
+    },
 };
 </script>
