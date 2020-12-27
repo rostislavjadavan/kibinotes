@@ -39,6 +39,9 @@ export default {
         EventBus.$on('focus_note_title', () => {            
             this.$refs.title.focus();
         });        
+    },
+    beforeDestroy() {
+        EventBus.$off('focus_note_title');
     }
 };
 </script>
