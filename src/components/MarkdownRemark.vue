@@ -10,6 +10,7 @@ import RemarkParse from "remark-parse";
 import RemarkHtml from "remark-html";
 import RemarkExternalLinks from "remark-external-links";
 import RemarkEmoji from 'remark-gemoji';
+import RemarkTodoPlugin from '@/libs/remark_todo_plugin'
 import Mark from "@/libs/mark";
 import { SET_NOTE_SCROLL } from "@/mutations_names";
 
@@ -47,10 +48,21 @@ export default {
         this.processor = Unified()
             .use(RemarkParse)
             .use(RemarkExternalLinks, { target: "_blank" })
-            .use(RemarkEmoji)
+            .use(RemarkTodoPlugin)
+            .use(RemarkEmoji)            
             .use(RemarkHtml);
     },
     mounted() {
+        if (this.$store.state.searchQuery) {
+            var markInstance = new Mark(this.$refs.markdown);
+            var options = {
+                acrossElements: true,
+                separateWordSearch: true,
+                diacritics: true
+            };
+            markInstance.mark(this.$store.state.searchQuery, options);
+        }
+
         let scroll = this.$store.state.noteScroll;
         if (scroll.scrollY != null) {
             window.scrollTo(0, scroll.scrollY);
