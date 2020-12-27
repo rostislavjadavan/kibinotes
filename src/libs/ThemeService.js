@@ -12,6 +12,7 @@ class ThemeService {
 
     setTheme(theme) {
         SettingsService.setTheme(theme);
+        this.theme = theme;
         this.initTheme();        
     }
 
