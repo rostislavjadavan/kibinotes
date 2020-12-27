@@ -12,7 +12,7 @@ import CodeMirror from "codemirror/lib/codemirror.js";
 import CodeMirrorSearch from "codemirror/addon/search/searchcursor.js";
 import "codemirror/lib/codemirror.css";
 import "codemirror/mode/markdown/markdown.js";
-
+import EventBus from '@/libs/event_bus.js';
 export default {
     props: {
         content: String
@@ -76,7 +76,7 @@ export default {
                     this.$emit("dashboard");
                 },
                 [KeyboardShortcutsService.getCMEditTitle()]: instance => {                    
-                    this.$root.$emit('focus_note_title');
+                    EventBus.$emit('focus_note_title');
                 }
             });
 
