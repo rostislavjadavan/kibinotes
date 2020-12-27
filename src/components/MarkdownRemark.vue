@@ -5,9 +5,12 @@
 </template>
 
 <script>
-import Unified from "unified";
-import RemarkParse from "remark-parse";
-import RemarkHtml from "remark-html";
+import Unified from 'unified';
+import RemarkParse from 'remark-parse';
+import RemartRehype from 'remark-rehype';
+import RehypeFormat from 'rehype-format';
+import RehypeStringify from 'rehype-stringify';
+import RehypeRaw from 'rehype-raw';
 import RemarkExternalLinks from "remark-external-links";
 import RemarkEmoji from 'remark-gemoji';
 import RemarkTodoPlugin from '@/libs/remark_todo_plugin'
@@ -49,8 +52,11 @@ export default {
             .use(RemarkParse)
             .use(RemarkExternalLinks, { target: "_blank" })
             .use(RemarkTodoPlugin)
-            .use(RemarkEmoji)            
-            .use(RemarkHtml);
+            .use(RemarkEmoji)
+            .use(RemartRehype)
+            .use(RehypeRaw)
+            .use(RehypeFormat)
+            .use(RehypeStringify);
     },
     mounted() {
         if (this.$store.state.searchQuery) {
