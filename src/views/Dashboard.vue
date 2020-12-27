@@ -72,7 +72,6 @@ import {
 import NotesList from "@/components/NotesList";
 import NotesSearchResults from "@/components/NotesSearchResults";
 import AppFooter from "@/components/AppFooter";
-import KeyboardShortcutsService from "@/libs/KeyboardShortcutsService";
 import NoteService from "@/libs/NoteService";
 export default {
     components: {
@@ -147,33 +146,7 @@ export default {
 
         this.$store.dispatch("reloadNotesList");
         this.$refs.search.focus();
-        this.searchQuery = this.$store.state.searchQuery;
-
-        this.$store.subscribe((mutation, state) => {
-            if (mutation.type === SET_SEARCH_RESULT) {
-                let index = 1;
-                do {
-                    KeyboardShortcutsService.bindSearchResult(
-                        this.$refs.search,
-                        index,
-                        (index) => {
-                            const noteId =
-                                state.searchResultList[index - 1].note_id;
-                            this.onSelectNoteById(noteId);
-                        }
-                    );
-                    index++;
-                } while (index <= state.searchResultList.length && index < 10);
-            }
-        });
-
-        KeyboardShortcutsService.bindCreateNewNote(
-            this.$refs.search,
-            this.onCreateNote
-        );
-        KeyboardShortcutsService.bindSettingsPage(() =>
-            this.$router.push({ name: "settings" })
-        );
+        this.searchQuery = this.$store.state.searchQuery;        
     },
     watch: {
         searchQuery: function (val) {

@@ -28,7 +28,6 @@
 
 <script>
 import { SET_SEARCH_RESULT } from "@/mutations_names";
-import KeyboardShortcutsService from "@/libs/KeyboardShortcutsService";
 export default {
     methods: {
         onSelect(note) {

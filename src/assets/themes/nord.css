@@ -37,6 +37,7 @@
     background: #3B4252
 }
 
+#nord pre,
 #nord .markdown-body pre, 
 #nord .markdown-body pre code, 
 #nord blockquote {
@@ -104,32 +105,6 @@
 #nord span .highlight, mark {
     color: #2E3440;
     background-color: khaki;
-}
-
-#nord .CodeMirror {
-    color: #ECEFF4;
-}
-
-#nord .CodeMirror-gutters {
-    color: #ECEFF4;
-    background-color: #3B4252;
-    border-right: 1px solid #2E3440;
-}
-
-#nord .CodeMirror-lines {
-    background-color: #3B4252;
-}
-
-#nord pre.CodeMirror-lines {
-    background-color: transparent;
-}
-
-#nord .CodeMirror div.CodeMirror-cursor {
-    border-left: 2px solid white;
-}
-
-#nord .CodeMirror-selected {
-    background: hsl(256, 30%, 52%);;
 }
 
 #nord button.is-danger {

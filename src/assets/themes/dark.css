@@ -37,6 +37,7 @@
     background: #666
 }
 
+#dark pre,
 #dark .markdown-body pre, 
 #dark .markdown-body pre code, 
 #dark blockquote {
@@ -95,32 +96,6 @@
 #dark span .highlight, mark {
     color: #333;
     background-color: khaki;
-}
-
-#dark .CodeMirror {
-    color: #eee;
-}
-
-#dark .CodeMirror-gutters {
-    color: #eee;
-    background-color: #444;
-    border-right: 1px solid #333;
-}
-
-#dark .CodeMirror-lines {
-    background-color: #444;
-}
-
-#dark pre.CodeMirror-lines {
-    background-color: transparent;
-}
-
-#dark .CodeMirror div.CodeMirror-cursor {
-    border-left: 2px solid white;
-}
-
-#dark .CodeMirror-selected {
-    background: hsl(256, 30%, 52%);;
 }
 
 #dark button.is-danger {

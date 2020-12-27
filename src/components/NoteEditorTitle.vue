@@ -16,7 +16,6 @@
 
 <script>
 import { SET_EDIT_TITLE } from "@/mutations_names";
-import KeyboardShortcutsService from "@/libs/KeyboardShortcutsService";
 import EventBus from '@/libs/event_bus.js';
 export default {
     data() {
