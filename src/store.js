@@ -28,9 +28,11 @@ export default new Vuex.Store({
         searchQuery: "",
         searchResultList: [],
         noteScroll: {
+            noteId: null,
             scrollY: null,
             positionStart: null,
-            positionEnd: null
+            positionEnd: null,
+            cursorPos: null
         }
     },
     mutations: {

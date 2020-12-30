@@ -14,7 +14,6 @@ export default {
     mounted() {
         const appVersion = remote.app.getVersion();
         const os = require("os");
-        const path = require("path");
         LoggingService.info(
             `application started, version=${appVersion}, os=${os.type()}, ${os.release()}, ${os.platform()}`
         );

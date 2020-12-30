@@ -19,6 +19,7 @@
   },
   "main": "background.js",
   "dependencies": {
+    "ContentSelect": "^1.0.3",
     "aws-sdk": "^2.817.0",
     "buefy": "^0.9.4",
     "codejar": "^3.2.3",
