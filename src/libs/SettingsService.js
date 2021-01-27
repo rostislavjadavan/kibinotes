@@ -18,7 +18,7 @@ class SettingsService {
             LoggingService.info(`Loaded settings from ${path}: ${JSON.stringify(this.settings)}`)
 
             if (this.settings.path == null || !fs.existsSync(this.settings.path)) {
-                this.settings.path = require('path').join(electron.remote.app.getPath("userData"), "data.db");
+                this.settings.path = require('path').join(remote.app.getPath("userData"), "data.db");
             }            
         } else {
             fs.writeFileSync(path, JSON.stringify(this.settings));
