@@ -18,16 +18,19 @@ function createWindow() {
     // Create the browser window.
     win = new BrowserWindow({
         width: 1000, height: 800, webPreferences: {
-            nodeIntegration: true
+            nodeIntegration: true,
+            enableRemoteModule: true
         },
         minWidth: 780,
-        minHeight: 500        
+        minHeight: 500,
     })
+
+    win.setMenuBarVisibility(false)
 
     if (process.env.WEBPACK_DEV_SERVER_URL) {
         // Load the url of the dev server if in development mode
         win.loadURL(process.env.WEBPACK_DEV_SERVER_URL)
-        //if (!process.env.IS_TEST) win.webContents.openDevTools()
+        if (!process.env.IS_TEST) win.webContents.openDevTools()
     } else {
         createProtocol('app')
         // Load the index.html when not in development

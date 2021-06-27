@@ -1,0 +1,135 @@
+#nord .app {    
+    color: #ECEFF4;
+    background-color: #2E3440;
+}
+
+#nord .app-logo {
+    background-image: url("logo_nord.svg");
+}
+
+#nord .content h1,
+#nord .content h2,
+#nord .content h3, 
+#nord .content h4,
+#nord .content h5,
+#nord strong,
+#nord nav ul li.is-active,
+#nord .breadcrumb li.is-active a
+{
+    color: #ECEFF4;    
+}
+
+#nord a {
+    color: #81A1C1;
+}
+#nord a:hover {
+    color: #ECEFF4;
+}
+
+#nord .table,
+#nord .modal-card-body
+{
+    color: #ECEFF4;
+    background-color: #2E3440;
+}
+
+#nord hr {
+    background: #3B4252
+}
+
+#nord pre,
+#nord .markdown-body pre, 
+#nord .markdown-body pre code, 
+#nord blockquote {
+    color: #ECEFF4;
+    background-color: #3B4252;
+}
+
+#nord .markdown-body code, #nord code { 
+    color: #88C0D0;
+    background-color: #3B4252;
+}
+
+#nord blockquote {
+    border-left: 5px solid #88C0D0;
+}
+
+#nord .modal-card-foot {
+    border-top: 1px solid #4C566A;
+    color: #ECEFF4;
+    background-color: #3B4252;
+}
+
+#nord .button {
+    background-color: #2E3440;
+    border-color: #4C566A;    
+    color: #ECEFF4;
+}
+
+#nord .button:hover {
+    border-color: #81A1C1;        
+}
+
+#nord .b-radio.radio input[type=radio]:checked + .check,
+#nord .b-radio.radio input[type=radio]:hover + .check {
+    border-color: #88C0D0;
+}
+
+#nord .b-radio.radio input[type=radio] + .check:before {
+    background-color: #88C0D0;
+}
+
+#nord .table td, 
+#nord .table th {
+    border-bottom: 1px solid #4C566A;
+}
+
+#nord input,
+#nord .box {
+    color: #ECEFF4;
+    background-color: #2E3440;
+    border: 1px solid #4C566A;
+}
+#nord input::placeholder {
+    color: #4C566A;
+}
+#nord input:focus {    
+    box-shadow: none;
+}
+
+#nord label {
+    color: #ccc;
+}
+
+#nord .note-seach-result-box b, 
+#nord span .highlight, mark {
+    color: #2E3440;
+    background-color: khaki;
+}
+
+#nord button.is-danger {
+    background-color: #b10a18;
+    border-color: transparent;
+    color: #fff;
+  }
+#nord .button.is-danger:focus:not(:active), 
+#nord .button.is-danger.is-focused:not(:active) {
+    box-shadow: none;
+}
+
+.m-mdic-copy-wrapper button:hover {
+    color: #ccc;
+}
+
+.u-mdic-copy-notify {
+    display: none;
+}
+
+#nord ::-webkit-scrollbar {
+    width: 12px;
+    background-color: #2E3440;
+}
+
+#nord ::-webkit-scrollbar-thumb, #nord ::-webkit-scrollbar-thumb:window-inactive {
+    background: #4C566A;
+}

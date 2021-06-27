@@ -2,6 +2,10 @@ body {
     min-height: 100vh;
 }
 
+.app {
+    min-height: 100vh;    
+}
+
 .view {
     padding: 25px 15px;
 }
@@ -14,12 +18,18 @@ body {
     background-size: 180px 30px;
 }
 
-.note-title-cell:hover, .note-seach-result-box:hover {
+.note-title-cell {
+    font-size: 1rem;
+}
+
+.note-title-cell:hover,
+.note-seach-result-box:hover {
     cursor: pointer;
 }
 
-
-.note-seach-result-box b, span .highlight, mark {
+.note-seach-result-box b,
+span .highlight,
+mark {
     background-color: khaki;
 }
 
@@ -34,9 +44,64 @@ body {
 }
 
 .mt1 {
-    margin-top: 15px;   
+    margin-top: 15px;
 }
 
 .mb1 {
-    margin-bottom: 15px;   
+    margin-bottom: 15px;
+}
+
+input[type="checkbox"] {
+    transform: scale(1.5);
+    margin: 0 0.5rem;
+}
+
+.content {
+    font-size: 1rem;
+}
+
+.content li p {
+    margin: 0 !important;
+}
+.content li {
+    margin-bottom: 0.5rem;
+}
+.content li li {
+    margin: 0;
+}
+
+pre {
+    position: relative;
+}
+
+.m-mdic-copy-wrapper {
+    position: absolute;
+    top: 0.3rem;
+    right: 0.5rem;
+}
+
+.m-mdic-copy-wrapper button {
+    font-weight: bold;
+    background: none !important;
+    border: none;
+    padding: 0 !important;
+    color: #aaa;
+    cursor: pointer;
+}
+
+.m-mdic-copy-wrapper button:hover {
+    color: #ccc;
+}
+
+.u-mdic-copy-notify {
+    display: none;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+    background-color: #fff;
+}
+
+::-webkit-scrollbar-thumb, ::-webkit-scrollbar-thumb:window-inactive {
+    background: #ccc;
 }

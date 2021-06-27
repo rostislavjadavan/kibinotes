@@ -34,7 +34,7 @@
 
         <div v-if="this.$store.state.editMode">
             <note-editor-title v-on:change="onTitleContentChange" />
-            <editor
+            <editor-code-jar
                 v-bind:content="this.$store.state.activeNote.content"
                 v-on:change="onEditorContentChange"
                 v-on:save="onEditorSave"
@@ -43,25 +43,24 @@
         </div>
         <div v-if="!this.$store.state.editMode">
             <note-editor-title />
-            <markdown v-bind:content="this.$store.state.activeNote.content" />
+            <markdown-remark v-bind:content="this.$store.state.activeNote.content" />
         </div>
     </div>
 </template>
 
 <script>
 import NoteEditorTitle from "@/components/NoteEditorTitle";
-import Markdown from "@/components/Markdown";
-import Editor from "@/components/Editor";
+import MarkdownRemark from "@/components/MarkdownRemark";
+import EditorCodeJar from "@/components/EditorCodeJar";
 import NoteService from '@/libs/NoteService'
-import KeyboardShortcutsService from "@/libs/KeyboardShortcutsService";
 import { SET_EDIT_MODE, SET_ACTIVE_NOTE } from "@/mutations_names";
 import debounce from "@/libs/debounce";
 
 export default {
     components: {
         NoteEditorTitle,
-        Markdown,
-        Editor
+        MarkdownRemark,        
+        EditorCodeJar
     },
     methods: {
         onTitleContentChange(title) {
@@ -113,10 +112,6 @@ export default {
                 }
             });
         }
-    },
-    mounted() {
-        KeyboardShortcutsService.bindSwitchEditAndViewMode(() => this.onSwitchMode());
-        KeyboardShortcutsService.bindGoToDashboard(() => this.onDashboard());
     }
 };
 </script>

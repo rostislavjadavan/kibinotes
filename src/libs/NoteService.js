@@ -1,5 +1,5 @@
 
-import uuid from 'uuid/v1'
+import { v1 as uuid } from 'uuid'
 import NoteIndexService from '@/libs/NoteIndexService'
 
 class NoteService {

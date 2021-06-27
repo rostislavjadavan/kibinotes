@@ -1,10 +1,9 @@
-import electron from 'electron';
+import SettingsService from '@/libs/SettingsService'
 import LoggingService from '@/libs/LoggingService'
 
 const sqlite3 = require('sqlite3').verbose();
 
-export const file = "data.db"
-export const path = require('path').join(electron.remote.app.getPath("userData"), file);
+export const path = SettingsService.getPath();
 export const connection = new sqlite3.Database(
     path,
     sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE, function (err) {

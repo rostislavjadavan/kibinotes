@@ -8,7 +8,7 @@
                 <a href="#" aria-current="page">{{this.$store.state.activeNote.title}}</a>
             </li>
             <li class="is-active" v-if="this.$store.state.editMode">
-                <b-input ref="title" class="ml1" size="is-small" v-model="title"></b-input>
+                <input ref="title" type="text" class="input is-small ml1" v-model="title" />
             </li>
         </ul>
     </nav>
@@ -16,7 +16,7 @@
 
 <script>
 import { SET_EDIT_TITLE } from "@/mutations_names";
-import KeyboardShortcutsService from "@/libs/KeyboardShortcutsService";
+import EventBus from '@/libs/event_bus.js';
 export default {
     data() {
         return {
@@ -32,29 +32,15 @@ export default {
         title: function(val) {
             this.$emit("change", val);
         }
+    },    
+    mounted() {        
+        this.title = this.$store.state.activeNote.title;        
+        EventBus.$on('focus_note_title', () => {            
+            this.$refs.title.focus();
+        });        
     },
-    mounted() {
-        const focusTitleInput = () => {
-            this.$store.commit(SET_EDIT_TITLE, this.$refs.title);
-            if (this.$refs.title) {
-                KeyboardShortcutsService.bindGoToDashboard(
-                    this.$refs.title.$el,
-                    () => {
-                        this.$router.push({ name: "dashboard" });
-                    }
-                );
-            }
-        };
-
-        if (this.$store.state.editMode) {
-            focusTitleInput()
-        }
-
-        this.title = this.$store.state.activeNote.title;
-        this.$store.watch(
-            (state, getters) => state.editMode,
-            (newValue, oldValue) => focusTitleInput()
-        );
+    beforeDestroy() {
+        EventBus.$off('focus_note_title');
     }
 };
 </script>

@@ -1,9 +1,18 @@
 productName: "Kibinotes"
 appId: "com.jadavan.kibinotes"
 
+# Linux
+linux:
+  target: "AppImage"
+  executableName: "kibinotes"
+  description: "Minimalistic notes application with instant search"
+  category: "Utilities"
+  icon: "build/icons/icon.png"
+
 # Mac OS configuration
 mac:
-  icon: "logo/build/icons/icon.icns"
+  icon: "build/icons/icon.icns"
+  category: "public.app-category.utilities"
 
 # Config for OSX dmg
 dmg:

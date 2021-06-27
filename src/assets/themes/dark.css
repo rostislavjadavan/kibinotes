@@ -1,4 +1,4 @@
-#dark, body#dark {    
+#dark .app {    
     color: #eee;
     background-color: #333;
 }
@@ -33,6 +33,11 @@
     background-color: #333;
 }
 
+#dark hr {
+    background: #666
+}
+
+#dark pre,
 #dark .markdown-body pre, 
 #dark .markdown-body pre code, 
 #dark blockquote {
@@ -40,7 +45,7 @@
     background-color: #444;
 }
 
-#dark .markdown-body code { 
+#dark .markdown-body code, #dark code { 
     color: hsl(171, 100%, 41%);
     background-color: #444;
 }
@@ -93,32 +98,6 @@
     background-color: khaki;
 }
 
-#dark .CodeMirror {
-    color: #eee;
-}
-
-#dark .CodeMirror-gutters {
-    color: #eee;
-    background-color: #444;
-    border-right: 1px solid #333;
-}
-
-#dark .CodeMirror-lines {
-    background-color: #444;
-}
-
-#dark pre.CodeMirror-lines {
-    background-color: transparent;
-}
-
-#dark .CodeMirror div.CodeMirror-cursor {
-    border-left: 2px solid white;
-}
-
-#dark .CodeMirror-selected {
-    background: hsl(256, 30%, 52%);;
-}
-
 #dark button.is-danger {
     background-color: #b10a18;
     border-color: transparent;
@@ -127,4 +106,21 @@
 #dark .button.is-danger:focus:not(:active), 
 #dark .button.is-danger.is-focused:not(:active) {
     box-shadow: none;
+}
+
+.m-mdic-copy-wrapper button:hover {
+    color: #ccc;
+}
+
+.u-mdic-copy-notify {
+    display: none;
+}
+
+#dark ::-webkit-scrollbar {
+    width: 12px;
+    background-color: #333;
+}
+
+#dark ::-webkit-scrollbar-thumb, #dark ::-webkit-scrollbar-thumb:window-inactive {
+    background: #666;
 }
