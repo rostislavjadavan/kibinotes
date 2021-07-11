@@ -15,7 +15,6 @@ import RemarkExternalLinks from "remark-external-links";
 import RemarkEmoji from "remark-gemoji";
 import RemarkTodoPlugin from "@/libs/remark_todo_plugin";
 import Mark from "@/libs/mark";
-import { SET_NOTE_SCROLL } from "@/mutations_names";
 
 export default {
     props: {

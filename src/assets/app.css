@@ -3,10 +3,11 @@ body {
 }
 
 .app {
-    min-height: 100vh;    
+    min-height: 100vh;
 }
 
 .view {
+    min-height: 100vh;
     padding: 25px 15px;
 }
 
@@ -34,9 +35,7 @@ mark {
 }
 
 .note-editor-nav {
-    position: fixed;
-    right: 10px;
-    z-index: 100;
+    margin-bottom: 21px;
 }
 
 .ml1 {

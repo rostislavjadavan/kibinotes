@@ -7,8 +7,6 @@
 <script>
 import { CodeJar } from "codejar";
 import ContentSelect from "ContentSelect";
-import EventBus from "@/libs/event_bus.js";
-import { SET_NOTE_SCROLL } from "@/mutations_names";
 
 export default {
     props: {
@@ -85,7 +83,7 @@ export default {
         });
         this.$refs.editor.focus();
 
-        this.initScroll();
+        //this.initScroll();
         window.addEventListener("keyup", this.handleCursorPosition);
         this.$refs.editor.addEventListener("click", this.handleCursorPosition);
     },

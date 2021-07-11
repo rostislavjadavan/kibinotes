@@ -52,48 +52,28 @@
                 </button>
             </div>
         </div>
-        <notes-list
-            v-if="!isSearch"
-            v-on:delete="onDeleteNote"
-            v-on:select="onSelectNoteById"
-        />
+        <notes-list v-if="!isSearch" />
         <notes-search-results v-if="isSearch" v-on:select="onSelectNoteById" />
         <app-footer />
     </div>
 </template>
 
 <script>
-import {
-    SET_ACTIVE_NOTE,
-    SET_EDIT_MODE,
-    SET_SEARCH_QUERY,
-    SET_SEARCH_RESULT,
-} from "@/mutations_names";
 import NotesList from "@/components/NotesList";
-import NotesSearchResults from "@/components/NotesSearchResults";
 import AppFooter from "@/components/AppFooter";
-import NoteService from "@/libs/NoteService";
+/*
+import NotesSearchResults from "@/components/NotesSearchResults";
+import Notes from "@/core/Notes";
+*/
 export default {
     components: {
         NotesList,
-        NotesSearchResults,
+        //NotesSearchResults,
         AppFooter,
     },
     methods: {
         onSelectNoteById(noteId) {
-            var vueThis = this;
-            NoteService.get(noteId, (err, row) => {
-                if (err) {
-                    vueThis.$buefy.toast.open({
-                        message: "Error :( " + err,
-                        type: "is-danger",
-                    });
-                } else {
-                    this.$store.commit(SET_ACTIVE_NOTE, row);
-                    this.active = row.id;
-                    this.$router.push({ name: "note" });
-                }
-            });
+            this.$router.push({ name: `edit-note/${noteId}` });            
         },
         onDeleteNote(note) {
             this.$buefy.dialog.confirm({
@@ -105,8 +85,7 @@ export default {
                 type: "is-danger",
                 scroll: "keep",
                 onConfirm: () => {
-                    NoteService.remove(note);
-                    this.$store.dispatch("reloadNotesList");
+                    NoteService.remove(note);                    
                     this.$buefy.toast.open(
                         "Note <b>" + note.title + "</b> deleted!"
                     );
@@ -141,12 +120,9 @@ export default {
             searchQuery: "",
         };
     },
-    mounted() {
-        this.$store.commit(SET_EDIT_MODE, false);
-
-        this.$store.dispatch("reloadNotesList");
+    mounted() {        
         this.$refs.search.focus();
-        this.searchQuery = this.$store.state.searchQuery;        
+        this.searchQuery = this.$store.state.searchQuery;
     },
     watch: {
         searchQuery: function (val) {

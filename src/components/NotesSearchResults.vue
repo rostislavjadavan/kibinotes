@@ -27,7 +27,6 @@
 </template>
 
 <script>
-import { SET_SEARCH_RESULT } from "@/mutations_names";
 export default {
     methods: {
         onSelect(note) {

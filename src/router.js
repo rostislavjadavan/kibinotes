@@ -11,16 +11,16 @@ export default new Router({
             path: '/',
             name: 'dashboard',
             component: () => import('./views/Dashboard.vue')
-        },
+        },        
         {
-            path: '/note',
-            name: 'note',
-            component: () => import('./views/Note.vue')
-        },
+            path: '/edit-note/:id',
+            name: 'edit-note',
+            component: () => import('./views/EditNote.vue')
+        },        
         {
             path: '/settings',
             name: 'settings',
             component: () => import('./views/Settings.vue')
-        }
+        }        
     ]
 })

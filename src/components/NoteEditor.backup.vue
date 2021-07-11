@@ -32,8 +32,7 @@
             </div>
         </div>
 
-        <div v-if="this.$store.state.editMode">
-            <note-editor-title v-on:change="onTitleContentChange" />
+        <div v-if="this.$store.state.editMode">            
             <editor-code-jar
                 v-bind:content="this.$store.state.activeNote.content"
                 v-on:change="onEditorContentChange"
@@ -41,19 +40,16 @@
                 v-on:dashboard="onDashboard"
             />
         </div>
-        <div v-if="!this.$store.state.editMode">
-            <note-editor-title />
+        <div v-if="!this.$store.state.editMode">            
             <markdown-remark v-bind:content="this.$store.state.activeNote.content" />
         </div>
     </div>
 </template>
 
 <script>
-import NoteEditorTitle from "@/components/NoteEditorTitle";
 import MarkdownRemark from "@/components/MarkdownRemark";
 import EditorCodeJar from "@/components/EditorCodeJar";
 import NoteService from '@/libs/NoteService'
-import { SET_EDIT_MODE, SET_ACTIVE_NOTE } from "@/mutations_names";
 import debounce from "@/libs/debounce";
 
 export default {
@@ -62,10 +58,7 @@ export default {
         MarkdownRemark,        
         EditorCodeJar
     },
-    methods: {
-        onTitleContentChange(title) {
-            this.saveNote({ title: title });
-        },
+    methods: {        
         onEditorContentChange(content) {
             this.saveNote({ content: content });
         },
@@ -104,8 +97,7 @@ export default {
                 scroll: "keep",
                 onConfirm: () => {
                     NoteService.remove(note);
-                    this.$router.push({ name: "dashboard" });
-                    this.$store.dispatch("reloadNotesList");
+                    this.$router.push({ name: "dashboard" });                    
                     this.$buefy.toast.open(
                         "Note <b>" + note.title + "</b> deleted!"
                     );
