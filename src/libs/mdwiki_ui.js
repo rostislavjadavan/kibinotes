@@ -1,3 +1,4 @@
+/* https://raw.githubusercontent.com/rostislavjadavan/mdwiki/master/src/ui/assets/script.js */
 /* mdwiki scipts */
 let ui = {};
 ui.dom = {};

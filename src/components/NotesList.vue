@@ -8,6 +8,11 @@
                             {{ note.title }}
                         </td>
                         <td class="note-actions-cell" align="right">
+                            <a href="#" v-on:click="onEdit(note)">
+                                <span class="icon">
+                                    <i class="fas fa-edit"></i>
+                                </span>
+                            </a>                        
                             <a href="#" v-on:click="onDelete(note)">
                                 <span class="icon">
                                     <i class="fas fa-trash-alt"></i>
@@ -54,8 +59,11 @@ export default {
                 },
             });
         },
-        onSelect(note) {
+        onEdit(note) {
             this.$router.push(`/edit-note/${note.id}`);
+        },
+        onSelect(note) {
+            this.$router.push(`/view-note/${note.id}`);
         },
     },
 };

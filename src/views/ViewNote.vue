@@ -1,15 +1,15 @@
 <template>
     <div class="note view">
-        <editor v-bind:id="$route.params.id" />
+        <view-markdown v-bind:id="$route.params.id" />
     </div>
 </template>
 
 <script>
-import Editor from '../components/Editor.vue';
+import ViewMarkdown from "../components/ViewMarkdown"
 
 export default {
     components: {
-        Editor
+        ViewMarkdown
     },
     beforeMount() {        
         if (!this.$route.params.id) {

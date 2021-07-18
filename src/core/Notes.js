@@ -12,16 +12,33 @@ const q = {
     updateNote: connection.prepare("UPDATE notes SET title = $title, content = $content, last_update_ts = $last_update_ts  WHERE id = $id"),
     updateNoteIndex: connection.prepare("UPDATE notes_index SET content = $content WHERE note_id = $note_id"),
     deleteNote: connection.prepare("DELETE FROM notes WHERE id = $id"),
-    deleteNoteIndex: connection.prepare("DELETE FROM notes_index WHERE note_id = $note_id")
+    deleteNoteIndex: connection.prepare("DELETE FROM notes_index WHERE note_id = $note_id"),
+    createArchiveNote: connection.prepare("INSERT INTO notes_archive (id, note_id, content, status, last_update_ts) VALUES ($id, $note_id, $content, $status, $last_update_ts)")
+}
+
+const StatusEnum = {
+    VERSION: 1,
+    TRASH: 2
 }
 
 const t = {
-    createNote: connection.transaction((id) => {
+    createNote: connection.transaction(() => {
+        const id = uuidv4()
         const res = q.createNote.run({ id: id, last_update_ts: Date.now() });
         q.createIndex.run({ note_id: id });
         return q.getByRowId.get({ rowid: res.lastInsertRowid });
     }),
-    updateNote: connection.transaction((note) => {
+    updateNote: connection.transaction((note) => {        
+        const currentNote = q.getById.get({ id: note.id })
+        if (note.content != currentNote.content) {
+            q.createArchiveNote.run({
+                id: uuidv4(),
+                note_id: currentNote.id,
+                content: currentNote.content,
+                status: StatusEnum.VERSION,
+                last_update_ts: currentNote.last_update_ts
+            })
+        }        
         const res = q.updateNote.run({ id: note.id, title: note.title, content: note.content, last_update_ts: Date.now() });
         q.updateNoteIndex.run({ note_id: note.id, content: removeMarkdown(note.content) });
         return res.changes == 1;
@@ -54,7 +71,7 @@ class Notes {
     }
 
     create() {
-        return t.createNote(uuidv4());
+        return t.createNote();
     }
 
     update(note) {

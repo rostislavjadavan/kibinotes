@@ -1,36 +1,46 @@
 <template>
     <div class="is-fullheight">
         <div class="note-editor-nav">
-            <div class="buttons">
-                <button class="button">
-                    <span class="icon is-small">
-                        <i class="fas fa-save"></i>
-                    </span>
-                    <span>Save</span>
-                </button>
+            <button class="button is-success" v-on:click="onSave">
+                <span class="icon is-small">
+                    <i class="fas fa-save"></i>
+                </span>
+                <span>Save</span>
+            </button>
 
-                <button class="button" v-on:click="onDelete">
-                    <span class="icon is-small">
-                        <i class="fas fa-trash-alt"></i>
-                    </span>
-                    <span>Delete</span>
-                </button>
+            <button class="button" v-on:click="onCancel">
+                <span class="icon is-small">
+                    <i class="fas fa-ban"></i>
+                </span>
+                <span>Cancel</span>
+            </button>
 
-                <button class="button" v-on:click="onDashboard">
-                    <span class="icon is-small">
-                        <i class="fas fa-align-justify"></i>
-                    </span>
-                    <span>Go to Dashboard</span>
-                </button>
-            </div>
+            <button class="button is-danger" v-on:click="onDelete">
+                <span class="icon is-small">
+                    <i class="fas fa-trash-alt"></i>
+                </span>
+                <span>Delete</span>
+            </button>
+
+            <button class="button" v-on:click="onDashboard">
+                <span class="icon is-small">
+                    <i class="fas fa-align-justify"></i>
+                </span>
+                <span>Go to Dashboard</span>
+            </button>
         </div>
 
-        <pre id="editor" class="editor" v-html="note.content"></pre>
+        <pre
+            id="editor"
+            class="editor"
+            @input="onContentChange"
+            v-html="content"
+        ></pre>
     </div>
 </template>
 
 <script>
-import ui from "@/libs/mdwiki_ui"
+import ui from "@/libs/mdwiki_ui";
 import Notes from "@/core/Notes";
 
 export default {
@@ -38,44 +48,32 @@ export default {
     data() {
         return {
             note: null,
-            editor: null
+            editor: null,
+            content: "",
         };
     },
     beforeMount() {
-        this.note = Notes.getById(this.id);        
+        this.note = Notes.getById(this.id);
+        this.content = this.note.content;
     },
     mounted() {
-        this.editor = ui.editor('#editor');
+        this.editor = ui.editor("#editor");
         this.editor.focus();
     },
     methods: {
-        onEditorContentChange(content) {
-            //this.saveNote({ content: content });
+        onContentChange(e) {
+            this.note.content = e.target.innerText;
         },
-        onEditorSave(content) {
-            //this.saveNote({ content: content });
-            //this.onSwitchMode();
+        onSave() {
+            Notes.update(this.note);
+            this.$router.push(`/view-note/${this.note.id}`);
+            this.$buefy.toast.open("Note saved");
         },
-        onSwitchMode() {
-            //this.$store.commit(SET_EDIT_MODE, !this.$store.state.editMode);
-        },
-        saveNote(newNote) {
-            /*
-            let note = JSON.parse(JSON.stringify(this.$store.state.activeNote));
-            if (newNote.hasOwnProperty("title")) {
-                note.title = newNote.title;
-            }
-            if (newNote.hasOwnProperty("content")) {
-                note.content = newNote.content;
-            }
-
-            debounce(() => NoteService.save(note), 250)();
-
-            this.$store.commit(SET_ACTIVE_NOTE, note);
-            */
+        onCancel() {
+            this.$router.push(`/view-note/${this.note.id}`);
         },
         onDashboard() {
-            this.$router.push({ name: "dashboard" });
+            this.$router.push("/dashboard");
         },
         onDelete() {
             this.$buefy.dialog.confirm({
@@ -88,7 +86,7 @@ export default {
                 scroll: "keep",
                 onConfirm: () => {
                     Notes.delete(this.note);
-                    this.$router.push({ name: "dashboard" });
+                    this.$router.push("/dashboard");
                     this.$buefy.toast.open(
                         "Note <b>" + note.title + "</b> deleted!"
                     );
