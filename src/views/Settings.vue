@@ -4,7 +4,7 @@
             <div class="buttons">
                 <button
                     class="button"
-                    v-on:click="$router.push({ name: 'dashboard' })"
+                    v-on:click="$router.push('/')"
                 >
                     <span class="icon is-small">
                         <i class="fas fa-align-justify"></i>

@@ -6,7 +6,7 @@ import { connection } from "@/core/Database"
 const q = {
     getById: connection.prepare("SELECT id, title, content, last_update_ts FROM notes WHERE id = $id"),
     getByRowId: connection.prepare("SELECT id, title, content, last_update_ts FROM notes WHERE rowid = $rowid"),
-    getAll: connection.prepare("SELECT id, title, last_update_ts FROM notes"),
+    getAll: connection.prepare("SELECT id, title, last_update_ts FROM notes ORDER BY title ASC"),
     createNote: connection.prepare("INSERT INTO notes (id, last_update_ts) VALUES ($id, $last_update_ts)"),
     createIndex: connection.prepare("INSERT INTO notes_index(note_id) VALUES ($note_id)"),
     updateNote: connection.prepare("UPDATE notes SET title = $title, content = $content, last_update_ts = $last_update_ts  WHERE id = $id"),
@@ -44,6 +44,13 @@ const t = {
         return res.changes == 1;
     }),
     deleteNote: connection.transaction((note) => {
+        q.createArchiveNote.run({
+            id: uuidv4(),
+            note_id: note.id,
+            content: note.content,
+            status: StatusEnum.TRASH,
+            last_update_ts: note.last_update_ts
+        })
         const res = q.deleteNote.run({ id: note.id });
         q.deleteNoteIndex.run({ note_id: note.id });
         return res.changes == 1;

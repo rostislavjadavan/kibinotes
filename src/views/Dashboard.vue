@@ -62,9 +62,9 @@
 import NotesList from "@/components/NotesList";
 import AppFooter from "@/components/AppFooter";
 /*
-import NotesSearchResults from "@/components/NotesSearchResults";
+import NotesSearchResults from "@/components/NotesSearchResults";*/
 import Notes from "@/core/Notes";
-*/
+
 export default {
     components: {
         NotesList,
@@ -73,7 +73,7 @@ export default {
     },
     methods: {
         onSelectNoteById(noteId) {
-            this.$router.push({ name: `edit-note/${noteId}` });            
+            this.$router.push(`edit-note/${noteId}`);
         },
         onDeleteNote(note) {
             this.$buefy.dialog.confirm({
@@ -93,22 +93,8 @@ export default {
             });
         },
         onCreateNote() {
-            var vueThis = this;
-            NoteService.create(function (err, noteId) {
-                if (err) {
-                    vueThis.$buefy.toast.open({
-                        message: "Error :( " + err,
-                        type: "is-danger",
-                    });
-                } else {
-                    NoteService.get(noteId, (err, row) => {
-                        vueThis.$store.commit(SET_EDIT_MODE, true);
-                        vueThis.$store.commit(SET_ACTIVE_NOTE, row);
-                        vueThis.active = row.id;
-                        vueThis.$router.push({ name: "note" });
-                    });
-                }
-            });
+            let note = Notes.create()
+            this.$router.push(`edit-note/${note.id}`);
         },
         onClearSearchQuery() {
             this.searchQuery = "";

@@ -45,7 +45,7 @@ export default {
             this.$buefy.dialog.confirm({
                 message:
                     "Are you sure you want to delete note <b>" +
-                    note.content +
+                    note.title +
                     "</b>",
                 confirmText: "Yes, delete",
                 type: "is-danger",
