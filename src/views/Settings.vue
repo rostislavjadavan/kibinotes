@@ -49,7 +49,7 @@
 export default {
     data() {
         return {
-            theme: this.$store.getters.getTheme       
+            theme: this.$store.getters.theme       
         };
     },
     methods: {

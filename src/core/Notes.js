@@ -13,7 +13,13 @@ const q = {
     updateNoteIndex: connection.prepare("UPDATE notes_index SET content = $content WHERE note_id = $note_id"),
     deleteNote: connection.prepare("DELETE FROM notes WHERE id = $id"),
     deleteNoteIndex: connection.prepare("DELETE FROM notes_index WHERE note_id = $note_id"),
-    createArchiveNote: connection.prepare("INSERT INTO notes_archive (id, note_id, content, status, last_update_ts) VALUES ($id, $note_id, $content, $status, $last_update_ts)")
+    createArchiveNote: connection.prepare("INSERT INTO notes_archive (id, note_id, content, status, last_update_ts) VALUES ($id, $note_id, $content, $status, $last_update_ts)"),
+    search: connection.prepare(`SELECT 
+        note_id,        
+        snippet(notes_index, 1, '<b>', '</b>', '...', 30) content
+        FROM notes_index 
+        WHERE notes_index MATCH $query
+        ORDER BY rank;`)
 }
 
 const StatusEnum = {
@@ -28,7 +34,7 @@ const t = {
         q.createIndex.run({ note_id: id });
         return q.getByRowId.get({ rowid: res.lastInsertRowid });
     }),
-    updateNote: connection.transaction((note) => {        
+    updateNote: connection.transaction((note) => {
         const currentNote = q.getById.get({ id: note.id })
         if (note.content != currentNote.content) {
             q.createArchiveNote.run({
@@ -38,7 +44,7 @@ const t = {
                 status: StatusEnum.VERSION,
                 last_update_ts: currentNote.last_update_ts
             })
-        }        
+        }
         const res = q.updateNote.run({ id: note.id, title: note.title, content: note.content, last_update_ts: Date.now() });
         q.updateNoteIndex.run({ note_id: note.id, content: removeMarkdown(note.content) });
         return res.changes == 1;
@@ -98,6 +104,10 @@ class Notes {
             throw Error("invalid note: " + JSON.stringify(note))
         }
         return t.deleteNote(note)
+    }
+
+    search(query) {
+        return q.search.all({query: `${query}*`})
     }
 }
 

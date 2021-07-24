@@ -53,7 +53,7 @@
             </div>
         </div>
         <notes-list v-if="!isSearch" />
-        <notes-search-results v-if="isSearch" v-on:select="onSelectNoteById" />
+        <notes-search-results v-if="isSearch" v-bind:query="searchQuery" />
         <app-footer />
     </div>
 </template>
@@ -61,20 +61,16 @@
 <script>
 import NotesList from "@/components/NotesList";
 import AppFooter from "@/components/AppFooter";
-/*
-import NotesSearchResults from "@/components/NotesSearchResults";*/
+import NotesSearchResults from "@/components/NotesSearchResults";
 import Notes from "@/core/Notes";
 
 export default {
     components: {
         NotesList,
-        //NotesSearchResults,
+        NotesSearchResults,
         AppFooter,
     },
     methods: {
-        onSelectNoteById(noteId) {
-            this.$router.push(`edit-note/${noteId}`);
-        },
         onDeleteNote(note) {
             this.$buefy.dialog.confirm({
                 message:
@@ -99,7 +95,7 @@ export default {
         onClearSearchQuery() {
             this.searchQuery = "";
             this.$refs.search.focus();
-        },
+        }        
     },
     data() {
         return {
@@ -107,18 +103,17 @@ export default {
         };
     },
     mounted() {        
-        this.$refs.search.focus();
-        this.searchQuery = this.$store.state.searchQuery;
+        this.$refs.search.focus()
+        this.searchQuery = this.$store.getters.searchQuery
     },
     watch: {
-        searchQuery: function (val) {
-            this.$store.commit(SET_SEARCH_QUERY, this.searchQuery);
-            this.$store.dispatch("updateSearchResult");
+        searchQuery: function (value) {            
+            this.$store.commit("setSearchQuery", value)
         },
     },
     computed: {
         isSearch: function () {
-            return this.searchQuery.length > 0;
+            return this.searchQuery.length > 0
         },
     },
 };
