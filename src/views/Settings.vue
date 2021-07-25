@@ -2,19 +2,16 @@
     <div class="settings view">
         <div class="note-editor-nav">
             <div class="buttons">
-                <button
-                    class="button"
-                    v-on:click="$router.push('/')"
-                >
+                <button class="button" v-on:click="$router.push('/')">
                     <span class="icon is-small">
                         <i class="fas fa-align-justify"></i>
                     </span>
-                    <span>Go to Dashboard</span>
+                    <span>Dashboard</span>
                 </button>
             </div>
         </div>
-        
-        <div class="content">            
+
+        <div class="content">
             <h2>Theme</h2>
 
             <div class="field">
@@ -40,7 +37,7 @@
                     native-value="nord"
                     >Nord</b-radio
                 >
-            </div>            
+            </div>
         </div>
     </div>
 </template>
@@ -49,14 +46,14 @@
 export default {
     data() {
         return {
-            theme: this.$store.getters.theme       
+            theme: this.$store.getters.theme,
         };
     },
     methods: {
         onThemeChange(value) {
             this.$store.dispatch("setTheme", value);
             this.$buefy.toast.open("Theme changed to " + value);
-        },        
-    }
+        },
+    },
 };
 </script>

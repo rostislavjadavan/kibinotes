@@ -1,31 +1,31 @@
 <template>
-    <div class="note view content">
-        <div class="note-editor-nav">
-            <div class="buttons">
-                <button class="button is-success" v-on:click="onEdit">
+    <div class="view">
+        <div class="note-editor-nav row">
+            <div class="col-xs">
+                <a class="button is-success" v-on:click="onEdit">
                     <span class="icon is-small">
                         <i class="fas fa-edit"></i>
                     </span>
                     <span>Edit</span>
-                </button>
-
-                <button class="button is-danger" v-on:click="onDelete">
+                </a>
+            </div>
+            <div class="col-xs has-text-right">                
+                <a class="button" v-on:click="$router.push('/')">
+                    <span class="icon is-small">
+                        <i class="fas fa-align-justify"></i>
+                    </span>
+                    <span>Dashboard</span>
+                </a>
+                <a class="button is-danger" v-on:click="onDelete">
                     <span class="icon is-small">
                         <i class="fas fa-trash-alt"></i>
                     </span>
                     <span>Delete</span>
-                </button>
-
-                <button class="button" v-on:click="onDashboard">
-                    <span class="icon is-small">
-                        <i class="fas fa-align-justify"></i>
-                    </span>
-                    <span>Go to Dashboard</span>
-                </button>
+                </a>
             </div>
         </div>
 
-        <div ref="markdown" class="markdown-body" v-html="content" />
+        <div ref="markdown" class="markdown-body content" v-html="content" />
     </div>
 </template>
 
@@ -42,7 +42,7 @@ import RemarkTodoPlugin from "@/libs/remark_todo_plugin";
 import Mark from "@/libs/mark";
 import Notes from "@/core/Notes";
 
-export default {    
+export default {
     data() {
         return {
             note: null,
@@ -62,11 +62,8 @@ export default {
                 markInstance.mark(this.$store.state.searchQuery, options);
             }
         },
-        onEdit() {            
-            this.$router.push(`/edit-note/${this.note.id}`)
-        },        
-        onDashboard() {
-            this.$router.push({ name: "dashboard" })
+        onEdit() {
+            this.$router.push(`/edit-note/${this.note.id}`);
         },
         onDelete() {
             this.$buefy.dialog.confirm({
@@ -78,13 +75,13 @@ export default {
                 type: "is-danger",
                 scroll: "keep",
                 onConfirm: () => {
-                    Notes.delete(this.note)
-                    this.$router.push('/')
+                    Notes.delete(this.note);
+                    this.$router.push("/");
                     this.$buefy.toast.open(
                         "Note <b>" + this.note.title + "</b> deleted!"
-                    )
+                    );
                 },
-            })
+            });
         },
     },
     beforeMount() {
@@ -102,7 +99,7 @@ export default {
             .use(RehypeRaw)
             .use(RehypeFormat)
             .use(RehypeStringify);
-        
+
         this.content = this.processor.processSync(this.note.content).toString();
     },
     mounted() {

@@ -37,6 +37,9 @@ mark {
 .note-editor-nav {
     margin-bottom: 21px;
 }
+.note-editor-nav a.button {
+    margin: 0 5px
+}
 
 .ml1 {
     margin-left: 15px;
