@@ -1,7 +1,8 @@
 
 import removeMarkdown from 'remove-markdown'
 import { v4 as uuidv4 } from 'uuid';
-import { connection } from "@/core/Database"
+import { connection } from "../core/Database"
+import markdownTitle from '../libs/markdown_title'
 
 const q = {
     getById: connection.prepare("SELECT id, title, content, last_update_ts FROM notes WHERE id = $id"),
@@ -91,11 +92,7 @@ class Notes {
         if (!note.hasOwnProperty('id')) {
             throw Error("invalid note: " + JSON.stringify(note))
         }
-        if (note.content && note.content.length > 0) {
-            note.title = note.content.substring(0, 40)
-        } else {
-            note.title = "Empty note"
-        }
+        note.title = markdownTitle.fromContent(note.content)
         return t.updateNote(note)
     }
 
