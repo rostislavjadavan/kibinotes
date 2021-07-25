@@ -1,17 +1,12 @@
 <template>
-    <div class="dashboard view">
-        <div class="note-editor-nav">
-            <div class="buttons">
-                <button
-                    class="button is-small"
-                    v-on:click="$router.push({ name: 'settings' })"
-                >
-                    <span class="icon is-small">
-                        <i class="fas fa-cog"></i>
-                    </span>
-                    <span>Settings</span>
-                </button>
-            </div>
+    <div class="view">
+        <div class="note-editor-nav has-text-right">
+            <a class="button is-small" v-on:click="$router.push('/settings')">
+                <span class="icon is-small">
+                    <i class="fas fa-cog"></i>
+                </span>
+                <span>Settings</span>
+            </a>
         </div>
         <div class="columns is-centered">
             <div class="app-logo" />
@@ -81,7 +76,7 @@ export default {
                 type: "is-danger",
                 scroll: "keep",
                 onConfirm: () => {
-                    NoteService.remove(note);                    
+                    NoteService.remove(note);
                     this.$buefy.toast.open(
                         "Note <b>" + note.title + "</b> deleted!"
                     );
@@ -89,31 +84,31 @@ export default {
             });
         },
         onCreateNote() {
-            let note = Notes.create()
+            let note = Notes.create();
             this.$router.push(`edit-note/${note.id}`);
         },
         onClearSearchQuery() {
             this.searchQuery = "";
             this.$refs.search.focus();
-        }        
+        },
     },
     data() {
         return {
             searchQuery: "",
         };
     },
-    mounted() {        
-        this.$refs.search.focus()
-        this.searchQuery = this.$store.getters.searchQuery
+    mounted() {
+        this.$refs.search.focus();
+        this.searchQuery = this.$store.getters.searchQuery;
     },
     watch: {
-        searchQuery: function (value) {            
-            this.$store.commit("setSearchQuery", value)
+        searchQuery: function (value) {
+            this.$store.commit("setSearchQuery", value);
         },
     },
     computed: {
         isSearch: function () {
-            return this.searchQuery.length > 0
+            return this.searchQuery.length > 0;
         },
     },
 };
