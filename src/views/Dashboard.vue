@@ -24,7 +24,7 @@
                             class="input is-medium"
                         />
                     </div>
-                    <p class="control" v-if="isSearch">
+                    <p class="control" v-show="isSearch">
                         <button
                             class="button is-medium"
                             v-on:click="onClearSearchQuery()"
@@ -47,8 +47,8 @@
                 </button>
             </div>
         </div>
-        <notes-list v-if="!isSearch" />
-        <notes-search-results v-if="isSearch" v-bind:query="searchQuery" />
+        <notes-list v-show="!isSearch" />
+        <notes-search-results v-show="isSearch" v-bind:query="searchQuery" />
         <app-footer />
     </div>
 </template>
@@ -85,7 +85,7 @@ export default {
         },
         onCreateNote() {
             let note = Notes.create();
-            this.$router.push(`edit-note/${note.id}`);
+            this.$router.push(`edit/${note.id}`);
         },
         onClearSearchQuery() {
             this.searchQuery = "";

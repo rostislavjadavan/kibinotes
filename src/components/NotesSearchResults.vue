@@ -25,8 +25,8 @@
 </template>
 
 <script>
-import debounce from "@/libs/debounce";
-import Notes from "@/core/Notes";
+import debounce from "../libs/debounce";
+import Notes from "../core/Notes";
 
 export default {
     props: ["query"],
@@ -37,7 +37,7 @@ export default {
     },
     methods: {
         onSelect(res) {            
-            this.$router.push(`/view-note/${res.note_id}`)
+            this.$router.push(`/view/${res.note_id}`)
         },        
     },
     watch: {

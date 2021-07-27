@@ -60,10 +60,10 @@ export default {
             });
         },
         onEdit(note) {
-            this.$router.push(`/edit-note/${note.id}`);
+            this.$router.push(`/edit/${note.id}`);
         },
         onSelect(note) {
-            this.$router.push(`/view-note/${note.id}`);
+            this.$router.push(`/view/${note.id}`);
         },
     },
 };

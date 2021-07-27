@@ -14,7 +14,9 @@ const q = {
     updateNoteIndex: connection.prepare("UPDATE notes_index SET content = $content WHERE note_id = $note_id"),
     deleteNote: connection.prepare("DELETE FROM notes WHERE id = $id"),
     deleteNoteIndex: connection.prepare("DELETE FROM notes_index WHERE note_id = $note_id"),
-    createArchiveNote: connection.prepare("INSERT INTO notes_archive (id, note_id, content, status, last_update_ts) VALUES ($id, $note_id, $content, $status, $last_update_ts)"),
+    createHistoryNote: connection.prepare("INSERT INTO notes_archive (id, note_id, content, status, last_update_ts) VALUES ($id, $note_id, $content, $status, $last_update_ts)"),
+    getHistoryForNoteId: connection.prepare("SELECT id, last_update_ts FROM notes_archive WHERE note_id = $note_id ORDER BY last_update_ts DESC"),
+    getHistoricById: connection.prepare("SELECT id, content, last_update_ts FROM notes_archive WHERE id = $id"),
     search: connection.prepare(`SELECT 
         note_id,        
         snippet(notes_index, 1, '<b>', '</b>', '...', 30) content
@@ -31,57 +33,55 @@ const StatusEnum = {
 const t = {
     createNote: connection.transaction(() => {
         const id = uuidv4()
-        const res = q.createNote.run({ id: id, last_update_ts: Date.now() });
-        q.createIndex.run({ note_id: id });
-        return q.getByRowId.get({ rowid: res.lastInsertRowid });
+        const res = q.createNote.run({ id: id, last_update_ts: Date.now() })
+        q.createIndex.run({ note_id: id })
+        return q.getByRowId.get({ rowid: res.lastInsertRowid })
     }),
     updateNote: connection.transaction((note) => {
         const currentNote = q.getById.get({ id: note.id })
         if (note.content != currentNote.content) {
-            q.createArchiveNote.run({
+            q.createHistoryNote.run({
                 id: uuidv4(),
                 note_id: currentNote.id,
                 content: currentNote.content,
                 status: StatusEnum.VERSION,
-                last_update_ts: currentNote.last_update_ts
+                last_update_ts: Date.now()
             })
         }
-        const res = q.updateNote.run({ id: note.id, title: note.title, content: note.content, last_update_ts: Date.now() });
-        q.updateNoteIndex.run({ note_id: note.id, content: removeMarkdown(note.content) });
-        return res.changes == 1;
+        const res = q.updateNote.run({ id: note.id, title: note.title, content: note.content, last_update_ts: Date.now() })
+        q.updateNoteIndex.run({ note_id: note.id, content: removeMarkdown(note.content) })
+        return res.changes == 1
     }),
     deleteNote: connection.transaction((note) => {
-        q.createArchiveNote.run({
+        q.createHistoryNote.run({
             id: uuidv4(),
             note_id: note.id,
             content: note.content,
             status: StatusEnum.TRASH,
             last_update_ts: note.last_update_ts
         })
-        const res = q.deleteNote.run({ id: note.id });
-        q.deleteNoteIndex.run({ note_id: note.id });
-        return res.changes == 1;
+        const res = q.deleteNote.run({ id: note.id })
+        q.deleteNoteIndex.run({ note_id: note.id })
+        return res.changes == 1
     }),
 }
 
 class Notes {
-    constructor() {
-        /*
-        [1, 3, 5, 9, 11].forEach(id => {
-            let n = this.create()
-            n.content = `Content of the note ${id}`
-            this.update(n)
-            console.log(n)
-        })
-        //*/
-    }
 
     list() {
         return q.getAll.all()
     }
 
+    listHistory(note) {
+        return q.getHistoryForNoteId.all({ note_id: note.id })
+    }
+
     getById(id) {
         return q.getById.get({ id: id })
+    }
+
+    getHistoricById(id) {
+        return q.getHistoricById.get({ id: id })
     }
 
     create() {
@@ -104,7 +104,11 @@ class Notes {
     }
 
     search(query) {
-        return q.search.all({query: `${query}*`})
+        if (!query) {
+            return []
+        }
+        query = query.trim()
+        return q.search.all({ query: `${query}*` })
     }
 }
 

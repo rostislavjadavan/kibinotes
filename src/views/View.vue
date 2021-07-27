@@ -2,6 +2,12 @@
     <div class="view">
         <div class="note-editor-nav row">
             <div class="col-xs">
+                <a class="button" v-on:click="$router.push('/')">
+                    <span class="icon is-small">
+                        <i class="fas fa-align-justify"></i>
+                    </span>
+                    <span>Dashboard</span>
+                </a>
                 <a class="button is-success" v-on:click="onEdit">
                     <span class="icon is-small">
                         <i class="fas fa-edit"></i>
@@ -9,12 +15,12 @@
                     <span>Edit</span>
                 </a>
             </div>
-            <div class="col-xs has-text-right">                
-                <a class="button" v-on:click="$router.push('/')">
+            <div class="col-xs has-text-right">
+                <a class="button" v-on:click="onHistory">
                     <span class="icon is-small">
-                        <i class="fas fa-align-justify"></i>
+                        <i class="fas fa-history"></i>
                     </span>
-                    <span>Dashboard</span>
+                    <span>History</span>
                 </a>
                 <a class="button is-danger" v-on:click="onDelete">
                     <span class="icon is-small">
@@ -63,7 +69,10 @@ export default {
             }
         },
         onEdit() {
-            this.$router.push(`/edit-note/${this.note.id}`);
+            this.$router.push(`/edit/${this.note.id}`);
+        },
+        onHistory() {
+            this.$router.push(`/history/${this.note.id}`);
         },
         onDelete() {
             this.$buefy.dialog.confirm({

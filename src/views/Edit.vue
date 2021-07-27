@@ -9,20 +9,14 @@
                     <span>Save</span>
                 </a>
 
-                <a class="button" v-on:click="onCancel">
+                <a class="button is-warning" v-on:click="onCancel">
                     <span class="icon is-small">
                         <i class="fas fa-ban"></i>
                     </span>
                     <span>Cancel</span>
                 </a>
             </div>
-            <div class="col-xs has-text-right">            
-                <a class="button" v-on:click="$router.push('/')">
-                    <span class="icon is-small">
-                        <i class="fas fa-align-justify"></i>
-                    </span>
-                    <span>Dashboard</span>
-                </a>
+            <div class="col-xs has-text-right">                
                 <a class="button is-danger" v-on:click="onDelete">
                     <span class="icon is-small">
                         <i class="fas fa-trash-alt"></i>
@@ -70,11 +64,11 @@ export default {
         },
         onSave() {
             Notes.update(this.note);
-            this.$router.push(`/view-note/${this.note.id}`);
+            this.$router.push(`/view/${this.note.id}`);
             this.$buefy.toast.open("Note saved");
         },
         onCancel() {
-            this.$router.push(`/view-note/${this.note.id}`);
+            this.$router.push(`/view/${this.note.id}`);
         },        
         onDelete() {
             this.$buefy.dialog.confirm({

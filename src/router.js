@@ -13,15 +13,20 @@ export default new Router({
             component: () => import('./views/Dashboard.vue')
         },
         {
-            path: '/view-note/:id',
-            name: 'view-note',
-            component: () => import('./views/ViewNote.vue')
+            path: '/view/:id',
+            name: 'view',
+            component: () => import('./views/View.vue')
         },     
         {
-            path: '/edit-note/:id',
-            name: 'edit-note',
-            component: () => import('./views/EditNote.vue')
-        },        
+            path: '/edit/:id',
+            name: 'edit',
+            component: () => import('./views/Edit.vue')
+        },
+        {
+            path: '/history/:id',
+            name: 'history',
+            component: () => import('./views/History.vue')
+        },
         {
             path: '/settings',
             name: 'settings',
