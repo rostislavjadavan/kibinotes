@@ -25,6 +25,7 @@
     "buefy": "^0.9.8",
     "core-js": "^3.15.2",
     "electron-store": "^8.0.0",
+    "escape-html": "^1.0.3",
     "flexboxgrid": "^6.3.1",
     "moment": "^2.29.1",
     "rehype-format": "^3.1.0",

@@ -38,6 +38,7 @@
 <script>
 import ui from "@/libs/mdwiki_ui";
 import Notes from "@/core/Notes";
+import escape from "escape-html"
 
 export default {
     data() {
@@ -49,10 +50,10 @@ export default {
     },
     beforeMount() {
         if (!this.$route.params.id) {
-            this.$router.push(`/`);
+            this.$router.push(`/`)
         }
-        this.note = Notes.getById(this.$route.params.id);
-        this.content = this.note.content;
+        this.note = Notes.getById(this.$route.params.id)
+        this.content = escape(this.note.content)
     },
     mounted() {
         this.editor = ui.editor("#editor");
