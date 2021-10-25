@@ -75,7 +75,7 @@ export default {
             this.$buefy.dialog.confirm({
                 message:
                     "Are you sure you want to delete note <b>" +
-                    note.title +
+                    this.note.title +
                     "</b>",
                 confirmText: "Yes, delete",
                 type: "is-danger",
@@ -84,7 +84,7 @@ export default {
                     Notes.delete(this.note);
                     this.$router.push("/");
                     this.$buefy.toast.open(
-                        "Note <b>" + note.title + "</b> deleted!"
+                        "Note <b>" + this.note.title + "</b> deleted!"
                     );
                 },
             });

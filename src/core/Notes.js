@@ -8,7 +8,7 @@ const q = {
     getById: connection.prepare("SELECT id, title, content, last_update_ts FROM notes WHERE id = $id"),
     getByRowId: connection.prepare("SELECT id, title, content, last_update_ts FROM notes WHERE rowid = $rowid"),
     getAll: connection.prepare("SELECT id, title, last_update_ts FROM notes ORDER BY title ASC"),
-    createNote: connection.prepare("INSERT INTO notes (id, last_update_ts) VALUES ($id, $last_update_ts)"),
+    createNote: connection.prepare("INSERT INTO notes (id, title, content, last_update_ts) VALUES ($id, $title, $content, $last_update_ts)"),
     createIndex: connection.prepare("INSERT INTO notes_index(note_id) VALUES ($note_id)"),
     updateNote: connection.prepare("UPDATE notes SET title = $title, content = $content, last_update_ts = $last_update_ts  WHERE id = $id"),
     updateNoteIndex: connection.prepare("UPDATE notes_index SET content = $content WHERE note_id = $note_id"),
@@ -32,9 +32,19 @@ const StatusEnum = {
 
 const t = {
     createNote: connection.transaction(() => {
-        const id = uuidv4()
-        const res = q.createNote.run({ id: id, last_update_ts: Date.now() })
-        q.createIndex.run({ note_id: id })
+        const ts = Date.now()
+        const title = `Note ${new Date(ts).toLocaleString()}`
+        const note = {
+            id: uuidv4(),
+            title: title,
+            content: `# ${title}` + "\n\n",
+            last_update_ts: ts
+        }
+        const res = q.createNote.run(note)
+
+        q.createIndex.run({ note_id: note.id })
+        q.updateNoteIndex.run({ note_id: note.id, content: removeMarkdown(note.content) })
+
         return q.getByRowId.get({ rowid: res.lastInsertRowid })
     }),
     updateNote: connection.transaction((note) => {
