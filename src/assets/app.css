@@ -23,6 +23,10 @@ body {
     font-size: 1rem;
 }
 
+.note-seach-result-box {
+    margin-bottom: 15px;
+}
+
 .note-title-cell:hover,
 .note-seach-result-box:hover {
     cursor: pointer;
