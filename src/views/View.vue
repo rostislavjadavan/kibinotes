@@ -1,35 +1,33 @@
 <template>
     <div class="view">
-        <div class="note-editor-nav row">
-            <div class="col-xs">
-                <a class="button" v-on:click="$router.push('/')">
-                    <span class="icon is-small">
-                        <i class="fas fa-align-justify"></i>
-                    </span>
-                    <span>Dashboard</span>
-                </a>
-                <a class="button is-success" v-on:click="onEdit">
-                    <span class="icon is-small">
-                        <i class="fas fa-edit"></i>
-                    </span>
-                    <span>Edit</span>
-                </a>
+        <nav class="navbar is-fixed-top">
+            <div class="navbar-brand">
+                <div class="navbar-item">
+                    <a class="app-logo" v-on:click="$router.push('/')" />
+                </div>
+                <div class="navbar-item">
+                    <a class="button is-success mx-2" v-on:click="onEdit">
+                        <span class="icon is-small">
+                            <i class="fas fa-edit"></i>
+                        </span>
+                        <span>Edit</span>
+                    </a>
+
+                    <a class="button mx-2" v-on:click="onHistory">
+                        <span class="icon is-small">
+                            <i class="fas fa-history"></i>
+                        </span>
+                        <span>History</span>
+                    </a>
+                    <a class="button is-danger mx-2" v-on:click="onDelete">
+                        <span class="icon is-small">
+                            <i class="fas fa-trash-alt"></i>
+                        </span>
+                        <span>Delete</span>
+                    </a>
+                </div>
             </div>
-            <div class="col-xs has-text-right">
-                <a class="button" v-on:click="onHistory">
-                    <span class="icon is-small">
-                        <i class="fas fa-history"></i>
-                    </span>
-                    <span>History</span>
-                </a>
-                <a class="button is-danger" v-on:click="onDelete">
-                    <span class="icon is-small">
-                        <i class="fas fa-trash-alt"></i>
-                    </span>
-                    <span>Delete</span>
-                </a>
-            </div>
-        </div>
+        </nav>
 
         <div ref="markdown" class="markdown-body content" v-html="content" />
     </div>

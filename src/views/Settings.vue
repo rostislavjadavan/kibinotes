@@ -1,15 +1,12 @@
 <template>
     <div class="settings view">
-        <div class="note-editor-nav">
-            <div class="buttons">
-                <button class="button" v-on:click="$router.push('/')">
-                    <span class="icon is-small">
-                        <i class="fas fa-align-justify"></i>
-                    </span>
-                    <span>Dashboard</span>
-                </button>
+        <nav class="navbar is-fixed-top">
+            <div class="navbar-brand">
+                <div class="navbar-item">
+                    <a class="app-logo" v-on:click="$router.push('/')" />
+                </div>
             </div>
-        </div>
+        </nav>
 
         <div class="content">
             <h2>Theme</h2>

@@ -13,10 +13,13 @@ body {
 
 .app-logo {
     width: 180px;
-    height: 30px;
-    margin: 25px 0;
+    height: 30px;    
     background-image: url("logo.svg");
     background-size: 180px 30px;
+}
+
+nav.navbar {
+    background-color: #333;
 }
 
 .note-title-cell {
@@ -36,13 +39,6 @@ body {
 span .highlight,
 mark {
     background-color: khaki;
-}
-
-.note-editor-nav {
-    margin-bottom: 21px;
-}
-.note-editor-nav a.button {
-    margin: 0 5px
 }
 
 .ml1 {

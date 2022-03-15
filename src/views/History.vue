@@ -1,19 +1,26 @@
 <template>
     <div class="view">
-        <div class="note-editor-nav row">
-            <div class="col-xs">
-                <a class="button" v-on:click="$router.push(`/view/${note.id}`)">
-                    <span class="icon is-small">
-                        <i class="fas fa-long-arrow-alt-left"></i>
-                    </span>
-                    <span>Back to note</span>
-                </a>
+        <nav class="navbar is-fixed-top">
+            <div class="navbar-brand">
+                <div class="navbar-item">
+                    <a class="app-logo" v-on:click="$router.push('/')" />
+                </div>
+                <div class="navbar-item">
+                    <a
+                        class="button"
+                        v-on:click="$router.push(`/view/${note.id}`)"
+                    >
+                        <span class="icon is-small">
+                            <i class="fas fa-long-arrow-alt-left"></i>
+                        </span>
+                        <span>Back to note</span>
+                    </a>
+                </div>
             </div>
-            <div class="col-xs has-text-right"></div>
-        </div>
+        </nav>
 
         <div class="content">
-            <h1>"{{ note.title }}" history</h1>
+            <h1>{{ note.title }} history</h1>
         </div>
         <table class="table is-fullwidth">
             <tbody>
@@ -38,7 +45,7 @@
             aria-modal
         >
             <template>
-                <div class="modal-card">                 
+                <div class="modal-card">
                     <pre>{{ content }}</pre>
                 </div>
             </template>

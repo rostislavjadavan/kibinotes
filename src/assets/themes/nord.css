@@ -7,6 +7,10 @@
     background-image: url("logo_nord.svg");
 }
 
+#nord nav.navbar {
+    background-color: #2E3440;
+}
+
 #nord .content h1,
 #nord .content h2,
 #nord .content h3, 

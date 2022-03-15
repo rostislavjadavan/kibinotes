@@ -1,30 +1,33 @@
 <template>
     <div class="view">
-        <div class="note-editor-nav row">
-            <div class="col-xs">
-                <a class="button is-success" v-on:click="onSave">
-                    <span class="icon is-small">
-                        <i class="fas fa-save"></i>
-                    </span>
-                    <span>Save</span>
-                </a>
+        <nav class="navbar is-fixed-top">
+            <div class="navbar-brand">
+                <div class="navbar-item">
+                    <a class="app-logo" v-on:click="$router.push('/')" />
+                </div>
+                <div class="navbar-item">
+                    <a class="button is-success mx-2" v-on:click="onSave">
+                        <span class="icon is-small">
+                            <i class="fas fa-save"></i>
+                        </span>
+                        <span>Save</span>
+                    </a>
 
-                <a class="button is-warning" v-on:click="onCancel">
-                    <span class="icon is-small">
-                        <i class="fas fa-ban"></i>
-                    </span>
-                    <span>Cancel</span>
-                </a>
+                    <a class="button is-warning mx-2" v-on:click="onCancel">
+                        <span class="icon is-small">
+                            <i class="fas fa-ban"></i>
+                        </span>
+                        <span>Cancel</span>
+                    </a>
+                    <a class="button is-danger mx-2" v-on:click="onDelete">
+                        <span class="icon is-small">
+                            <i class="fas fa-trash-alt"></i>
+                        </span>
+                        <span>Delete</span>
+                    </a>
+                </div>
             </div>
-            <div class="col-xs has-text-right">                
-                <a class="button is-danger" v-on:click="onDelete">
-                    <span class="icon is-small">
-                        <i class="fas fa-trash-alt"></i>
-                    </span>
-                    <span>Delete</span>
-                </a>
-            </div>
-        </div>
+        </nav>
 
         <pre
             id="editor"
@@ -38,7 +41,7 @@
 <script>
 import ui from "@/libs/mdwiki_ui";
 import Notes from "@/core/Notes";
-import escape from "escape-html"
+import escape from "escape-html";
 
 export default {
     data() {
@@ -50,10 +53,10 @@ export default {
     },
     beforeMount() {
         if (!this.$route.params.id) {
-            this.$router.push(`/`)
+            this.$router.push(`/`);
         }
-        this.note = Notes.getById(this.$route.params.id)
-        this.content = escape(this.note.content)
+        this.note = Notes.getById(this.$route.params.id);
+        this.content = escape(this.note.content);
     },
     mounted() {
         this.editor = ui.editor("#editor");
@@ -70,7 +73,7 @@ export default {
         },
         onCancel() {
             this.$router.push(`/view/${this.note.id}`);
-        },        
+        },
         onDelete() {
             this.$buefy.dialog.confirm({
                 message:

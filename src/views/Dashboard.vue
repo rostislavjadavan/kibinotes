@@ -1,52 +1,51 @@
 <template>
     <div class="view">
-        <div class="note-editor-nav has-text-right">
-            <a class="button is-small" v-on:click="$router.push('/settings')">
-                <span class="icon is-small">
-                    <i class="fas fa-cog"></i>
-                </span>
-                <span>Settings</span>
-            </a>
-        </div>
-        <div class="columns is-centered">
-            <div class="app-logo" />
-        </div>
-        <div class="columns is-centered">
-            <div class="column is-half">
-                <b-field grouped>
-                    <div class="control is-medium is-clearfix is-expanded">
-                        <input
-                            ref="search"
-                            v-model="searchQuery"
-                            type="text"
-                            autocomplete="on"
-                            placeholder="Search..."
-                            class="input is-medium"
-                        />
-                    </div>
-                    <p class="control" v-show="isSearch">
+        <nav class="navbar is-fixed-top">
+            <div class="navbar-brand">
+                <div class="navbar-item">
+                    <div class="app-logo" />
+                </div>
+                <div class="navbar-item">
+                    <input
+                        ref="search"
+                        v-model="searchQuery"
+                        type="text"
+                        autocomplete="on"
+                        placeholder="Search..."
+                        class="input"
+                    />
+                    <span class="control" v-show="isSearch">
                         <button
-                            class="button is-medium"
+                            class="button"
                             v-on:click="onClearSearchQuery()"
                         >
                             <span class="icon is-small">
                                 <i class="fas fa-times"></i>
                             </span>
                         </button>
-                    </p>
-                </b-field>
-            </div>
-        </div>
-        <div class="columns is-centered">
-            <div class="column is-narrow">
-                <button class="button is-large" v-on:click="onCreateNote()">
-                    <span class="icon is-small">
-                        <i class="fas fa-plus"></i>
                     </span>
-                    <span>New note</span>
-                </button>
+                    <button
+                        class="button is-primary mx-2"
+                        v-on:click="onCreateNote()"
+                    >
+                        <span class="icon is-small">
+                            <i class="fas fa-plus"></i>
+                        </span>
+                        <span>New note</span>
+                    </button>
+                    <button
+                        class="button mx-2"
+                        v-on:click="$router.push('/settings')"
+                    >
+                        <span class="icon is-small">
+                            <i class="fas fa-cog"></i>
+                        </span>
+                        <span>Settings</span>
+                    </button>
+                </div>
             </div>
-        </div>
+        </nav>
+
         <notes-list v-show="!isSearch" />
         <notes-search-results v-show="isSearch" v-bind:query="searchQuery" />
         <app-footer />
