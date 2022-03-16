@@ -2,19 +2,14 @@
     <div class="columns">
         <div class="column is-10 is-offset-1">
             <div class="content">
-                <h3 class="has-text-centered">
-                    Search results for "{{ query }}"
-                </h3>
                 <div
                     class="note-seach-result-box"
                     v-for="res in results"
                     v-bind:key="res.note_id"
                 >
+                    <strong><a v-on:click="onSelect(res)">{{res.title}}</a></strong>
                     <pre v-on:click="onSelect(res)" v-html="res.content" />
-                </div>
-                <p class="is-size-6 has-text-centered">
-                    {{ results.length }} results found
-                </p>
+                </div>                
             </div>
         </div>
     </div>

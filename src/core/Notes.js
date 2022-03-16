@@ -17,13 +17,9 @@ const q = {
     createHistoryNote: connection.prepare("INSERT INTO notes_archive (id, note_id, content, status, last_update_ts) VALUES ($id, $note_id, $content, $status, $last_update_ts)"),
     getHistoryForNoteId: connection.prepare("SELECT id, last_update_ts FROM notes_archive WHERE note_id = $note_id ORDER BY last_update_ts DESC"),
     getHistoricById: connection.prepare("SELECT id, content, last_update_ts FROM notes_archive WHERE id = $id"),
-    search: connection.prepare(`SELECT note_id, snippet(notes_index, 2, '<b>', '</b>', '...', 30) as content 
-        FROM notes_index 
-        WHERE notes_index
-        MATCH $query 
-        ORDER BY rank;
-    `)
+    search: connection.prepare(`SELECT note_id, notes.title as title, snippet(notes_index, 2, '<b>', '</b>', '...', 20) as content FROM notes_index INNER JOIN notes ON notes.id = notes_index.note_id WHERE notes_index MATCH $query ORDER BY rank;`)
 }
+
 
 const StatusEnum = {
     VERSION: 1,
