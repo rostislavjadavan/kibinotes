@@ -19,7 +19,7 @@ body {
 }
 
 nav.navbar {
-    background-color: #333;
+    background-color: #fff;
 }
 
 .note-title-cell {
@@ -76,34 +76,3 @@ pre {
     position: relative;
 }
 
-.m-mdic-copy-wrapper {
-    position: absolute;
-    top: 0.3rem;
-    right: 0.5rem;
-}
-
-.m-mdic-copy-wrapper button {
-    font-weight: bold;
-    background: none !important;
-    border: none;
-    padding: 0 !important;
-    color: #aaa;
-    cursor: pointer;
-}
-
-.m-mdic-copy-wrapper button:hover {
-    color: #ccc;
-}
-
-.u-mdic-copy-notify {
-    display: none;
-}
-
-::-webkit-scrollbar {
-    width: 12px;
-    background-color: #fff;
-}
-
-::-webkit-scrollbar-thumb, ::-webkit-scrollbar-thumb:window-inactive {
-    background: #ccc;
-}
