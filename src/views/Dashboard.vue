@@ -90,6 +90,10 @@ export default {
             this.searchQuery = "";
             this.$refs.search.focus();
         },
+        handleScroll(event) {
+            console.log(window.scrollY)
+            this.$store.commit('setDashboardScroll', window.scrollY)
+        },
     },
     data() {
         return {
@@ -99,6 +103,8 @@ export default {
     mounted() {
         this.$refs.search.focus();
         this.searchQuery = this.$store.getters.searchQuery;
+
+        window.addEventListener("scroll", this.handleScroll);
     },
     watch: {
         searchQuery: function (value) {
@@ -109,6 +115,9 @@ export default {
         isSearch: function () {
             return this.searchQuery.length > 0;
         },
+    },    
+    destroyed() {
+        window.removeEventListener("scroll", this.handleScroll);
     },
 };
 </script>

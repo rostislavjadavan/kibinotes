@@ -34,8 +34,11 @@ export default {
             notes: [],
         };
     },
-    mounted() {
-        this.reloadNotes();
+    beforeMount() {
+         this.reloadNotes();
+    },
+    mounted() {               
+        window.scroll(0, this.$store.getters.dashboardScroll)
     },
     methods: {
         reloadNotes() {
