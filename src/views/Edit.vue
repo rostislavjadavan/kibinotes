@@ -57,6 +57,11 @@ export default {
         }
         this.note = Notes.getById(this.$route.params.id);
         this.content = escape(this.note.content);
+
+        window.scroll({
+            top: 0,
+            left: 0,
+        });
     },
     mounted() {
         this.editor = ui.editor("#editor");

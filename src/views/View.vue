@@ -108,6 +108,11 @@ export default {
             .use(RehypeStringify);
 
         this.content = this.processor.processSync(this.note.content).toString();
+
+        window.scroll({
+            top: 0,
+            left: 0,
+        });
     },
     mounted() {
         this.highlightSearchQuery();

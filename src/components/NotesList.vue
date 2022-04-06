@@ -12,7 +12,7 @@
                                 <span class="icon">
                                     <i class="fas fa-edit"></i>
                                 </span>
-                            </a>                        
+                            </a>
                             <a href="#" v-on:click="onDelete(note)">
                                 <span class="icon">
                                     <i class="fas fa-trash-alt"></i>
@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import Vue from "vue";
 import Notes from "@/core/Notes";
 export default {
     data() {
@@ -34,12 +35,17 @@ export default {
             notes: [],
         };
     },
-    mounted() {
+    created() {
         this.reloadNotes();
+    },
+    mounted() {
+        Vue.nextTick(() => {            
+            window.scroll(0, this.$store.getters.dashboardScroll);
+        });
     },
     methods: {
         reloadNotes() {
-            this.notes = Notes.list();         
+            this.notes = Notes.list();
         },
         onDelete(note) {
             this.$buefy.dialog.confirm({
