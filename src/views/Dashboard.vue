@@ -90,8 +90,7 @@ export default {
             this.searchQuery = "";
             this.$refs.search.focus();
         },
-        handleScroll(event) {
-            console.log(window.scrollY)
+        handleScroll(event) {            
             this.$store.commit('setDashboardScroll', window.scrollY)
         },
     },
