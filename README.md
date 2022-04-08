@@ -7,14 +7,6 @@
 
 ![](graphics/screenshots.jpg)
 
-## Notes Backup
-
-Currenly there is no built-in solution and it is user responsibility to backup data file. Notes are stored in `data.db` file in following location:
-
-- Mac OS: `~/Library/Application Support/kibinotes/data.db`
-- Windows: `C:\Users\<you>\AppData\Local\kibinotes\data.db`
-- Linux: `~/.config/kibinotes/data.db`
-
 # Development
 
 - Use `npm install` to init dependencies
