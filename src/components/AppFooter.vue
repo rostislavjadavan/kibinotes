@@ -1,6 +1,6 @@
 <template>
     <div>                
-        <p class="is-size-7 has-text-centered">build {{appVersion}}</p>
+        <p class="is-size-7 has-text-centered">version {{appVersion}}</p>
     </div>
 </template>
 

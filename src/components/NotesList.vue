@@ -1,6 +1,7 @@
 <template>
     <div class="columns">
         <div class="column is-10 is-offset-1">
+            <p class="has-text-centered my-6" v-if="notes.length == 0">You haven't made any notes yet!</p>
             <table class="table is-fullwidth">
                 <tbody>
                     <tr v-for="note in notes" v-bind:key="note.id">
@@ -39,7 +40,7 @@ export default {
         this.reloadNotes();
     },
     mounted() {
-        Vue.nextTick(() => {            
+        Vue.nextTick(() => {
             window.scroll(0, this.$store.getters.dashboardScroll);
         });
     },
