@@ -36,15 +36,7 @@
                 >
             </div>
 
-            <h2>Notes database</h2>
-
-            <b-field label="File path">
-                <b-input
-                    placeholder="Disabled"
-                    is-disabled
-                    v-model="dbPath"
-                ></b-input>
-            </b-field>
+            <h2 class="mt-6">Notes database</h2>
             <b-field>
                 <a class="button is-success" @click="onOpen()">
                     <span class="icon is-small">
@@ -52,11 +44,27 @@
                     </span>
                     <span>Open</span>
                 </a>
+
+                <a class="button is-warning mx-2" @click="onCreate()">
+                    <span class="icon is-small">
+                        <i class="fas fa-plus"></i>
+                    </span>
+                    <span>Create new database</span>
+                </a>
+            </b-field>
+            <b-field label="File path">
+                <b-input
+                    placeholder="Disabled"
+                    is-disabled
+                    v-model="dbPath"
+                ></b-input>
             </b-field>
 
-            <h2>Source code</h2>
+            <h2 class="mt-6">Source code</h2>
             <p>
-                <a href="https://github.com/rostislavjadavan/kibinotes">https://github.com/rostislavjadavan/kibinotes</a>
+                <a href="https://github.com/rostislavjadavan/kibinotes"
+                    >https://github.com/rostislavjadavan/kibinotes</a
+                >
             </p>
         </div>
     </div>
@@ -77,17 +85,18 @@ export default {
             this.$store.dispatch("setTheme", value);
             this.$buefy.toast.open("Theme changed to " + value);
         },
-        async onOpen() {
-            const res = await electron.remote.dialog.showOpenDialog({
+        onOpen() {
+            const res = electron.remote.dialog.showOpenDialogSync({
                 properties: ["openFile"],
             });
 
-            if (res.filePaths.length == 0) {
+            if (typeof res == "undefined") {
                 return;
             }
 
-            const filepath = res.filePaths[0];
+            const filepath = res[0];
             const dbRes = DB.open(filepath);
+
             if (!dbRes.success) {
                 this.$buefy.toast.open({
                     message: `Error: ${dbRes.error}`,
@@ -99,6 +108,28 @@ export default {
                 this.$buefy.toast.open(`${filepath} opened successfully!`);
             }
         },
+        onCreate() {
+            const filepath = electron.remote.dialog.showSaveDialogSync({
+                properties: ["createDirectory"],
+            });
+
+            if (typeof filepath == "undefined") {
+                return;
+            }
+            
+            const dbRes = DB.create(filepath);
+
+            if (!dbRes.success) {
+                this.$buefy.toast.open({
+                    message: `Error: ${dbRes.error}`,
+                    type: "is-warning",
+                });
+            } else {
+                this.$store.dispatch("setDbPath", filepath);
+                this.$router.push("/");
+                this.$buefy.toast.open(`${filepath} created successfully!`);
+            }
+        }
     },
 };
 </script>
