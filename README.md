@@ -9,6 +9,7 @@
 
 # Development
 
+- `node@16` is needed
 - Use `npm install` to init dependencies
 - `npm electron:serve` to run development mode
 
@@ -19,6 +20,10 @@ To rebuild `better-sqlite3` with used version of electron run:
 node_modules/.bin/electron-rebuild -f -w better-sqlite3
 ```
 See https://github.com/JoshuaWise/better-sqlite3/issues/126#issuecomment-403943522
+
+## How to build on Windows
+
+In order to build SQLite MSVC toolchain is needed. Please follow steps in https://github.com/nodejs/node-gyp#on-windows.
 
 ## Useful documentation links
 
