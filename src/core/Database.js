@@ -34,9 +34,11 @@ const createTables = (connection) => {
     })
 }
 
+import Settings from "@/core/Settings"
+
 export default new class Database {
-    constructor() {
-        this.path = defaultDbPath;
+    constructor() {        
+        this.path = Settings.get('db', defaultDbName);
         this.connection = sqlite(this.path);
 
         createTables(this.connection)
