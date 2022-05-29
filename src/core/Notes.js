@@ -37,7 +37,7 @@ const t = {
             content: `# ${title}` + "\n\n",
             last_update_ts: ts
         }
-        const res = q.createNote.run(note)
+        const res = q.createNote().run(note)
 
         q.createIndex().run({ note_id: note.id })
         q.updateNoteIndex().run({ note_id: note.id, content: removeMarkdown(note.content) })
