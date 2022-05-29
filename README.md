@@ -5,7 +5,9 @@
 
 > Minimalistic notes application with instant search
 
-![](graphics/screenshots.jpg)
+![](graphics/dashboard.png)
+![](graphics/note.png)
+![](graphics/search.png)
 
 # Development
 
