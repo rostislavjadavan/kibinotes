@@ -7,6 +7,10 @@
     background-image: url("logo_dark.svg");
 }
 
+#dark nav.navbar {
+    background-color: #333;
+}
+
 #dark .content h1,
 #dark .content h2,
 #dark .content h3, 

@@ -14,6 +14,10 @@ let win
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([{ scheme: 'app', privileges: { secure: true, standard: true } }])
 
+// Create electron-store
+const Store = require('electron-store');
+Store.initRenderer();
+
 function createWindow() {
     // Create the browser window.
     win = new BrowserWindow({
@@ -105,3 +109,4 @@ if (isDevelopment) {
         })
     }
 }
+

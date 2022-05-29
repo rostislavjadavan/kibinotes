@@ -1,87 +1,48 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import debounce from "@/libs/debounce";
-import ThemeService from "@/libs/ThemeService"
-import NoteService from "@/libs/NoteService";
-import NoteIndexService from '@/libs/NoteIndexService';
-import {
-    SET_NOTE_LIST,
-    SET_ACTIVE_NOTE,
-    SET_EDIT_MODE,    
-    SET_SEARCH_QUERY,
-    SET_SEARCH_RESULT,
-    SET_NOTE_SCROLL,
-    SET_THEME
-} from "@/mutations_names";
+import Theme from "@/core/Theme"
+import Settings from "@/core/Settings"
+import { defaultDbPath } from "@/core/Database"
 
 Vue.use(Vuex)
 
-
 export default new Vuex.Store({
     state: {
-        theme: ThemeService.getTheme(),
-        activeNote: null,
-        editMode: false,
-        editTitle: null,
-        noteList: [],
+        dbPath: Settings.get('db', defaultDbPath),
+        theme: Theme.get(),        
         searchQuery: "",
-        searchResultList: [],
-        noteScroll: {
-            noteId: null,
-            scrollY: null,
-            positionStart: null,
-            positionEnd: null,
-            cursorPos: null
-        }
+        dashboardScroll: 0
     },
     mutations: {
-        [SET_NOTE_LIST](state, noteList) {
-            state.noteList = noteList;
+        setDbPath(state, dbPath) {
+            state.dbPath = dbPath
         },
-        [SET_ACTIVE_NOTE](state, note) {
-            state.activeNote = note;
-            state.edit = false;
+        setTheme(state, theme) {
+            state.theme = theme
         },
-        [SET_EDIT_MODE](state, editMode) {
-            state.editMode = editMode;
-        },        
-        [SET_SEARCH_QUERY](state, searchQuery) {
-            state.searchQuery = searchQuery;
+        setSearchQuery(state, query) {
+            state.searchQuery = query
         },
-        [SET_SEARCH_RESULT](state, searchResultList) {
-            state.searchResultList = searchResultList;
-        },
-        [SET_NOTE_SCROLL](state, position) {
-            state.noteScroll = position;
-        },
-        [SET_THEME](state, theme) {
-            state.theme = theme;            
+        setDashboardScroll(state, scrollY) {
+            state.dashboardScroll = scrollY
         }
     },
     actions: {
-        reloadNotesList(context) {
-            NoteService.list((err, rows) => {
-                if (err) {
-                    console.error(err);
-                }
-                context.commit(SET_NOTE_LIST, rows);
-            });
-        },
-        updateSearchResult(context) {
-            debounce(
-                () =>
-                    NoteIndexService.search(context.state.searchQuery, function (err, rows) {
-                        if (typeof rows !== 'undefined') {
-                            context.commit(SET_SEARCH_RESULT, rows);
-                        }
-                    }),
-                150
-            )();
+        setDbPath(context, dbPath) {
+            Settings.set('db', dbPath);
+            context.commit("setDbPath", dbPath);
         },
         setTheme(context, theme) {
-            ThemeService.setTheme(theme);                    
-            context.commit(SET_THEME, theme);
+            Theme.set(theme);
+            context.commit("setTheme", theme);
         }        
+    },
+    getters: {
+        dbPath: (state) => state.dbPath,
+        theme: (state) => state.theme,
+        isSearch: (state) => state.searchQuery.trim().length > 0,
+        searchQuery: (state) => state.searchQuery,
+        dashboardScroll: (state) => state.dashboardScroll
     }
 })

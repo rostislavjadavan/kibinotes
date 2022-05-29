@@ -13,14 +13,24 @@ export default new Router({
             component: () => import('./views/Dashboard.vue')
         },
         {
-            path: '/note',
-            name: 'note',
-            component: () => import('./views/Note.vue')
+            path: '/view/:id',
+            name: 'view',
+            component: () => import('./views/View.vue')
+        },     
+        {
+            path: '/edit/:id',
+            name: 'edit',
+            component: () => import('./views/Edit.vue')
+        },
+        {
+            path: '/history/:id',
+            name: 'history',
+            component: () => import('./views/History.vue')
         },
         {
             path: '/settings',
             name: 'settings',
             component: () => import('./views/Settings.vue')
-        }
+        }        
     ]
 })

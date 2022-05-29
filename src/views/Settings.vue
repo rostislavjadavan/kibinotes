@@ -1,33 +1,14 @@
 <template>
     <div class="settings view">
-        <div class="note-editor-nav">
-            <div class="buttons">
-                <button
-                    class="button"
-                    v-on:click="$router.push({ name: 'dashboard' })"
-                >
-                    <span class="icon is-small">
-                        <i class="fas fa-align-justify"></i>
-                    </span>
-                    <span>Go to Dashboard</span>
-                </button>
+        <nav class="navbar is-fixed-top">
+            <div class="navbar-brand">
+                <div class="navbar-item">
+                    <a class="app-logo" v-on:click="$router.push('/')" />
+                </div>
             </div>
-        </div>
-
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-            <ul>
-                <li>
-                    <a href="#" v-on:click="$router.push({ name: 'dashboard' })"
-                        >Dashboard</a
-                    >
-                </li>
-                <li class="is-active">
-                    <a href="#" aria-current="page">Settings</a>
-                </li>
-            </ul>
         </nav>
+
         <div class="content">
-            <h1>Settings</h1>
             <h2>Theme</h2>
 
             <div class="field">
@@ -55,47 +36,48 @@
                 >
             </div>
 
-            <hr />
-            <h2>System</h2>
-            <h4>Search index</h4>
-            <p>
-                When search goes crazy you can fix it by rebuilding whole search
-                index.
-            </p>
-            <div v-if="working">
-                <b-progress></b-progress>
-            </div>
-            <div v-if="!working">
-                <div class="mb1">
-                    <button class="button" v-on:click="onRebuldIndex">
-                        <span class="icon is-small">
-                            <i class="fas fa-sync"></i>
-                        </span>
-                        <span>Rebuild</span>
-                    </button>
-                </div>
-            </div>
-            <pre v-html="log" v-if="log" />
+            <h2 class="mt-6">Notes database</h2>
+            <b-field>
+                <a class="button is-success" @click="onOpen()">
+                    <span class="icon is-small">
+                        <i class="fas fa-save"></i>
+                    </span>
+                    <span>Open</span>
+                </a>
 
-            <h4>Notes storage</h4>
-            <p>Notes are stored in Sqlite3 database file. Current file location is:</p>
-            <code v-html="dbpath" />
+                <a class="button is-warning mx-2" @click="onCreate()">
+                    <span class="icon is-small">
+                        <i class="fas fa-plus"></i>
+                    </span>
+                    <span>Create new database</span>
+                </a>
+            </b-field>
+            <b-field label="File path">
+                <b-input
+                    placeholder="Disabled"
+                    is-disabled
+                    v-model="dbPath"
+                ></b-input>
+            </b-field>
+
+            <h2 class="mt-6">Source code</h2>
+            <p>
+                <a href="https://github.com/rostislavjadavan/kibinotes"
+                    >https://github.com/rostislavjadavan/kibinotes</a
+                >
+            </p>
         </div>
     </div>
 </template>
 
 <script>
-import NoteService from "@/libs/NoteService";
-import NoteIndexService from "@/libs/NoteIndexService";
-import * as Storage from "@/libs/storage";
-
+import DB from "../core/Database";
+import electron from "../libs/electron";
 export default {
     data() {
         return {
-            theme: this.$store.state.theme,
-            working: false,
-            log: "",
-            dbpath: Storage.path,
+            theme: this.$store.getters.theme,
+            dbPath: this.$store.getters.dbPath,
         };
     },
     methods: {
@@ -103,36 +85,51 @@ export default {
             this.$store.dispatch("setTheme", value);
             this.$buefy.toast.open("Theme changed to " + value);
         },
-        onRebuldIndex() {
-            let vueThis = this;
-            this.working = true;
-            this.log = "";
-            NoteService.list((err, rows) => {
-                if (err) {
-                    vueThis.$buefy.toast.open({
-                        message: "Error :( " + err,
-                        type: "is-danger",
-                    });
-                } else {
-                    rows.forEach((row) => {
-                        vueThis.log += `processing ${row.id} ${row.title}\n`;
-                        NoteService.get(row.id, (err, note) => {
-                            NoteIndexService.remove(note, () => {
-                                NoteIndexService.create(
-                                    note.id,
-                                    note.title,
-                                    () => {
-                                        vueThis.log += `done ${row.id}\n`;
-                                        NoteIndexService.update(note);
-                                    }
-                                );
-                            });
-                        });
-                    });
-                    vueThis.working = false;
-                }
+        onOpen() {
+            const res = electron.remote.dialog.showOpenDialogSync({
+                properties: ["openFile"],
             });
+
+            if (typeof res == "undefined") {
+                return;
+            }
+
+            const filepath = res[0];
+            const dbRes = DB.open(filepath);
+
+            if (!dbRes.success) {
+                this.$buefy.toast.open({
+                    message: `Error: ${dbRes.error}`,
+                    type: "is-warning",
+                });
+            } else {
+                this.$store.dispatch("setDbPath", filepath);
+                this.$router.push("/");
+                this.$buefy.toast.open(`${filepath} opened successfully!`);
+            }
         },
+        onCreate() {
+            const filepath = electron.remote.dialog.showSaveDialogSync({
+                properties: ["createDirectory"],
+            });
+
+            if (typeof filepath == "undefined") {
+                return;
+            }
+            
+            const dbRes = DB.create(filepath);
+
+            if (!dbRes.success) {
+                this.$buefy.toast.open({
+                    message: `Error: ${dbRes.error}`,
+                    type: "is-warning",
+                });
+            } else {
+                this.$store.dispatch("setDbPath", filepath);
+                this.$router.push("/");
+                this.$buefy.toast.open(`${filepath} created successfully!`);
+            }
+        }
     },
 };
 </script>

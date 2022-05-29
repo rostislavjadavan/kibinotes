@@ -2,37 +2,39 @@
     <div class="columns">
         <div class="column is-10 is-offset-1">
             <div class="content">
-                <h3 class="has-text-centered">Search results for "{{this.$store.state.searchQuery}}"</h3>
                 <div
-                    class="box note-seach-result-box"
-                    v-for="note in this.$store.state.searchResultList"
-                    v-bind:key="note.id"
+                    class="note-seach-result-box"
+                    v-for="res in results"
+                    v-bind:key="res.note_id"
                 >
-                    <div class="media-content" v-on:click="onSelect(note)">
-                        <div class="content">
-                            <p>
-                                <strong v-html="note.title" />
-                                <br />
-                                <span class="note-content-preview" v-html="note.content" />
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <p
-                    class="is-size-6 has-text-centered"
-                >{{this.$store.state.searchResultList.length}} results found</p>
+                    <strong><a v-on:click="onSelect(res)">{{res.title}}</a></strong>
+                    <pre v-on:click="onSelect(res)" v-html="res.content" />
+                </div>                
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import { SET_SEARCH_RESULT } from "@/mutations_names";
+import debounce from "../libs/debounce";
+import Notes from "../core/Notes";
+
 export default {
+    props: ["query"],
+    data() {
+        return {
+            results: [],
+        };
+    },
     methods: {
-        onSelect(note) {
-            this.$emit("select", note.note_id);
-        }
-    }    
+        onSelect(res) {
+            this.$router.push(`/view/${res.note_id}`);
+        },
+    },
+    watch: {
+        query: function (value) {
+            debounce(() => (this.results = Notes.search(value)), 150)();
+        },
+    },
 };
 </script>
